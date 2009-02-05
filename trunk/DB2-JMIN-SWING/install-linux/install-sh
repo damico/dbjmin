@@ -1,0 +1,52 @@
+#!/bin/bash
+#search for java_home
+if [ -z "$JAVA_HOME" ]; then
+    echo ""
+    echo "No JAVA_HOME variable found in your environment!"
+    echo ""
+    exit 1
+fi
+#search for java >= 1.5
+java -version 2> /tmp/java.version
+VERSION=`cat /tmp/java.version | grep "java version" | awk '{ print substr($3, 4,1); }'`
+if [ $VERSION > 4 ]; then
+	echo ""
+	echo "Creating lib dir..."
+	mkdir /usr/lib/dbjmin
+	echo ""
+        echo "Creating conf dir..."
+	mkdir /etc/dbjmin
+	echo ""
+        echo "Copying libs..."
+	cp lib/** /usr/lib/dbjmin
+	echo ""
+	echo "Copying application jar..."
+        cp app/** /usr/lib/dbjmin
+        echo ""
+        echo "Copying conf file..."
+	cp preServers.xml /etc/dbjmin
+	echo ""
+        echo "Copying icons files..."
+        cp icons/dbjmin24x24icon.png /usr/share/icons/gnome/24x24/apps/dbjmin.png
+	cp icons/dbjmin24x24icon.png /usr/lib/dbjmin/dbjmin.png
+	cp icons/dbjmin32x32icon.png /usr/share/icons/gnome/32x32/apps/dbjmin.png
+	cp icons/dbjmin48x48icon.png /usr/share/icons/gnome/48x48/apps/dbjmin.png
+	cp icons/dbjmin.svg /usr/share/icons/gnome/scalable/apps
+	cp icons/dbjmin.xpm /usr/share/pixmaps
+	echo ""
+	echo "Copying start script..."
+        cp install-linux/dbjmin /usr/bin
+	echo ""
+	echo "Giving permission..."
+        chmod +x /usr/bin/dbjmin
+	echo "Creating shortcut..."
+        cp install-linux/dbjmin.desktop /usr/share/applications
+	echo ""
+fi
+#mk lib dirs
+#mk conf dirs
+#cp libs
+#cp bin
+#search for gnome
+#create icons
+#finish
