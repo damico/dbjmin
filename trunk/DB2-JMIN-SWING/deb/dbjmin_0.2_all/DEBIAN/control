@@ -1,0 +1,15 @@
+Package: dbjmin
+Version: 0.2
+Section: devel
+Priority: optional
+Architecture: all
+Depends: sun-java5-jre
+Recommends: 
+Suggests: 
+Conflicts: 
+Replaces: 
+Installed-Size: 6900
+Maintainer: Jose Damico <damico@dcon.com>
+Description: Graphical Client for databases.
+ This is an easy-to-use client for DB2, Oracle, Derby, MySQL, PostgreSQL and Firebird.
+ For more information see http://dcon.com.br/dbjmin.
