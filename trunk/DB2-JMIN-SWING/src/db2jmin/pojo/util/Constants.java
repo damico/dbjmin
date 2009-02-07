@@ -39,5 +39,7 @@ public class Constants {
 	public static final String APPLOGO = "dbjmin.png";
 	public static int frameWidth = 798;
 	public static int frameHeight = 50;
+	public static final String EMPTY = "Write here your query.";
+	public static final String HISTORY_FILE = "dbash_history.txt";
 
 }
