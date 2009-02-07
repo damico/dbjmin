@@ -1,8 +1,28 @@
+/*******************************************************************************
+ * DB2-JMIN / MULTI-JMIN (MULTI DB CLIENT)	
+ * Copyright (c) 2007, 2009 Jose' Ricardo de Oliveira Damico and others.
+ * This program is free software; you can redistribute it and/or		
+ * modify it under the terms of the GNU General Public License			
+ * as published by the Free Software Foundation; either version 2		
+ * of the License, or (at your option) any later version.
+ *
+ *Contributors:
+ *Jose' Ricardo de Oliveira Damico (jd.comment@gmail.com)
+ *Argemiro José de Lima - a.k.a Mir0 (mirolima@gmail.com)
+ *Mario C. Ponciano - a.k.a Razec (mrazec@gmail.com) 
+ *
+ *	
+*******************************************************************************/
 package db2jmin.pojo.swing;
 
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,6 +30,7 @@ import java.util.Iterator;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,6 +45,7 @@ import javax.swing.KeyStroke;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
+import db2jmin.pojo.util.RWhistory;
 
 /**
  * This class intents to be a helper to 
@@ -35,6 +57,7 @@ import db2jmin.pojo.util.Logger;
 public class SwingUtils {
 
 	private static final SwingUtils getInstance = new SwingUtils();
+	private static int count = 0;
 
 	public static SwingUtils singleton() {
 		return getInstance;
@@ -42,6 +65,7 @@ public class SwingUtils {
 
 	public JComboBox prepareDrivers(JComboBox drivers) {
 		drivers.setBounds(40, 2, 60, 20);
+		drivers.setToolTipText("Select DataBase");
 		ArrayList<String> defaultSrvs = new ArrayList<String>();
 		defaultSrvs.add("db2");
 		defaultSrvs.add("mysql");
@@ -83,22 +107,49 @@ public class SwingUtils {
 		tables.removeAllItems();
 	}
 
-	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, JTextArea sqltext, JPanel panel) {
+	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final JTextArea sqltext, JPanel panel) {
 		scrollableSqlArea.setVisible(true);
 		goSQL.setVisible(true);
 		sqltext.setBounds(5, 57 + Constants.LOGTEXTH, 740, Constants.SQLTEXTH);
 		sqltext.setLineWrap(true);
 		sqltext.setWrapStyleWord(false);
+		sqltext.setToolTipText("Using the keyboard (set UP or set Down) to Move through history commands");		
 		sqltext.setText("Write here your query.");
+		sqltext.addKeyListener(new KeyAdapter(){
+            public void keyPressed(KeyEvent e) { 
+				RWhistory rw = new RWhistory();
+                if( e.getKeyCode() == KeyEvent.VK_DOWN){        
+                	    count++;        
+                	     for(int i=0;i<count;i++){
+                           sqltext.setText(rw.readFile(count)+"\n");
+                  	                       
+                        }
+ 		        }
+                if( e.getKeyCode() == KeyEvent.VK_UP){
+                    count--;             
+                    for(int i=0;i<count;i++){
+                       sqltext.setText(rw.readFile(count)+"\n");
+              	     }
+                    sqltext.append("");
+                }
+                
+         }});     
+
 		scrollableSqlArea.setBounds(5, 57 + Constants.LOGTEXTH, 742, Constants.SQLTEXTH);
 		goSQL.setText("!");
-		goSQL.setBounds(746, 57 + Constants.LOGTEXTH, 40,	Constants.SQLTEXTH - 1);
+		goSQL.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				RWhistory rwh = new RWhistory();
+				rwh.writeFile(sqltext.getText());
+			}
+		});
+	    goSQL.setBounds(746, 57 + Constants.LOGTEXTH, 40,	Constants.SQLTEXTH - 1);
 		panel.add(scrollableSqlArea);
 		panel.add(goSQL);
 	}
 
 	public void setGenericWindowSettings(JPanel panel, JComboBox drivers,
-			JTextField tf_server, JTextField tf_port, JTextField tf_db,
+			JTextField tf_server, JTextField tf_port, final JTextField tf_db,
 			JTextField tf_user, JPasswordField tf_passwd,
 			Action actionValidadeAndConnect, JComboBox schemas,
 			JComboBox tables, JButton validateAndConnectButton,
@@ -116,6 +167,7 @@ public class SwingUtils {
 
 		l_server.setBounds(110, 2, 100, 20);
 		tf_server.setBounds(135, 2, 80, 20);
+		tf_server.setToolTipText("localhost");
 		panel.add(l_server);
 		panel.add(tf_server);
 
@@ -123,20 +175,39 @@ public class SwingUtils {
 
 		l_port.setBounds(220, 2, 100, 20);
 		tf_port.setBounds(251, 2, 45, 20);
+		tf_port.setToolTipText("Insert Port");
 		panel.add(l_port);
 		panel.add(tf_port);
 
 		JLabel l_db = new JLabel("db: ");
 
 		l_db.setBounds(300, 2, 100, 20);
-		tf_db.setBounds(325, 2, 100, 20);
+		tf_db.setBounds(325, 2, 50, 20);
+		tf_db.setToolTipText("Add DataBase");
 		panel.add(l_db);
 		panel.add(tf_db);
 
+		JButton btnOpenDb = new JButton(actionGetTables);
+		btnOpenDb.setText(">");
+		btnOpenDb.setBounds(375, 2, 50, 20);
+		btnOpenDb.addActionListener( new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JFileChooser fc = new JFileChooser();
+				int res = fc.showOpenDialog(null);
+				if(res == JFileChooser.APPROVE_OPTION){
+					File arq = fc.getSelectedFile();
+					tf_db.setText(arq.getAbsolutePath());
+				}
+			}
+		});
+		panel.add(btnOpenDb);
+		
+		
 		JLabel l_user = new JLabel("User: ");
 
 		l_user.setBounds(430, 2, 100, 20);
 		tf_user.setBounds(470, 2, 100, 20);
+		tf_user.setToolTipText("Login");
 		panel.add(l_user);
 		panel.add(tf_user);
 
@@ -145,6 +216,7 @@ public class SwingUtils {
 		tf_passwd.setEchoChar('#');
 		l_passwd.setBounds(575, 2, 100, 20);
 		tf_passwd.setBounds(630, 2, 100, 20);
+
 
 		tf_passwd.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),
 				actionValidadeAndConnect);
