@@ -1,7 +1,7 @@
 = Description of new features added to base code of DBJMIN =
 
 
-= Command History =
+= 1. Command History =
 
 *Description:*
 
