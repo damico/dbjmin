@@ -1,3 +1,10 @@
+0.3
+-Finished implementation of Command's history
+-Added right path for Command's history 
+-Removed "count" variable from main scope inside singleton
+-Added more tests units for preServers and RWhistory
+-Fixed bug with preServers (it was saving and getting from a wrong path)
+
 0.2
 - Several changes done to make app compliance with deb and rpm packages.
 - Added support to store preServers.xml file into a personal folder inside home folder of current user (into linux)
