@@ -69,14 +69,14 @@ public class Launch {
 
 	public static void main(String[] args) {
 		
-		String preServerFile = Constants.PRESERVER_FILE;
+		String preServerFile = SystemOper.singleton().getHomePath()+Constants.PRESERVER_FILE;
 
 		if (SystemOper.singleton().isWindows()) {
 			SystemOper.singleton().setWinUIManager();
 			os_specH = 5;
 		}else{
 			/* verify folder */
-			preServerFile = "/home/"+SystemOper.singleton().execExtCommand("whoami")+"/.dbjmin/"+Constants.PRESERVER_FILE;
+			
 			File preServer = new File(preServerFile);
 			if( !preServer.isFile() ){
 				/* create folder */
@@ -105,7 +105,7 @@ public class Launch {
 			}
 		}
 		
-		
+		log.AddLogLine("preServerFile: "+preServerFile);
 		
 		if (PreServers.singleton().isPreServer(preServerFile)) {
 			try {
@@ -251,7 +251,7 @@ public class Launch {
 				SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
 				SwingUtils.singleton().resetData(schemas, tables);
 				form_data.clear();
-				ArrayList result_data = new ArrayList();
+				
 
 				if (drivers.getSelectedItem() != null) {
 					if (drivers.getSelectedItem().toString().contains("derby")

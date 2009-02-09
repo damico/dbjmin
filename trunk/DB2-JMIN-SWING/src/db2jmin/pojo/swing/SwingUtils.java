@@ -46,6 +46,7 @@ import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
 import db2jmin.pojo.util.RWhistory;
+import db2jmin.pojo.util.SystemOper;
 
 /**
  * This class intents to be a helper to 
@@ -57,7 +58,7 @@ import db2jmin.pojo.util.RWhistory;
 public class SwingUtils {
 
 	private static final SwingUtils getInstance = new SwingUtils();
-	private static int count = 0;
+
 
 	public static SwingUtils singleton() {
 		return getInstance;
@@ -106,31 +107,42 @@ public class SwingUtils {
 		schemas.removeAllItems();
 		tables.removeAllItems();
 	}
+	
+	private RWhistory getRWhistory(){
+		RWhistory rw = new RWhistory(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE);
+		return rw;
+	}
 
 	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final JTextArea sqltext, JPanel panel) {
-		scrollableSqlArea.setVisible(true);
+				scrollableSqlArea.setVisible(true);
 		goSQL.setVisible(true);
 		sqltext.setBounds(5, 57 + Constants.LOGTEXTH, 740, Constants.SQLTEXTH);
 		sqltext.setLineWrap(true);
 		sqltext.setWrapStyleWord(false);
-		sqltext.setToolTipText("Using the keyboard (set UP or set Down) to Move through history commands");		
+		sqltext.setToolTipText("Use the keyboard (set UP or set Down) to Move through history commands");		
 		sqltext.setText("Write here your query.");
+		
 		sqltext.addKeyListener(new KeyAdapter(){
+			private int count = getRWhistory().getTotalLines();
             public void keyPressed(KeyEvent e) { 
-				RWhistory rw = new RWhistory();
-                if( e.getKeyCode() == KeyEvent.VK_DOWN){        
-                	    count++;        
-                	     for(int i=0;i<count;i++){
-                           sqltext.setText(rw.readFile(count)+"\n");
-                  	                       
-                        }
- 		        }
-                if( e.getKeyCode() == KeyEvent.VK_UP){
-                    count--;             
-                    for(int i=0;i<count;i++){
-                       sqltext.setText(rw.readFile(count)+"\n");
-              	     }
-                    sqltext.append("");
+            	
+            	if( e.getKeyCode() == KeyEvent.VK_DOWN){        
+                	    count++;
+            			if(count > getRWhistory().getTotalLines()){
+            				count = getRWhistory().getTotalLines();
+                	    	sqltext.setText("End of command's history!");       
+                	    }else{
+                	    	sqltext.setText(getRWhistory().readFile(count)+"\n");
+                	    }	                    
+
+ 		        }else if( e.getKeyCode() == KeyEvent.VK_UP){
+ 		        	count--;
+ 		        	if(count < 0){
+ 		        		count = 0;
+ 		        		sqltext.setText("End of command's history!");
+ 		        	}else{
+ 		        		sqltext.setText(getRWhistory().readFile(count)+"\n");
+ 		        	}
                 }
                 
          }});     
@@ -139,8 +151,7 @@ public class SwingUtils {
 		goSQL.setText("!");
 		goSQL.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				RWhistory rwh = new RWhistory();
-				rwh.writeFile(sqltext.getText());
+				getRWhistory().writeFile(sqltext.getText());
 			}
 		});
 	    goSQL.setBounds(746, 57 + Constants.LOGTEXTH, 40,	Constants.SQLTEXTH - 1);
