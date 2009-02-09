@@ -11,11 +11,14 @@
 
 package org.jdamico.test;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.RWhistory;
+import db2jmin.pojo.util.SystemOper;
 import junit.framework.TestCase;
 
 /**	 	
@@ -25,10 +28,22 @@ import junit.framework.TestCase;
  * */
 
 public class RWhistoryTest extends TestCase{
-
+	private int mockTotalLines =0;
     protected void setUp() {    	 
         System.out.println("Starting...");
-        }
+        
+
+		try {
+	        BufferedReader input = new BufferedReader(new FileReader(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE));
+	        while ((input.readLine()) != null) {
+	        	mockTotalLines ++;
+	        }
+	        input.close();
+	    } catch (IOException ioe) {
+	    	ioe.printStackTrace();
+	    }    
+        
+    }
     
 
    
@@ -36,7 +51,7 @@ public class RWhistoryTest extends TestCase{
     	 int checkW = 0;
     	 File file = new File(Constants.HISTORY_FILE); 
     	 if(file.exists()){
-    	        RWhistory rw = new RWhistory();
+    		 RWhistory rw = new RWhistory(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE);
     	        rw.writeFile("test");
     		    checkW++;
     	 }else{
@@ -52,7 +67,7 @@ public class RWhistoryTest extends TestCase{
 		 int checkR = 0;
     	 File file = new File(Constants.HISTORY_FILE); 
     	 if(file.exists()){
-    		 RWhistory rw = new RWhistory();
+    		 RWhistory rw = new RWhistory(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE);
     		 rw.readFile(1);
     	 }else{
     		 System.out.println("Not Exists");
@@ -61,6 +76,12 @@ public class RWhistoryTest extends TestCase{
     		 assertEquals(1, checkR);
     	 }
 	    
+	}
+	
+	public void testGetTotalLines(){
+		RWhistory rw = new RWhistory(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE);
+		int tlines = rw.getTotalLines();
+		assertEquals(mockTotalLines, tlines);
 	}
 	
 	protected void tearDown(){

@@ -77,4 +77,15 @@ public class SystemOper {
 	    ret = ret.replaceAll("\n", "");
 	    return ret;
 	}
+
+	public String getHomePath() {
+		String path = null;
+		if(isWindows()){
+			path = "";
+		}else{
+			path ="/home/"+SystemOper.singleton().execExtCommand("whoami")+"/.dbjmin/";
+		}
+		
+		return path;
+	}
 }

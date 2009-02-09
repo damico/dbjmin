@@ -15,11 +15,9 @@ package db2jmin.pojo.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import db2jmin.pojo.util.Constants;
 
 /**	 	
  *This class creates a file called "dbash_history.txt"
@@ -31,13 +29,18 @@ public class RWhistory{
 
 
 	private Logger log = new Logger(Constants.LOGNAME);
+	private String fileHistory = null;
 	
+	public RWhistory(String fileHistory){
+		this.fileHistory = fileHistory;
+		
+	}
 	
 	//This method writes in the bash_history.txt
 	public void writeFile(String $text){
 		String text = $text;
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(Constants.HISTORY_FILE, true));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fileHistory, true));
 			bw.write(text + System.getProperty("line.separator"));
 			bw.flush();
 			bw.close();
@@ -48,38 +51,37 @@ public class RWhistory{
 
 	//This method read line by line of dbash_history.txt
 	public String readFile(int nline) {
-		String ret = null;
-		BufferedReader in = null; 
-	    try {
-	    	int count = nline;
-	        in = new BufferedReader(new FileReader(Constants.HISTORY_FILE));
-	        for (int i = 0; i <count+1; i++) {
-                       in.readLine();
-            } 
-			ret = in.readLine();
-       
-	    } catch (FileNotFoundException fnf) {
-        	
-        	log.AddLogLine("FileNotFoundException: "+fnf);
-        	
+		String row = null;
+		int count = 0;
+		try {
+	        BufferedReader input = new BufferedReader(new FileReader(fileHistory));
+	        
+	        while ((row = input.readLine()) != null) {
+	            if(count == nline) break;
+	        	count ++;
+	            
+	        }
+	        input.close();
 	    } catch (IOException ioe) {
-	    	
-          	log.AddLogLine("IOException: " + ioe);   
-          	
-        }finally{
-             try {
-                 	if(in != null){
-				    in.close();
-			    }
-             }catch (IOException ioe) {            	 
-		      	log.AddLogLine("IOException: " + ioe);		      	
-			}
-        } 
-       	if(ret == null)
-			ret = Constants.EMPTY;
-		
-		return ret;
+	    	log.AddLogLine("IOException: " + ioe.getMessage());	
+	    }
+		if(row == null) row = "";
+		return row;
         
+	}
+
+	public int getTotalLines() {
+		int ret = 0;
+		try {
+	        BufferedReader input = new BufferedReader(new FileReader(fileHistory));
+	        while ((input.readLine()) != null) {
+	            ret ++;
+	        }
+	        input.close();
+	    } catch (IOException ioe) {
+	    	log.AddLogLine("IOException: " + ioe.getMessage());	
+	    }
+		return ret;
 	}
 
 

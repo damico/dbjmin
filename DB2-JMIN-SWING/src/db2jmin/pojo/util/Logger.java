@@ -38,28 +38,26 @@ public class Logger {
 
 	public Logger(String fFile) {
 
-		if( !System.getProperty("os.name").equalsIgnoreCase("Linux") ){
-			tempDir="c:/temp";
+		if( System.getProperty("os.name").equalsIgnoreCase("Windows") ){
+			tempDir="c:/temp/";
 		}
-		Format formatter;
+		
+		/* Format formatter;
 		Date date = new Date();
 		formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String stime = formatter.format(date);
-		//filen = fFile + "_" + stime + ".log";
+		filen = fFile + "_" + stime + ".log"; */
 
-			filen = tempDir+fFile + ".log";
-		
-		
-
-		boolean delete = (new File(filen)).delete();
+		filen = tempDir+fFile + ".log";
+		createLog(filen);
 
 	}
 
-	public boolean CreateLog() {
+	private boolean createLog(String filename) {
 		boolean ret = false;
 
 		try {
-			File file = new File(tempDir+filen);
+			File file = new File(filename);
 
 			// Create file if it does not exist
 			boolean success = file.createNewFile();

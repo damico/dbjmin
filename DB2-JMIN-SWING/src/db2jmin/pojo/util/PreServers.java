@@ -1,18 +1,11 @@
 package db2jmin.pojo.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
-import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -114,10 +107,10 @@ public class PreServers {
 	public void setPreServers(String type, String tf_server, String tf_port,
 			String tf_db, String tf_user) {
 
-		String logerror = null;
+
 
 		try {
-			 RandomAccessFile raf = new RandomAccessFile(Constants.PRESERVER_FILE,"rw");
+			 RandomAccessFile raf = new RandomAccessFile(SystemOper.singleton().getHomePath()+Constants.PRESERVER_FILE,"rw");
 			 raf.seek(raf.length()-14);
 			 raf.writeBytes("\n");
 			 raf.writeBytes("<SERVER type=\""+ type + "\" host=\""+ tf_server + "\" port=\"" + tf_port + "\" dbname=\"" + tf_db + "\" user=\"" + tf_user + "\"/>");
@@ -129,7 +122,7 @@ public class PreServers {
 
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			log.AddLogLine(e.getMessage());
 		}
 
 
