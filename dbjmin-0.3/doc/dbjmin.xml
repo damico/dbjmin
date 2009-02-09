@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [<!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.2">
+  <!ENTITY manrevision "0.1">
+  <!ENTITY date "May 2008">
+  <!ENTITY app "<application>DBJMIN</application>">
+  <!ENTITY appname "DBJMIN">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 06, 2003
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="en">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo> 
+    <title><application>DBJMIN</application> Manual V0.1</title>       
+
+    <abstract role="description">
+      <para>
+	User manual for the dbjmin application. 
+      </para>
+    </abstract>
+
+    <copyright> 
+      <year>2008</year> 	
+      <holder>Jose Damico</holder> 
+    </copyright> 
+    <publisher> 
+      <publishername> Jose Damico </publishername> 
+    </publisher> 
+
+   
+   <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup> 
+      <corpauthor> Jose Damico</corpauthor>
+
+
+      
+
+     
+      <othercredit role="programmer">
+		<firstname>Miro</firstname> 
+		<surname>Lima</surname> 
+		<affiliation> 
+	  		<orgname>Miro Lima</orgname> 
+	  		<address> <email>ajlima@br.ibm.com</email> </address> 
+		</affiliation>
+		<contrib>Programmer</contrib>
+      </othercredit>
+
+    </authorgroup>
+
+    <revhistory>
+    <revision> 
+		<revnumber>DBJMIN Manual V0.1</revnumber> 
+		<date>May 2008</date> 
+		<revdescription> 
+	  		<para role="author">Jose Damico
+	  		</para>
+	  		<para role="publisher">Jose Damico</para>
+		</revdescription> 
+      </revision> 
+      
+    </revhistory> 
+
+    <releaseinfo>This manual describes version 0.2 of DBJMIN.
+    </releaseinfo> 
+    <legalnotice> 
+      <title>Feedback</title> 
+      <para>To report a bug or make a suggestion regarding the <application>DBJMIN</application> application or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>DBJMIN</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>DBJMIN</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gcalctool-intro"> 
+    <title>Introduction</title> 
+    <para>The <application>Calculator</application> application provides the following modes for different types of mathematical functionality: </para>
+     <variablelist>
+        <varlistentry>
+        <term><link linkend="gcalctool-basic-mode">Basic </link></term>
+        <listitem><para>The default mode. Provides standard calculator functions. You can perform standard addition, subtraction, division, and multiplication functions in Basic mode and you can use all of the Basic functions in each of the other modes.</para></listitem>
+        </varlistentry>
+  <varlistentry>
+        <term><link linkend="gcalctool-advanced-mode">Advanced </link></term>
+        <listitem><para>Provides advanced calculator functions. You can store numbers in 10 different memory registers, and easily retrieve and replace the numbers in the memory registers. You can use all of the Advanced functions in Financial and Scientific modes.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+        <term><link linkend="gcalctool-financial-mode">Financial </link></term>
+        <listitem><para>Provides several complex financial functions.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+        <term><link linkend="gcalctool-scientific-mode">Scientific </link></term>
+        <listitem><para>Provides many additional mathematical functions, including trigonometric and bitwise functions. You can also store your own functions and constants, when you use Scientific mode.</para></listitem>
+        </varlistentry>
+     </variablelist>
+
+    <para>You can use <application>Calculator</application> in the following numbering systems:</para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50*"/>
+          <colspec colname="COLSPEC1" colwidth="50*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>Numbering System</para></entry>
+              <entry colname="COLSPEC1" align="right">
+                <para>Base</para></entry>
+            </row>
+          </thead> 
+          <tbody> 
+            <row valign="top">
+              <entry><para>Binary</para></entry>
+              <entry align="right"><para>2</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>Octal</para></entry>
+              <entry align="right"><para>8</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>Decimal</para></entry>
+              <entry align="right"><para>10</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>Hexadecimal</para></entry>
+              <entry align="right"><para>16</para></entry>
+            </row>
+          </tbody> 
+        </tgroup>
+      </informaltable>
+                           
+  </sect1>
+
+</article>

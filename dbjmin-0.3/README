@@ -1,0 +1,51 @@
+DBJMIN 
+
+News: (For news, check CHANGELOG file)
+
+What is this?
+
+This is a MULTI-DB client.
+
+Pre-requisites:
+
+Java:
+- Java Runtime Environment Version 5.0 (http://java.com/en/download/manual.jsp)
+
+JDBC Drivers: (Since version 0.0.9 all drivers are inside the package)
+
+
+How to install?
+
+0) On Linux the best way to install is use one of packages (.deb or .rpm) or even use 
+the install-sh script. If you are using Windows, try first the dbjmin.exe. But for any cases 
+BE SURE to have JRE >= 1.5 installed and configured at your PATH.
+
+1) If you want to continue with manual installation, go ahead with the follow steps:
+Uncompress dbjmin-<version>.tar.gz or dbjmin-<version>.zip.
+
+2) After uncompress you will have the follow directory structure: 
+dbjmin-<version>/
+dbjmin-<version>/install-sh
+dbjmin-<version>/dbjminicon.png
+dbjmin-<version>/lib
+dbjmin-<version>/lib/db2jcc_license_cu.jar
+dbjmin-<version>/lib/db2jcc.jar          
+dbjmin-<version>/lib/mysql-connector-java-5.0.3-bin.jar  
+dbjmin-<version>/lib/ojdbc14.jar
+dbjmin-<version>/lib/derbyclient.jar         
+dbjmin-<version>/lib/postgresql-8.1-407.jdbc3.jar
+dbjmin-<version>/lib/jaybird-full-2.1.0.jar
+dbjmin-<version>/dbjminicon.ico
+dbjmin-<version>/app
+dbjmin-<version>/app/db2jmin.pojo.jar
+dbjmin-<version>/start_db2jmin.sh
+dbjmin-<version>/start_db2jmin.bat
+dbjmin-<version>/LICENSE
+dbjmin-<version>/README
+dbjmin-<version>/VERSION
+
+4) Finally to start the application run start_db2jmin.sh (UNIX-LIKE OSs) or start_db2jmin.bat (Windows OSs). In case of start_db2jmin.sh you will need to give execute permission before run (chmod +x start_db2jmin.sh).
+If you want to run directly from java, java -jar app/db2jmin.pojo.jar should work once you have all jars from lib/ folder into you classpath.
+
+
+5) If you want to store database credentials in order to avoid write connection info each time that you runs the app, just add new servers into preServers.xml file.
