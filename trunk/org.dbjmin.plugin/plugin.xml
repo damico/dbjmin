@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.dbjmin.plugin.editors.PropertiesEditor"
+            contributorClass="org.dbjmin.plugin.editors.PropertiesEditorContributor"
+            default="false"
+            extensions="properties"
+            icon="icons/sample.gif"
+            id="org.dbjmin.plugin.editors.PropertiesEditor"
+            name="Properties Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.dbjmin.plugin.perspectives.DBjminPerspectiveFactory"
+            icon="icons/sample.gif"
+            id="org.dbjmin.plugin.perspective"
+            name="DBjmin Manager">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.dbjmin.plugin"
+            name="DBjmin Category">
+      </category>
+      <view
+            category="org.dbjmin.plugin"
+            class="org.dbjmin.plugin.views.LaunchView"
+            icon="icons/sample.gif"
+            id="org.dbjmin.plugin.views.LaunchView"
+            name="DBJMIN Launch">
+      </view>
+      <view
+            category="org.dbjmin.plugin"
+            class="org.dbjmin.plugin.views.SQLview"
+            icon="icons/sample.gif"
+            id="org.dbjmin.plugin.sqlview"
+            name="SQLEditor View">
+      </view>
+      <view
+            category="org.dbjmin.plugin"
+            class="org.dbjmin.plugin.views.DataTableView"
+            icon="icons/sample.gif"
+            id="org.dbjmin.plugin.views.DataTableView"
+            name="DataTable">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.resourcePerspective">
+         <view
+               id="org.dbjmin.plugin.views.DBjminView"
+               relationship="top"
+               relative="org.eclipse.ui.views.TaskList"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="org.dbjmin.plugin.views.DataView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>

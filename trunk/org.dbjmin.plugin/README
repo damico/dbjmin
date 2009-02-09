@@ -1,0 +1,42 @@
+### DBJMIN PLUGIN ###
+
+## What is this?
+
+This is an extension of DBJMIN for Eclipse IDE.
+Keeping the simplicity and ease of DBJMIN.
+
+## Pre-requisites:
+
+Eclipse 
+- Eclipse IDE (http://www.eclipse.org/)
+
+Java:
+- Java Runtime Environment Version 5.0 (http://java.com/en/download/manual.jsp)
+
+JDBC Drivers: (Since version 0.0.9 all drivers are inside the package)
+
+## How to install plugin manually?
+-example/org.dbjmin.plugin-testing.zip 
+-To install the plug-in, unzip the file into the Eclipse installation directory (Eclipse/plugin/)
+
+## Testing Plugin
+
+-Open Eclipse
+-The Tutorial_Test_DBJMIN_PLUGIN.pdf explain how running the org.dbjmin.plugin-testing.zip.
+
+*org.dbjmin.plugin-testing.zip isn't complete. This plugin is only to understand the structure dbjmin plugin.
+
+## Necessary Implementation
+
+DBJMIN PLUGIN are working with 2 database only (Derby and Firebird).
+
+-Validation
+
+-SQLEditor 
+
+-DataTable 
+
+-StructureTable
+
+
+ 
