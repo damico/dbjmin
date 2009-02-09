@@ -5,7 +5,7 @@ if [ -z "$JAVA_HOME" ]; then
     echo ""
     exit 1
 fi
-JAVALOCAL=$JAVA_HOME/bin/
+JAVALOCAL=$JAVA_HOME/bin
 DBJMINLOCAL=
 if [ -z "$DBJMINLOCAL" ]; then
     echo ""
