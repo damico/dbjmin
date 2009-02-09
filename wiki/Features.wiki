@@ -5,4 +5,23 @@
 
 *Description:*
 
+Command History stores the SQL Commands typed and send for file called "dbash.history" (inspired bash_history). This function allow you recover your commands, If you forgot command, for example a big Select, so that they can be used again with relative ease.
+
+
 *How to test:*
+
+*1.)* Connect Database
+
+*2.)* Open SQL Editor - Click Button *[ SQL ]*
+
+*3.)* Write some sql command  
+
+*example: 
+ # Select `*` from Table1 - click Button *[ ! ]*
+ # Select `*` from Table2 - click Button *[ ! ]*
+ # Select `*` from Table3 - click Button *[ ! ]*
+
+
+*4.)* You just press the keyboard up arrow (↑) to scroll up or keyboard down arrow (↓) to scroll down through your command history and will appear the command typed
+
+*Doubts send for:* [http://groups.google.com.br/group/dbjmin] 
