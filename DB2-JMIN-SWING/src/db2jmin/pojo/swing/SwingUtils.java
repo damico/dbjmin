@@ -41,11 +41,14 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
 import db2jmin.pojo.util.RWhistory;
+import db2jmin.pojo.util.SQLSyntax;
 import db2jmin.pojo.util.SystemOper;
 
 /**
@@ -112,6 +115,7 @@ public class SwingUtils {
 		RWhistory rw = new RWhistory(SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE);
 		return rw;
 	}
+	
 
 	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final JTextArea sqltext, JPanel panel) {
 				scrollableSqlArea.setVisible(true);
@@ -121,6 +125,22 @@ public class SwingUtils {
 		sqltext.setWrapStyleWord(false);
 		sqltext.setToolTipText("Use the keyboard (set UP or set Down) to Move through history commands");		
 		sqltext.setText("Write here your query.");
+	   
+		//send sql commands for analisy of SQLSyntax
+		sqltext.getDocument().addDocumentListener(new SQLSyntax(sqltext));
+		
+		sqltext.addKeyListener(new KeyAdapter(){
+	    	public void keyReleased(KeyEvent ke){
+	    		//This event closes the open parenthesis
+	    		String x = sqltext.getText();
+	    		int pos = sqltext.getCaretPosition()-1;
+	    		if(ke.getKeyChar()=='('){
+	    			x+= " )";
+	    				sqltext.setText(x);
+	    				sqltext.setCaretPosition(pos+1);
+	    		}
+	    	}
+	    });
 		
 		sqltext.addKeyListener(new KeyAdapter(){
 			private int count = getRWhistory().getTotalLines();
@@ -146,7 +166,10 @@ public class SwingUtils {
                 }
                 
          }});     
+		
+		
 
+		
 		scrollableSqlArea.setBounds(5, 57 + Constants.LOGTEXTH, 742, Constants.SQLTEXTH);
 		goSQL.setText("!");
 		goSQL.addActionListener(new ActionListener(){
@@ -274,7 +297,7 @@ public class SwingUtils {
 		SQL_button.setBounds(725, 32, 60, 20);
 		panel.add(SQL_button);
 		SQL_button.setEnabled(false);
-
+	
 		logtext.setBounds(5, 57, 782, Constants.LOGTEXTH);
 		logtext.setBackground(Color.BLACK);
 		logtext.setForeground(Color.CYAN);
@@ -441,5 +464,6 @@ public class SwingUtils {
 		}
 		return ret;
 	}
+
 	
 }
