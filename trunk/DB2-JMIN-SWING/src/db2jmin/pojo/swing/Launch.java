@@ -226,24 +226,18 @@ public class Launch {
 
 	public static Action actionValidadeAndConnect = new AbstractAction(
 			"Action InputValidation / Schemas") {
-		/**
-		 * 
-		 */
+		
 		private static final long serialVersionUID = 5388887340394323000L;
 
-		// This is an instance initializer; it is executed just after the
-		// constructor of the superclass is invoked
 		{
-			// The following values are completely optional
 
-			// Set an accelerator key; this value is used by menu items
 			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("F2"));
 
 		}
 
-		// This method is called when the action is invoked
 		public void actionPerformed(ActionEvent evt) {
-			// Perform action
+			ValidadeUserData4Connection validate = new ValidadeUserData4Connection(form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd, drivers, logtext);
+
 			if (!open
 					&& !connected
 					|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
@@ -254,22 +248,9 @@ public class Launch {
 				
 
 				if (drivers.getSelectedItem() != null) {
-					if (drivers.getSelectedItem().toString().contains("derby")
-							&& tf_user.getText().equals("")
-							&& tf_passwd.equals("")) {
-						tf_user.setText("null");
-						tf_passwd.setText("null");
-					}
-
-					form_data.add(tf_server.getText());
-					form_data.add(tf_port.getText());
-					form_data.add(tf_db.getText());
-					form_data.add(tf_user.getText());
-					form_data.add(tf_passwd.getText());
-					form_data.add(drivers.getSelectedItem().toString());
-
-					if (SwingUtils.singleton().isValidFormData(form_data,
-							drivers, logtext)) {
+					
+										
+					if (validate.isValidade()) {
 						schemas.setEnabled(true);
 
 						logtext.setForeground(Color.CYAN);
