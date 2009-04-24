@@ -1,2 +1,5 @@
 #summary Description of 'DBJMIN web view' requirements
 
+ # At main interface, after Password field we need to resize '>' button to a half of its current length, also change its label for 'D' instead '>' and add 1 new button: 'W'
+ # Add a tool tip text for 'D' with value: 'Desktop use'
+ # Add a tool tip text for 'W' with value: 'Web use'
