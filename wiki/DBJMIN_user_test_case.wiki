@@ -1,0 +1,46 @@
+#summary How to test the main features of DBJMIN
+
+= Connecting MySQL =
+
+== Machine Setup ==
+
+== Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+
+= Connecting PostgreSQL = 
+
+== Machine Setup ==
+
+== Testing ==
+
+= Connecting Firebird =
+
+== Machine Setup ==
+
+== Testing ==
+
+= Connecting Derby Embedded =
+
+== Machine Setup ==
+
+== Testing ==
+
+= Connecting Derby Server = 
+
+== Machine Setup ==
+
+== Testing ==
+
+= Connecting Oracle =
+
+== Machine Setup ==
+
+== Testing ==
+
+= Connecting DB2 =
+
+== Machine Setup ==
+
+== Testing ==
