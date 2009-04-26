@@ -8,39 +8,79 @@
   * CREATE
   * INSERT
   * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
+  
 = Connecting PostgreSQL = 
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
 = Connecting Firebird =
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
 = Connecting Derby Embedded =
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
 = Connecting Derby Server = 
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
 = Connecting Oracle =
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
 
 = Connecting DB2 =
 
 == Machine Setup ==
 
 == Testing ==
+  * CREATE
+  * INSERT
+  * SELECT
+  * BATCH UPADE
+  * View Data
+  * View Structure
