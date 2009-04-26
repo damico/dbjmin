@@ -84,3 +84,10 @@
   * BATCH UPADE
   * View Data
   * View Structure
+
+= Common Features Test =
+  * Save credentials
+  * Invalid data
+  * Tooltips
+  * SQL History
+  * SQL Syntax autocomplete
