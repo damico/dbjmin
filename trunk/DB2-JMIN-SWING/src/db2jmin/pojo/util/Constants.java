@@ -40,5 +40,6 @@ public class Constants {
 	public static int frameWidth = 798;
 	public static int frameHeight = 50;
 	public static final String HISTORY_FILE = "dbash_history.txt";
+	public static final int SCHEMA_ACTION = 1;
 
 }

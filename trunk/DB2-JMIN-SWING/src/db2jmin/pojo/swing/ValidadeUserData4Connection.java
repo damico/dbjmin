@@ -35,7 +35,7 @@ public class ValidadeUserData4Connection {
 	
 	}
 	
-	public boolean isValidade(){
+	public boolean isValidated(){
 		
 		boolean ret = false;
 		
