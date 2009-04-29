@@ -3,8 +3,8 @@ Version: 0.4
 Section: devel
 Priority: optional
 Architecture: all
-Depends: openjdk-6-jre|sun-java6-jre|sun-java5-jre
-Recommends: 
+Depends: openjdk-6-jre | sun-java6-jre | sun-java5-jre | sun-j2re1.5 | java-virtual-machine
+Recommends: java-package 
 Suggests: 
 Conflicts: 
 Replaces: 
