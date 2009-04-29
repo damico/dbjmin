@@ -175,7 +175,49 @@ public class Launch {
 
 			private void tf_passwdKeyPressed(KeyEvent evt) {
 
-				if (evt.getKeyCode() == KeyEvent.VK_F3) {
+				if (evt.getKeyCode() == KeyEvent.VK_F9) {
+					ValidadeUserData4Connection validate = new ValidadeUserData4Connection(form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd, drivers, logtext);
+					if (!open
+							&& !connected
+							|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
+									tf_port, tf_db, tf_user, tf_passwd, drivers)) {
+						SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
+						SwingUtils.singleton().resetData(schemas, tables);
+						form_data.clear();
+						
+						if (drivers.getSelectedItem() != null) {
+							
+							
+							if (validate.isValidated()) {
+								schemas.setEnabled(true);
+
+								logtext.setForeground(Color.CYAN);
+								logtext.setText("Connected\n");
+								open = true;
+								connected = true;
+								validateAndConnectButton.setText("W");
+								validateAndConnectButton.setBackground(Color.BLUE);
+								
+								//callJetty(form_data, Constants.SCHEMA_ACTION);
+								
+								DBconnector dbc = new DBconnector(form_data);
+								schemas_array = dbc.getSchemas();
+
+								int counter = 0;
+								Iterator it = schemas_array.iterator();
+								while (it.hasNext()) {
+
+									schemas.insertItemAt(it.next().toString(), counter);
+								}
+							}
+
+						} else {
+							drivers.setBackground(Color.RED);
+						}
+					}
+					
+					
+				} else if (evt.getKeyCode() == KeyEvent.VK_F3) {
 
 					form_data.add(tf_server.getText());
 					form_data.add(tf_port.getText());
@@ -250,7 +292,7 @@ public class Launch {
 				if (drivers.getSelectedItem() != null) {
 					
 										
-					if (validate.isValidade()) {
+					if (validate.isValidated()) {
 						schemas.setEnabled(true);
 
 						logtext.setForeground(Color.CYAN);
