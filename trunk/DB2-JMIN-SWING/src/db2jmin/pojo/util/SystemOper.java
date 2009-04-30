@@ -88,4 +88,24 @@ public class SystemOper {
 		
 		return path;
 	}
+	
+	public String getTempPath() {
+		String path = null;
+		if(isWindows()){
+			path = "c:/temp/";
+		}else{
+			path ="/tmp/";
+		}
+		
+		return path;
+	}
+	
+	public void startBrowser(String cmd){
+		try {
+			Process p = Runtime.getRuntime().exec(cmd);
+		}
+		catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
 }
