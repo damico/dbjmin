@@ -11,7 +11,7 @@ public class TestJettyController extends TestCase {
 		JettyController jettyControl;
 		try {
 			jettyControl = new JettyController(8000);
-			jettyControl.startServer();
+			jettyControl.init();
 			isStarted = true;
 		} catch (Exception e) {
 			e.printStackTrace();
