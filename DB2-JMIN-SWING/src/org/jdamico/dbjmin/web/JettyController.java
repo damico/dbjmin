@@ -5,9 +5,10 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.servlet.ServletHandler;
 
-public class JettyController {
+public class JettyController implements Runnable {
 
 	private Server server = null;
+	private Thread t = null;
 	
 	public JettyController(int port) throws Exception {
 		server = new Server();
@@ -27,9 +28,28 @@ public class JettyController {
         
 	}
 
-	public void startServer() throws Exception {
-		server.start();
-        server.join();
+
+	public void init(){
+        t = new Thread(this);
+        t.start();
+    }
+
+    public int stopServer(){
+        t= new Thread(this);
+        t.interrupt();
+        return 1;
+    }
+	
+	
+	public void run() {
+		try {
+			server.start();
+			server.join();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+		
 	}
 
 }
