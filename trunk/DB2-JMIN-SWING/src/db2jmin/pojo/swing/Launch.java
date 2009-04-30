@@ -49,6 +49,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
+import org.jdamico.dbjmin.web.action.ActionsFactory;
+
 import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
@@ -198,17 +200,11 @@ public class Launch {
 								validateAndConnectButton.setText("W");
 								validateAndConnectButton.setBackground(Color.BLUE);
 								
-								//callJetty(form_data, Constants.SCHEMA_ACTION);
 								
-								DBconnector dbc = new DBconnector(form_data);
-								schemas_array = dbc.getSchemas();
-
-								int counter = 0;
-								Iterator it = schemas_array.iterator();
-								while (it.hasNext()) {
-
-									schemas.insertItemAt(it.next().toString(), counter);
-								}
+								ActionsFactory.callJetty(form_data, Constants.D_SERVER_ACTION).exec();
+								ActionsFactory.callJetty(form_data, Constants.D_SCHEMA_ACTION).exec();
+								
+								
 							}
 
 						} else {
