@@ -29,7 +29,7 @@ package db2jmin.pojo.util;
 
 public class Constants {
 
-	public static final String APPNAME = "DBJMIN - Desktop - 0.3 (2009-feb-09)";
+	public static final String APPNAME = "DBJMIN - 0.3 (2009-feb-09)";
 	public static final int LOGTEXTH = 80;
 	public static final int SQLTEXTH = 80;
 	public static final String PRESERVER_FILE = "preServers.xml";
@@ -39,7 +39,26 @@ public class Constants {
 	public static final String APPLOGO = "dbjmin.png";
 	public static int frameWidth = 798;
 	public static int frameHeight = 50;
+	public static String COMMON_KEY = "dbjmin";
 	public static final String HISTORY_FILE = "dbash_history.txt";
-	public static final int SCHEMA_ACTION = 1;
+	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties";
+	
+	public static final int D_SERVER_ACTION = 0;
+	public static final int D_SCHEMA_ACTION = 1;
+	public static final int W_SCHEMA_ACTION = 2;
+	public static final int W_TABLE_ACTION = 3;
+	
+	public static final String HTML_TOP = 	"<html>\n" +
+	"<head>\n" +
+	"<title>DBJMIN: Schemas</title>\n" +
+	"</head>\n" +
+	"<body>\n" +
+	"<h2>DBJMIN: Schemas</h2><hr>";
+
+	public static final String HTML_BOTTON = "<hr>" +
+	"" + APPNAME +
+	"</body>\n" +
+	"</html>";
+	
 
 }
