@@ -102,10 +102,13 @@ public class SystemOper {
 	
 	public void startBrowser(String cmd){
 		try {
-			Process p = Runtime.getRuntime().exec(cmd);
+			Runtime.getRuntime().exec(cmd);
 		}
 		catch (Exception err) {
 			err.printStackTrace();
 		}
 	}
+
+	
+	
 }
