@@ -165,7 +165,7 @@ public class Launch {
 				actionValidadeAndConnect, schemas, tables,
 				validateAndConnectButton, actionGetTables, data_button,
 				structure_button, SQL_button, logtext, scrollableTextArea,
-				mainDesktopFrame, os_specH);
+				mainDesktopFrame, os_specH, table_button);
 
 		tf_passwd
 				.setToolTipText("Press F3 to save this dababase credentials on preServers.xml file");
@@ -210,6 +210,7 @@ public class Launch {
 						} else {
 							drivers.setBackground(Color.RED);
 						}
+						mainDesktopFrame.setSize(798, 90 + Constants.LOGTEXTH);
 					}
 					
 					
@@ -299,15 +300,17 @@ public class Launch {
 						DBconnector dbc = new DBconnector(form_data);
 						schemas_array = dbc.getSchemas();
 
-						int counter = 0;
-						Iterator it = schemas_array.iterator();
-						while (it.hasNext()) {
-
-							schemas.insertItemAt(it.next().toString(), counter);
-						}
+						SwingUtils.singleton().setSchemasDropDown(form_data, schemas);
+						SQL_button.setEnabled(true);
+						table_button.setEnabled(true);
+						
+					}else{
+						table_button.setEnabled(false);
+						SQL_button.setEnabled(false);
+						
 					}
-					SQL_button.setEnabled(true);
 					mainDesktopFrame.setSize(798, 90 + Constants.LOGTEXTH);
+					
 				} else {
 					drivers.setBackground(Color.RED);
 				}
@@ -331,13 +334,13 @@ public class Launch {
 			tables.removeAllItems();
 
 			DBconnector dbc = new DBconnector(form_data);
-			ArrayList<String> tables_array = dbc.getTables(schemas
-					.getSelectedItem().toString());
+			ArrayList<String> tables_array = dbc.getTables(schemas.getSelectedItem().toString());
 			int counter = 0;
 			Iterator<String> it = tables_array.iterator();
 			while (it.hasNext()) {
 
 				tables.insertItemAt(it.next().toString(), counter);
+				counter++;
 			}
 			if (tables_array.size() > 0) {
 
@@ -431,18 +434,12 @@ public class Launch {
 		}
 	};
 
-	/**
-	 * 
-	 */
 
 	public static Action mountSqlArea = new AbstractAction("Action SQL Area") {
-		// This is an instance initializer; it is executed just after the
-		// constructor of the superclass is invoked
-		{
+		
+		
+		private static final long serialVersionUID = 1L;
 
-		}
-
-		// This method is called when the action is invoked
 		public void actionPerformed(ActionEvent evt) {
 
 			SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
@@ -498,7 +495,7 @@ public class Launch {
 					log.AddLogLine(error);
 				}
 			} else {
-				ArrayList data = data = DBc.getSQL(sqltext.getText());
+				ArrayList data = DBc.getSQL(sqltext.getText());
 				SwingUtils.singleton().callSql(sqltext, data, maintable,
 						scrollableTable, logtext, panel);
 			}
@@ -510,13 +507,12 @@ public class Launch {
 	};
 
 	public static Action action6 = new AbstractAction("Action Table Structure") {
-		// This is an instance initializer; it is executed just after the
-		// constructor of the superclass is invoked
+
 		{
 
 		}
 
-		// This method is called when the action is invoked
+
 		public void actionPerformed(ActionEvent evt) {
 
 			try {
@@ -599,8 +595,8 @@ public class Launch {
 	public static JTable maintable = new JTable();
 	public static JScrollPane scrollableTable = new JScrollPane(maintable);
 	public static Logger log = new Logger(Constants.LOGNAME);
-	public static JButton validateAndConnectButton = new JButton(
-			actionValidadeAndConnect);
+	public static JButton table_button = new JButton(">");
+	public static JButton validateAndConnectButton = new JButton(actionValidadeAndConnect);
 	public static boolean open = false;
 	public static boolean connected = false;
 	public static int os_specH = Constants.DEFAULT_OS_SPEC_H;
