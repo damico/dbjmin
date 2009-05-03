@@ -24,6 +24,8 @@ public class JettyController implements Runnable {
         handler.addServletWithMapping("org.jdamico.dbjmin.web.Sql",			 "/sql");
         handler.addServletWithMapping("org.jdamico.dbjmin.web.SampleData",	 "/sampledata");
         handler.addServletWithMapping("org.jdamico.dbjmin.web.SqlData",		 "/sqldata");
+        handler.addServletWithMapping("org.jdamico.dbjmin.web.Structure",	 "/structure");
+        handler.addServletWithMapping("org.jdamico.dbjmin.web.Destroy",		 "/destroy");
         
         
 	}
