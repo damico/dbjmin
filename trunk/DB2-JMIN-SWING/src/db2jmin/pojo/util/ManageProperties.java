@@ -1,5 +1,6 @@
 package db2jmin.pojo.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,4 +58,12 @@ public class ManageProperties {
 	    }
 	    return ret;
 	}
+    
+    public boolean remove(){
+    	boolean ret = false;
+    	String fs = SystemOper.singleton().getTempPath();
+		fs = fs + Constants.TEMP_ALIVE_CREDENTIAL;
+		ret = (new File(fs)).delete();
+		return ret;
+    }
 }
