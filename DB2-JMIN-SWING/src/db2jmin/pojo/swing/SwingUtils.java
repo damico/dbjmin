@@ -44,6 +44,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
@@ -190,7 +191,7 @@ public class SwingUtils {
 			Action actionGetTables, JButton data_button,
 			JButton structure_button, JButton SQL_button, JTextArea logtext,
 			JScrollPane scrollableTextArea, JFrame mainDesktopFrame,
-			int os_specH) {
+			int os_specH, JButton table_button) {
 		mainDesktopFrame.setVisible(true);
 		panel.add(drivers);
 		JLabel l_server = new JLabel("Srv: ");
@@ -278,7 +279,7 @@ public class SwingUtils {
 		validateAndConnectButton.setBounds(735, 2, 50, 20);
 		panel.add(validateAndConnectButton);
 
-		JButton table_button = new JButton(actionGetTables);
+		table_button.setAction(actionGetTables);
 		table_button.setText(">");
 		table_button.setBounds(210, 32, 50, 20);
 		panel.add(table_button);
@@ -465,5 +466,17 @@ public class SwingUtils {
 		return ret;
 	}
 
-	
+	public void setSchemasDropDown(ArrayList<String> form_data, JComboBox schemas){
+		
+		DBconnector dbc = new DBconnector(form_data);
+
+		ArrayList<String> schemas_Array = dbc.getSchemas();
+		int counter = 0;
+		Iterator<String> it = schemas_Array.iterator();
+		while (it.hasNext()) {
+			schemas.insertItemAt(it.next(), counter);
+			counter++;
+		}
+
+	}
 }
