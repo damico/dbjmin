@@ -16,6 +16,18 @@ public class ActionsFactory {
 				return new WebSchemaAction(form_data);
 			case Constants.W_TABLE_ACTION:
 				return new WebTableAction(form_data);
+			case Constants.W_SAMPLEDATA_ACTION:
+				return new WebSampleDataAction(form_data);
+			case Constants.W_STRUCTURE_ACTION:
+				return new WebStructureAction(form_data);
+			case Constants.W_BATCH_SQL_ACTION:
+				return new WebBatchSQLAction(form_data);
+			case Constants.W_SINGLE_SQL_ACTION:
+				return new WebSingleSQLAction(form_data);
+			case Constants.W_GET_DB_SESSION:
+				return new WebGetDbSessionAction(form_data);
+			case Constants.W_CLOSE_SESSION:
+				return new WebCloseSessionAction(form_data);
 			default:
 				return null;
 		}
