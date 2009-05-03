@@ -39,7 +39,7 @@ public class InputDataValidation {
 		log.AddLogLine("Invoking  InputDataValidation()");
 	}
 
-	public ArrayList formValidationDerbye(String form_name, ArrayList form_data) {
+	public ArrayList formValidationDerbye(String form_name, ArrayList<String> form_data) {
 
 		ArrayList validationResult = new ArrayList();
 		boolean ret = true;
