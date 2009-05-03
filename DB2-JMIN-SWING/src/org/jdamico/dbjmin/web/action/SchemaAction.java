@@ -19,13 +19,12 @@ public class SchemaAction implements JettyActions {
 		fs = fs + Constants.TEMP_ALIVE_CREDENTIAL;
 		boolean isPropWritten = ManageProperties.getInstance().write(fs, form_data);
 		if(isPropWritten){
-			SystemOper.singleton().startBrowser("iceweasel http://127.0.0.1:8888/schemas");
+			SystemOper.singleton().startBrowser(Constants.DEFAULT_BROWSER+" http://127.0.0.1:8888/schemas");
 		}
 		return isPropWritten;
 	}
 
 	public ArrayList getResult() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
