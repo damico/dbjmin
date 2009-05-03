@@ -90,6 +90,7 @@ public interface Constants {
 											"</table>";
 	public static final int SELECT_LIMIT = 100;
 	public static final String HTML_DESTROY_HEADER = "<h2>Close Session</h2><hr>\n";
+	public static final String DEFAULT_BROWSER = "firefox";
 
 	
 	
