@@ -34,9 +34,11 @@ public class SqlData extends HttpServlet {
 		form_data.add(query);
 		PrintWriter out = response.getWriter();
 		out.println(Constants.HTML_TOP);
+		out.println(ServletUtils.getInstance().getHTMLhead());
 		out.println(Constants.HTML_SQL_HEADER);
-		out.println(Constants.HTML_TOOLS.replaceAll("@", DbSessionInfo.getInstance().getCurrentDBinfo()));
-		
+		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
+		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
+		out.println("<div id=\"display\"></div><br>\n");
 		
 		
 		
@@ -61,7 +63,11 @@ public class SqlData extends HttpServlet {
 			ArrayList columns_name = (ArrayList) data.get(0);
 			ArrayList set = (ArrayList) data.get(1);
 			errors = (ArrayList) data.get(2);
-
+			int setSize = set.size();
+			
+			if(setSize < 1){
+				errors.add("Table Empty!");
+			}else{
 			
 			out.println("<table border = '1' width = '500'>");
 			out.println("<tr bgcolor='#CCCCCC'>\n");
@@ -70,7 +76,8 @@ public class SqlData extends HttpServlet {
 			}
 			out.println("</tr>\n");
 			
-			int setSize = set.size();
+			
+			
 			for (int i = 0; i < setSize; i++) {
 				columns_data.clear();
 				columns_data = (ArrayList<String>) set.get(i);
@@ -86,6 +93,7 @@ public class SqlData extends HttpServlet {
 			}
 			
 			out.println("</table>");
+			}
 		}
 
 		
@@ -106,7 +114,8 @@ public class SqlData extends HttpServlet {
 		
 		
 		out.println("<BR>");
-		out.println(Constants.HTML_SQL_FORM);
+		out.println(Constants.HTML_SQL_FORM.replaceAll("@", ServletUtils.getInstance().getSQLInnerButton()));
+
 		out.println(Constants.HTML_BOTTON);
 		out.close();
 	}

@@ -24,7 +24,7 @@ public class Destroy extends HttpServlet {
 		out.println("<table bgcolor = 'black' width='600' cellspacing='10'>\n" +
 				"<tr valign='top'>\n" +
 				"<td><font color = 'red'>\n" +
-				"<h2><center>"+DbSessionInfo.getInstance().getCurrentDBinfo()+" was closed. <br>" +
+				"<h2><center>"+ServletUtils.getInstance().getCurrentDBinfo()+" was closed. <br>" +
 				"DBJMIN instance terminated.</center></h2></font>\n" +
 				"</td></tr></table>");
 

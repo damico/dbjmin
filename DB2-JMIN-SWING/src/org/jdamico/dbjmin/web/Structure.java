@@ -36,8 +36,12 @@ public class Structure extends HttpServlet{
 
 		
 		out.println(Constants.HTML_TOP);
+		out.println(ServletUtils.getInstance().getHTMLhead());
 		out.println(Constants.HTML_STRUCTURE_HEADER);
-		out.println(Constants.HTML_TOOLS);
+		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
+		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
+		out.println("<div id=\"display\"></div><br>\n");
+		
 		out.println("<table border = '1' width = '400'>");
 		out.println("<tr bgcolor='#CCCCCC'><td><b>Column Name</b></td>" +
 				"<td><b>Type Name</b></td>" +
@@ -57,7 +61,8 @@ public class Structure extends HttpServlet{
 		out.println("</table>");
 		
 		out.println("<BR>");
-		out.println(Constants.HTML_SQL_FORM);
+		out.println(Constants.HTML_SQL_FORM.replaceAll("@", ServletUtils.getInstance().getSQLInnerButton()));
+
 		
 		out.println(Constants.HTML_BOTTON);
 		out.close();

@@ -400,7 +400,8 @@ public class DBconnector {
 
 		Statement stmt = null;
 		ArrayList columns_name = new ArrayList();
-
+		String error = "";
+		
 		ArrayList data = new ArrayList();
 		ArrayList set = new ArrayList();
 
@@ -463,10 +464,8 @@ public class DBconnector {
 
 				}
 				set.add(columns_data.clone());
-				log
-						.AddLogLine("===================================================");
-				log.AddLogLine("nn_columns_data: " + columns_data.size());
-				log.AddLogLine("nn_set: " + set.size());
+				log.AddLogLine("===================================================");
+				log.AddLogLine("nn_columns_data: " + columns_data.size()+" | "+"nn_set: " + set.size());
 				columns_data.clear();
 			}
 			rs.close();
@@ -474,19 +473,23 @@ public class DBconnector {
 			log.AddLogLine("nn_columns: " + columns_name.size());
 
 		} catch (SQLException e) {
+			error = error + e.getMessage();
 			log.AddLogLine("EXCEPTION: " + e);
 		} catch (ClassNotFoundException e) {
+			error = error + e.getMessage();
 			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
 				con.close();
 			} catch (SQLException e) {
+				error = error + e.getMessage();
 				log.AddLogLine("EXCEPTION: " + e);
 			}
 		}
 		data.add(columns_name);
 		data.add(set);
+		data.add(error);
 		return data;
 	}
 

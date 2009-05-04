@@ -16,6 +16,7 @@
 package db2jmin.pojo.swing;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -41,8 +43,6 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
@@ -268,10 +268,10 @@ public class SwingUtils {
 		schemas.setEnabled(false);
 
 		JLabel l_tables = new JLabel("Tables: ");
-		l_tables.setBounds(270, 32, 100, 20);
+		l_tables.setBounds(264, 32, 100, 20);
 		panel.add(l_tables);
 
-		tables.setBounds(320, 32, 200, 20);
+		tables.setBounds(310, 32, 188, 20);
 		panel.add(tables);
 		tables.setEnabled(false);
 
@@ -283,19 +283,26 @@ public class SwingUtils {
 		table_button.setText(">");
 		table_button.setBounds(210, 32, 50, 20);
 		panel.add(table_button);
+		
+		JButton viewLog = new JButton();
+		viewLog.setText("Log");
+		viewLog.setBounds(503,32,58,20);
+		ActionListener actionShowLog = getActionShowLog();
+		viewLog.addActionListener(actionShowLog);
+		panel.add(viewLog);
 
 		data_button.setText("Data");
-		data_button.setBounds(555, 32, 65, 20);
+		data_button.setBounds(564, 32, 63, 20);
 		panel.add(data_button);
 		data_button.setEnabled(false);
 
 		structure_button.setText("Structure");
-		structure_button.setBounds(625, 32, 95, 20);
+		structure_button.setBounds(631, 32, 91, 20);
 		panel.add(structure_button);
 		structure_button.setEnabled(false);
 
 		SQL_button.setText("SQL");
-		SQL_button.setBounds(725, 32, 60, 20);
+		SQL_button.setBounds(725, 32, 58, 20);
 		panel.add(SQL_button);
 		SQL_button.setEnabled(false);
 	
@@ -309,9 +316,7 @@ public class SwingUtils {
 		
 		panel.add(scrollableTextArea);
 
-		Image icon = Toolkit.getDefaultToolkit().getImage(Constants.APPLOGO);
-
-		mainDesktopFrame.setIconImage(icon);
+		mainDesktopFrame.setIconImage(getDefaultIcon());
 
 		mainDesktopFrame.setTitle(Constants.APPNAME);
 		mainDesktopFrame.getContentPane().add(panel);
@@ -321,8 +326,19 @@ public class SwingUtils {
 
 		mainDesktopFrame.setSize(Constants.frameWidth, Constants.frameHeight
 				+ os_specH);
+		
+		
 	}
 	
+	public Image getDefaultIcon(){
+		return Toolkit.getDefaultToolkit().getImage(Constants.APPLOGO);
+	}
+	
+	private AbstractAction getActionShowLog() {
+		
+		return new SwingLogAction();
+	}
+
 	public void callSql(JTextArea sqltext, ArrayList data, JTable maintable, JScrollPane scrollableTable, JTextArea logtext, JPanel panel){
 
 		Logger log = new Logger(Constants.LOGNAME);

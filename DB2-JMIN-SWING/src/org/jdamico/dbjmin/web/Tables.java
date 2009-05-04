@@ -24,8 +24,11 @@ public class Tables extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.println(Constants.HTML_TOP);
+		out.println(ServletUtils.getInstance().getHTMLhead());
 		out.println(Constants.HTML_TABLE_HEADER);
-		out.println(Constants.HTML_TOOLS.replaceAll("@", DbSessionInfo.getInstance().getCurrentDBinfo()));
+		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
+		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
+		out.println("<div id=\"display\"></div><br>\n");
 		out.println("<table border = '1' width = '500'>");
 		out.println("<tr bgcolor='#CCCCCC'><td><b>Tables ("+tables.size()+")</b></td>" +
 				"<td><b>Sample Data</b></td>" +
@@ -41,6 +44,10 @@ public class Tables extends HttpServlet {
 			out.println("<br><br><table bgcolor = 'black' width='500'>" +
 					"<tr><td><font color = 'yellow'><b>No tables for Schema "+request.getParameter("s")+"</b></font></td></tr></table>");
 		}
+		
+		out.println("<BR>");
+		out.println(Constants.HTML_SQL_FORM.replaceAll("@", ServletUtils.getInstance().getSQLInnerButton()));
+
 		out.println(Constants.HTML_BOTTON);
 		out.close();
 	}
