@@ -100,6 +100,17 @@ public class SystemOper {
 		return path;
 	}
 	
+	public String getLibPath() {
+		String path = null;
+		if(isWindows()){
+			path = "lib/";
+		}else{
+			path ="/usr/lib/dbjmin/";
+		}
+		
+		return path;
+	}
+	
 	public void startBrowser(String cmd){
 		try {
 			Runtime.getRuntime().exec(cmd);

@@ -34,37 +34,52 @@ public class SampleData extends HttpServlet {
 		ArrayList<String> columns_data = new ArrayList<String>();
 		ArrayList set = (ArrayList) data.get(1);
 		columns_name = (ArrayList<String>) data.get(0);
-		
+		String error = data.get(2).toString();
 
 		out.println(Constants.HTML_TOP);
+		out.println(ServletUtils.getInstance().getHTMLhead());
 		out.println(Constants.HTML_SAMPLEDATA_HEADER);
-		out.println(Constants.HTML_TOOLS.replaceAll("@", DbSessionInfo.getInstance().getCurrentDBinfo()));
+		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
+		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
+		out.println("<div id=\"display\"></div><br>\n");
+	
+		if(set.size()<1) error = error + "Table empty!";
 		
-		out.println("<table border = '1' width = '300'>");
-		out.println("<tr bgcolor='#CCCCCC'>\n");
-		for (int j = 0; j < columns_name.size(); j++) {
-			out.println("<td>"+columns_name.get(j)+"</td>");
-		}
-		out.println("</tr>\n");
-		
-		int setSize = set.size();
-		for (int i = 0; i < setSize; i++) {
-			columns_data.clear();
-			columns_data = (ArrayList<String>) set.get(i);
-			out.println("<tr>\n");
-			for (int j = 0; j < columns_data.size(); j++) {
-				try {
-					out.println("<td>"+columns_data.get(j)+"</td>");
-				} catch (NullPointerException e) {
-					// log.AddLogLine("NullPointerException: "+e);
-				}
-
+		if(error.equals("")){
+			out.println("<table border = '1' width = '300'>");
+			out.println("<tr bgcolor='#CCCCCC'>\n");
+			for (int j = 0; j < columns_name.size(); j++) {
+				out.println("<td>"+columns_name.get(j)+"</td>");
 			}
 			out.println("</tr>\n");
-			columns_data.clear();
+			
+			int setSize = set.size();
+			for (int i = 0; i < setSize; i++) {
+				columns_data.clear();
+				columns_data = (ArrayList<String>) set.get(i);
+				out.println("<tr>\n");
+				for (int j = 0; j < columns_data.size(); j++) {
+					try {
+						out.println("<td>"+columns_data.get(j)+"</td>");
+					} catch (NullPointerException e) {
+						// log.AddLogLine("NullPointerException: "+e);
+					}
+
+				}
+				out.println("</tr>\n");
+				columns_data.clear();
+			}
+			
+			out.println("</table>");
+		}else{
+			out.println("<table bgcolor = 'black' width='500'>" +
+					"<tr valign='top'><td><font color = 'red'><b>"+error+"</b></font></td></tr></table>");
+
 		}
 		
-		out.println("</table>");
+		out.println("<BR>");
+		out.println(Constants.HTML_SQL_FORM.replaceAll("@", ServletUtils.getInstance().getSQLInnerButton()));
+
 		out.println(Constants.HTML_BOTTON);
 		out.close();
 	}

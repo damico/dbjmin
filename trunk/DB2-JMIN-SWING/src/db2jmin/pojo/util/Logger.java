@@ -36,6 +36,9 @@ import java.util.Date;
 
 public class Logger {
 
+	private String filen = null;
+	private String tempDir = "/tmp/";
+	
 	public Logger(String fFile) {
 
 		if( System.getProperty("os.name").equalsIgnoreCase("Windows") ){
@@ -100,7 +103,6 @@ public class Logger {
 		return ret;
 	}
 
-	private String filen = null;
-	private String tempDir = "/tmp/";
+
 
 }

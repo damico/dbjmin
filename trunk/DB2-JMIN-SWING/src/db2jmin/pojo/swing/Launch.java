@@ -51,6 +51,8 @@ import javax.swing.KeyStroke;
 
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
+import com.sun.j3d.utils.applet.MainFrame;
+
 import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
@@ -168,7 +170,7 @@ public class Launch {
 				mainDesktopFrame, os_specH, table_button);
 
 		tf_passwd
-				.setToolTipText("Press F3 to save this dababase credentials on preServers.xml file");
+				.setToolTipText("Press F3 to save this dababase credentials on preServers.xml file. Or F9 to open a Web Module");
 
 		tf_passwd.addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -204,6 +206,7 @@ public class Launch {
 								ActionsFactory.callJetty(form_data, Constants.D_SERVER_ACTION).exec();
 								ActionsFactory.callJetty(form_data, Constants.D_SCHEMA_ACTION).exec();
 								
+								mainDesktopFrame.setTitle("* "+Constants.APPNAME);
 								
 							}
 
@@ -268,12 +271,7 @@ public class Launch {
 		
 		private static final long serialVersionUID = 5388887340394323000L;
 
-		{
-
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("F2"));
-
-		}
-
+	
 		public void actionPerformed(ActionEvent evt) {
 			ValidadeUserData4Connection validate = new ValidadeUserData4Connection(form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd, drivers, logtext);
 
@@ -450,13 +448,7 @@ public class Launch {
 	};
 
 	public static Action executeSql = new AbstractAction("Action SQL Go!") {
-		// This is an instance initializer; it is executed just after the
-		// constructor of the superclass is invoked
-		{
-
-		}
-
-		// This method is called when the action is invoked
+		
 		public void actionPerformed(ActionEvent evt) {
 
 			scrollableTable.setVisible(false);
@@ -507,10 +499,6 @@ public class Launch {
 	};
 
 	public static Action action6 = new AbstractAction("Action Table Structure") {
-
-		{
-
-		}
 
 
 		public void actionPerformed(ActionEvent evt) {

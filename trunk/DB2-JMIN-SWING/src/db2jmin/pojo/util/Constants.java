@@ -56,8 +56,7 @@ public interface Constants {
 	
 	public static final String HTML_TOP = 	"<html>\n" +
 	"<head>\n" +
-	"<title>"+ APPNAME +"</title>\n" +
-	"</head>\n" +
+	"<title>"+ APPNAME +"</title></head>\n" +
 	"<body>";
 
 	public static final String HTML_BOTTON = "<hr>" +
@@ -65,9 +64,9 @@ public interface Constants {
 	"</body>\n" +
 	"</html>";
 	
-	public static final String HTML_SQL_FORM = 	"<form action = '/sqldata' method='post'>\n" +
+	public static final String HTML_SQL_FORM = 	"@<br><form action = '/sqldata' method='post'>\n" +
 												"<table width='400'><tr><td>" +
-												"SQL:<br><textarea name='s' rows='15' cols='45'></textarea><br>\n" +
+												"<textarea name='s' rows='15' cols='45'></textarea><br>\n" +
 												"</td></tr>" +
 												"<tr><td>" +
 												"<input type='submit' value='Submit' />" +
@@ -82,6 +81,7 @@ public interface Constants {
 	
 	public static final String HTML_TOOLS = "<table width='795'>" +
 											"<tr valign='top'>" +
+											"<td width='10'>inserLogButton</td>" +
 											"<td width='10'><form action = '/schemas' method='get'><input type='submit' value='Schemas' /></form></td>" +
 											"<td width='10'><form action = '/sql' method='get'><input type='submit' value='SQL' /></form></td>" +
 											"<td width='775'><center>@</center></td>" +
