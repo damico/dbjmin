@@ -34,14 +34,17 @@ public interface Constants {
 	public static final int SQLTEXTH = 80;
 	public static final String PRESERVER_FILE = "preServers.xml";
 	public static final int DEFAULT_OS_SPEC_H = 2;
-	public static final String LOGNAME = "DBJMIN";
-	public static final boolean VERBOSE_CONSOLE = false;
+	
 	public static final String APPLOGO = "dbjmin.png";
 	public static int frameWidth = 798;
 	public static int frameHeight = 50;
-	public static String COMMON_KEY = "dbjmin";
-	public static final String HISTORY_FILE = "dbash_history.txt";
-	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties";
+	public static String COMMON_KEY = "dbjmin"; //add to xml
+	public static final String HISTORY_FILE = "dbash_history.txt"; //add to xml
+	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties"; //add to xml
+	public static final int SELECT_LIMIT = 100; //add to xml
+	public static final String DEFAULT_BROWSER = "firefox"; //add to xml
+	public static final String LOGNAME = "DBJMIN"; //add to xml
+	public static final boolean VERBOSE_CONSOLE = false; //add to xml
 	
 	public static final int D_SERVER_ACTION = 0;
 	public static final int D_SCHEMA_ACTION = 1;
@@ -88,9 +91,9 @@ public interface Constants {
 											"<td width='10'><form action = '/destroy' method='get'><input type='submit' value='Close Session' /></form></td>" +
 											"</tr>" +
 											"</table>";
-	public static final int SELECT_LIMIT = 100;
+	
 	public static final String HTML_DESTROY_HEADER = "<h2>Close Session</h2><hr>\n";
-	public static final String DEFAULT_BROWSER = "firefox";
+	
 
 	
 	

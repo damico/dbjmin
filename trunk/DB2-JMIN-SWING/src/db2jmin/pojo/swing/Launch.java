@@ -47,11 +47,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 import org.jdamico.dbjmin.web.action.ActionsFactory;
-
-import com.sun.j3d.utils.applet.MainFrame;
 
 import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
