@@ -114,13 +114,34 @@ public class SystemOper {
 		return path;
 	}
 	
-	public void startBrowser(String cmd){
-		try {
-			Runtime.getRuntime().exec(cmd);
+	public boolean startBrowser(String cmd[], String url){
+		Logger log = new Logger(Constants.LOGNAME);
+		
+		boolean success = false;
+		
+		
+		if(isWindows()){
+			Runtime rt = Runtime.getRuntime();
+			try {
+				rt.exec( "rundll32 url.dll,FileProtocolHandler " + url);
+				success = true;
+			} catch (IOException e) {
+				log.AddLogLine("Exception: " + e.getMessage());
+			}
+		}else{
+			int apps = -1;
+			while(!success && (apps < cmd.length-1)){
+				try {
+					apps++;
+					Runtime.getRuntime().exec(cmd[apps]+" "+url);
+					success = true;
+					break;
+				} catch (IOException err) {
+					log.AddLogLine("Exception: " + err.getMessage());		
+				}
+			}
 		}
-		catch (Exception err) {
-			err.printStackTrace();
-		}
+		return success;
 	}
 
 	
