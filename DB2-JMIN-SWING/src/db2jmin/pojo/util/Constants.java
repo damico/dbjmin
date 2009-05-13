@@ -42,7 +42,7 @@ public interface Constants {
 	public static final String HISTORY_FILE = "dbash_history.txt"; //add to xml
 	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties"; //add to xml
 	public static final int SELECT_LIMIT = 100; //add to xml
-	public static final String DEFAULT_BROWSER = "firefox"; //add to xml
+	public static final String[] UNIXES_DEFAULT_BROWSERS = {"firefox", "iceweasel"};
 	public static final String LOGNAME = "DBJMIN"; //add to xml
 	public static final boolean VERBOSE_CONSOLE = false; //add to xml
 	

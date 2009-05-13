@@ -201,7 +201,15 @@ public class Launch {
 								
 								
 								ActionsFactory.callJetty(form_data, Constants.D_SERVER_ACTION).exec();
-								ActionsFactory.callJetty(form_data, Constants.D_SCHEMA_ACTION).exec();
+								boolean browserOpened = ActionsFactory.callJetty(form_data, Constants.D_SCHEMA_ACTION).exec();
+								
+								if(browserOpened){
+									logtext.setText("Web module started. Browser opened.");
+									logtext.setForeground(Color.GREEN);
+								}else{
+									logtext.setText("Web module started. Browser did not open! Check log!");
+									logtext.setForeground(Color.RED);
+								}
 								
 								mainDesktopFrame.setTitle("* "+Constants.APPNAME);
 								
