@@ -42,19 +42,21 @@ public class SystemOper {
 		return getInstance;
 	}
 
-	private Logger log = new Logger(Constants.LOGNAME);
-
 	public boolean isWindows() {
-		boolean ret = true;
-		if (System.getProperty("os.name").equalsIgnoreCase("Linux"))
+		boolean ret = false;
+		String osName = System.getProperty("os.name");
+		if (osName.toLowerCase().contains("linux")){
 			ret = false;
+		}else if (osName.toLowerCase().contains("win")){
+			ret = true;
+		}
 		return ret;
 	}
 
 	public void setWinUIManager() {
+		Logger log = new Logger(Constants.LOGNAME);
 		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e) {
 			log.AddLogLine("EXCEPTION: " + e);
 		}
@@ -62,6 +64,7 @@ public class SystemOper {
 
 	public String execExtCommand(String command){
 		StringBuffer sb = new StringBuffer();
+		Logger log = new Logger(Constants.LOGNAME);
 		try {
 	        Process child = Runtime.getRuntime().exec(command);
 	        InputStream in = child.getInputStream();
@@ -92,7 +95,7 @@ public class SystemOper {
 	public String getTempPath() {
 		String path = null;
 		if(isWindows()){
-			path = "c:/temp/";
+			path = "c:/WINDOWS/Temp/";
 		}else{
 			path ="/tmp/";
 		}
