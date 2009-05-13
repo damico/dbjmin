@@ -1,0 +1,40 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Documents and Settings\joe\Desktop\dbjmin-win\app\db2jmin.pojo.jar</jar>
+  <outfile>C:\Documents and Settings\joe\Desktop\dbjmin-win\dbjmin.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>C:\Documents and Settings\joe\Desktop\dbjmin-win\icons\dbjmin.ico</icon>
+  <classPath>
+    <mainClass>db2jmin.pojo.swing.Launch</mainClass>
+    <cp>app\</cp>
+    <cp>app\db2jmin.pojo.jar</cp>
+    <cp>lib\</cp>
+    <cp>lib\db2jcc.jar</cp>
+    <cp>lib\db2jcc_license_cu.jar</cp>
+    <cp>lib\mysql-connector-java-5.0.3-bin.jar</cp>
+    <cp>lib\ojdbc14.jar</cp>
+    <cp>lib\derby.jar</cp>
+    <cp>lib\derbyclient.jar</cp>
+    <cp>lib\postgresql-8.1-407.jdbc3.jar</cp>
+    <cp>lib\jaybird-full-2.1.0.jar</cp>
+    <cp>lib\jetty-6.1.0.jar</cp>
+    <cp>lib\jetty-embedded-6.1.5.jar</cp>
+    <cp>lib\servlet-api-2.5.jar</cp>
+    <cp>lib\jetty-util-6.1.0.jar</cp>
+  </classPath>
+  <jre>
+    <path></path>
+    <minVersion>1.5.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+</launch4jConfig>
