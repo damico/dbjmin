@@ -66,7 +66,8 @@ public class Logger {
 				ret = true;
 			} else {
 				// File already exists
-				ret = false;
+				file.delete();
+				ret = file.createNewFile();
 			}
 		} catch (IOException e) {
 			ret = false;

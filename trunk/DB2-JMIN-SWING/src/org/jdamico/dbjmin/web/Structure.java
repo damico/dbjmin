@@ -22,9 +22,11 @@ public class Structure extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String schema = request.getParameter("s");
+		String table = request.getParameter("t");
 		ArrayList<String> form_data = new ArrayList<String>();
-		form_data.add(request.getParameter("s"));
-		form_data.add(request.getParameter("t"));
+		form_data.add(schema);
+		form_data.add(table);
 		ArrayList table_description = ActionsFactory.callJetty(form_data, Constants.W_STRUCTURE_ACTION).getResult();
 		PrintWriter out = response.getWriter();
 
@@ -37,7 +39,7 @@ public class Structure extends HttpServlet{
 		
 		out.println(Constants.HTML_TOP);
 		out.println(ServletUtils.getInstance().getHTMLhead());
-		out.println(Constants.HTML_STRUCTURE_HEADER);
+		out.println(ServletUtils.getInstance().getCommonHeader("Structure", schema, table, Constants.SCHEMA_DATA));
 		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
 		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
 		out.println("<div id=\"display\"></div><br>\n");
