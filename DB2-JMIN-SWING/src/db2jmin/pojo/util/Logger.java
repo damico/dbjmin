@@ -41,10 +41,7 @@ public class Logger {
 	
 	public Logger(String fFile) {
 
-		if( System.getProperty("os.name").equalsIgnoreCase("Windows") ){
-			tempDir="c:/temp/";
-		}
-		
+		tempDir = SystemOper.singleton().getTempPath();
 		/* Format formatter;
 		Date date = new Date();
 		formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
