@@ -6,12 +6,12 @@ if [ -z "$JAVA_HOME" ]; then
     exit 1
 fi
 JAVALOCAL=$JAVA_HOME/bin
-DBJMINLOCAL=
+DBJMINLOCAL=/usr/lib/dbjmin
 if [ -z "$DBJMINLOCAL" ]; then
     echo ""
     echo "No DBJMINLOCAL variable found in your environment!" 
     echo "DBJMINLOCAL is the directory of DBJMIN installation"
-    echo "Example: /opt/sws/DB2-JMIN-SWING"
+    echo "Example: /usr/lib/dbjmin"
     echo ""
 fi
 cd $DBJMINLOCAL
