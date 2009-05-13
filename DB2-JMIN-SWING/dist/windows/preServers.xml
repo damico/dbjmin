@@ -21,6 +21,6 @@
 /* MA  02110-1301, USA.													*/
 /* ******************************************************************** */
  -->
-	<PRESERVERS>
-<SERVER type="mysql" host="111.111.111.9" port="3306" dbname="MyTestDB" user="myUser"/>
+<PRESERVERS>
+	<SERVER type="derby" host="127.0.0.1" port="1527" dbname="/opt/sws/dbTest/test" user="guest"/>
 </PRESERVERS>
