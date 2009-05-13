@@ -21,10 +21,6 @@
 /* MA  02110-1301, USA.													*/
 /* ******************************************************************** */
  -->
-	<PRESERVERS>
-		<SERVER type="db2" host="chinadb1.chicago.ibm.com" port="50000" dbname="FCBST" user="db2inst1"/>
-		<SERVER type="db2" host="ebrisc5.br.ibm.com" port="50000" dbname="epacdb" user="epacusr"/>
-	
-<SERVER type="db2" host="111.111.111.40" port="50000" dbname="FCBST0" user="jdamico"/>
-<SERVER type="derby" host="127.0.0.1" port="1527" dbname="/opt/sws/dbTest/test" user="guest"/>
+<PRESERVERS>
+	<SERVER type="derby" host="127.0.0.1" port="1527" dbname="/opt/sws/dbTest/test" user="guest"/>
 </PRESERVERS>
