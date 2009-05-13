@@ -15,4 +15,8 @@ public class SystemOperTest extends TestCase {
 		assertEquals(mockPath, path);
 		
 	}
+	
+	public void testStartBrowser(){
+		SystemOper.singleton().startBrowser(Constants.UNIXES_DEFAULT_BROWSERS, "http://www.gnu.org");
+	}
 }

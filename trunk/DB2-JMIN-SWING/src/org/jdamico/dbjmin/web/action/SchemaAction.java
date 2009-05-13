@@ -15,13 +15,14 @@ public class SchemaAction implements JettyActions {
 	}
 	
 	public boolean exec() {
+		boolean ret =  false;
 		String fs = SystemOper.singleton().getTempPath();
 		fs = fs + Constants.TEMP_ALIVE_CREDENTIAL;
 		boolean isPropWritten = ManageProperties.getInstance().write(fs, form_data);
 		if(isPropWritten){
-			SystemOper.singleton().startBrowser(Constants.DEFAULT_BROWSER+" http://127.0.0.1:8888/schemas");
+			ret = SystemOper.singleton().startBrowser(Constants.UNIXES_DEFAULT_BROWSERS, "http://127.0.0.1:8888/schemas");
 		}
-		return isPropWritten;
+		return ret;
 	}
 
 	public ArrayList getResult() {
