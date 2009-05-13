@@ -41,7 +41,7 @@ public interface Constants {
 	public static String COMMON_KEY = "dbjmin"; //add to xml
 	public static final String HISTORY_FILE = "dbash_history.txt"; //add to xml
 	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties"; //add to xml
-	public static final int SELECT_LIMIT = 100; //add to xml
+	public static final int SELECT_LIMIT = 1500; //add to xml
 	public static final String[] UNIXES_DEFAULT_BROWSERS = {"firefox", "iceweasel"};
 	public static final String LOGNAME = "DBJMIN"; //add to xml
 	public static final boolean VERBOSE_CONSOLE = false; //add to xml
@@ -79,6 +79,7 @@ public interface Constants {
 	public static final String HTML_SCHEMA_HEADER = "<h2>Schemas</h2><hr>\n";
 	public static final String HTML_TABLE_HEADER = "<h2>Tables</h2><hr>\n";
 	public static final String HTML_SAMPLEDATA_HEADER = "<h2>Sample Data</h2><hr>\n";
+	public static final String HTML_COMMON_HEADER = "<h2>#</h2><hr>\n";
 	public static final String HTML_STRUCTURE_HEADER = "<h2>Table Structure</h2><hr>\n";
 	public static final String HTML_SQL_HEADER = "<h2>SQL</h2><hr>\n";
 	
@@ -94,6 +95,9 @@ public interface Constants {
 	
 	public static final String HTML_DESTROY_HEADER = "<h2>Close Session</h2><hr>\n";
 	
+	
+	public static final int SCHEMA_STRUCTURE = 0;
+	public static final int SCHEMA_DATA = 1;
 
 	
 	

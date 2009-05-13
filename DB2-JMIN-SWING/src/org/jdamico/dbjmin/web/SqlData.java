@@ -57,6 +57,9 @@ public class SqlData extends HttpServlet {
 			}
 			out.println("</table>");
 			
+			sqldata.clear();
+			sqldata = null;
+			
 		}else{
 			ArrayList data = ActionsFactory.callJetty(form_data, Constants.W_SINGLE_SQL_ACTION).getResult();
 			ArrayList columns_data = new ArrayList();
@@ -72,7 +75,7 @@ public class SqlData extends HttpServlet {
 			out.println("<table border = '1' width = '500'>");
 			out.println("<tr bgcolor='#CCCCCC'>\n");
 			for (int j = 0; j < columns_name.size(); j++) {
-				out.println("<td>"+columns_name.get(j)+"</td>");
+				out.println("<td><b>"+columns_name.get(j)+"</b>&nbsp</td>");
 			}
 			out.println("</tr>\n");
 			
@@ -84,7 +87,7 @@ public class SqlData extends HttpServlet {
 				out.println("<tr valign='top'>\n");
 				for (int j = 0; j < columns_data.size(); j++) {
 					try {
-						out.println("<td>"+columns_data.get(j)+"</td>");
+						out.println("<td>"+columns_data.get(j)+"&nbsp</td>");
 					} catch (NullPointerException e) {
 					}
 				}
@@ -94,6 +97,18 @@ public class SqlData extends HttpServlet {
 			
 			out.println("</table>");
 			}
+			
+			data.clear();
+			columns_data.clear();
+			columns_name.clear();
+			set.clear();
+			
+			
+			data = null;
+			columns_data = null;
+			columns_name = null;
+			set = null;
+			
 		}
 
 		
@@ -107,7 +122,7 @@ public class SqlData extends HttpServlet {
 				sb.append(node + "\n");
 			}
 			
-			out.println("</table<table bgcolor = 'black' width='500'>" +
+			out.println("</table><br><br><table bgcolor = 'black' width='500'>" +
 			"<tr valign='top'><td><font color = 'red'><b>"+sb.toString()+"</b></font></td></tr></table>");
 			
 		}
@@ -118,6 +133,11 @@ public class SqlData extends HttpServlet {
 
 		out.println(Constants.HTML_BOTTON);
 		out.close();
+
+		errors.clear();
+		errors = null;
+		sb = null;
+		
 	}
 
 }

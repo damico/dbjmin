@@ -18,10 +18,11 @@ public class SampleData extends HttpServlet {
 
 	private static final long serialVersionUID = -8232210101653665253L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String schema = request.getParameter("s");
+		String table = request.getParameter("t");
 		ArrayList<String> form_data = new ArrayList<String>();
-		form_data.add(request.getParameter("s"));
-		form_data.add(request.getParameter("t"));
+		form_data.add(schema);
+		form_data.add(table);
 		ArrayList data = ActionsFactory.callJetty(form_data, Constants.W_SAMPLEDATA_ACTION).getResult();
 		PrintWriter out = response.getWriter();
 		
@@ -38,7 +39,7 @@ public class SampleData extends HttpServlet {
 
 		out.println(Constants.HTML_TOP);
 		out.println(ServletUtils.getInstance().getHTMLhead());
-		out.println(Constants.HTML_SAMPLEDATA_HEADER);
+		out.println(ServletUtils.getInstance().getCommonHeader("Sample Data", schema, table, Constants.SCHEMA_STRUCTURE));
 		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
 		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
 		out.println("<div id=\"display\"></div><br>\n");
@@ -49,7 +50,7 @@ public class SampleData extends HttpServlet {
 			out.println("<table border = '1' width = '300'>");
 			out.println("<tr bgcolor='#CCCCCC'>\n");
 			for (int j = 0; j < columns_name.size(); j++) {
-				out.println("<td>"+columns_name.get(j)+"</td>");
+				out.println("<td><b>"+columns_name.get(j)+"</b>&nbsp</td>");
 			}
 			out.println("</tr>\n");
 			
@@ -60,7 +61,7 @@ public class SampleData extends HttpServlet {
 				out.println("<tr>\n");
 				for (int j = 0; j < columns_data.size(); j++) {
 					try {
-						out.println("<td>"+columns_data.get(j)+"</td>");
+						out.println("<td>"+columns_data.get(j)+"&nbsp</td>");
 					} catch (NullPointerException e) {
 						// log.AddLogLine("NullPointerException: "+e);
 					}
@@ -82,6 +83,18 @@ public class SampleData extends HttpServlet {
 
 		out.println(Constants.HTML_BOTTON);
 		out.close();
+		
+		data.clear();
+		columns_data.clear();
+		columns_name.clear();
+		set.clear();
+		
+		
+		data = null;
+		columns_data = null;
+		columns_name = null;
+		set = null;
+		
 	}
 		
 }

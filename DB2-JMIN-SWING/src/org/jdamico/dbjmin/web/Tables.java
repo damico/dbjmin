@@ -18,14 +18,15 @@ public class Tables extends HttpServlet {
 	private static final long serialVersionUID = -8232210101653665253L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String schema = request.getParameter("s");
 		ArrayList<String> form_data = new ArrayList<String>();
-		form_data.add(request.getParameter("s"));
+		form_data.add(schema);
 		ArrayList<String> tables = ActionsFactory.callJetty(form_data, Constants.W_TABLE_ACTION).getResult();
 		PrintWriter out = response.getWriter();
 		
 		out.println(Constants.HTML_TOP);
 		out.println(ServletUtils.getInstance().getHTMLhead());
-		out.println(Constants.HTML_TABLE_HEADER);
+		out.println(ServletUtils.getInstance().getCommonHeader("Tables from schema:", schema));
 		String tools = Constants.HTML_TOOLS.replaceAll("inserLogButton", ServletUtils.getInstance().getLogButton());
 		out.println(tools.replaceAll("@", ServletUtils.getInstance().getCurrentDBinfo()));
 		out.println("<div id=\"display\"></div><br>\n");

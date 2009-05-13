@@ -84,4 +84,22 @@ public class ServletUtils {
 		
 		return ret;
 	}
+	
+	public String getCommonHeader(String title, String schema){
+		title = title + " [ <a href='/tables?s="+schema+"'>"+schema+"</a> ]";
+		String ret = Constants.HTML_COMMON_HEADER.replaceAll("#", title);
+		return ret;
+	}
+	
+	
+	public String getCommonHeader(String title, String schema, String table, int type){
+		
+		String action = null;
+		if(type == Constants.SCHEMA_STRUCTURE) action = "/structure";
+		else action = "/sampledata";
+		
+		title = title + " [ <a href='/tables?s="+schema+"'>"+schema+"</a> . <a href='"+action+"?s="+schema+"&t="+table+"'>"+table+"</a> ]";
+		String ret = Constants.HTML_COMMON_HEADER.replaceAll("#", title);
+		return ret;
+	}
 }
