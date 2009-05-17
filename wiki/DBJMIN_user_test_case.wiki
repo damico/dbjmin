@@ -1,5 +1,74 @@
 #summary How to test the main features of DBJMIN
 
+= Connecting Firebird =
+
+ # *Type:* firebird
+ # *Srv:* your_server
+ # *Port:* 3050
+ # *db:* your_database.fdb
+ # *User:* database_user
+ # *Passwd:* password
+
+*_Example_
+
+ # Type: <firebird>
+ # Srv: <localhost>
+ # Port: <3050>
+ # db: <mydatabase.fdb>
+ # User: <sysdba>
+ # Passwd: <masterkey>
+
+*`[` > `]`* (Click in the button for connect)
+
+== Machine Setup ==
+
+Linux darkstar 2.6.24.5-smp #2 SMP Wed Apr 30 13:41:38 CDT 2008 i686 AMD Turion(tm) 64 Mobile Technology MK-36 AuthenticAMD GNU/Linux
+
+java version "1.6.0_06"
+Java(TM) SE Runtime Environment (build 1.6.0_06-b02)
+Java HotSpot(TM) Client VM (build 10.0-b22, mixed mode, sharing)
+
+== Testing ==
+
+   * CREATE
+
+  {{{ 
+  create table TBL_TEST 
+   (
+     ID INTEGER NOT NULL,
+     DESCRIPTION CHAR(25),
+     PRIMARY KEY (ID) 
+   )
+   }}}
+
+
+  * INSERT
+
+    {{{ insert into TBL_TEST(ID, DESCRIPTION) VALUES(1, 'Firebird Test' ) }}}
+
+
+  * SELECT
+    
+    {{{ Select `*` from TBL_TEST }}}
+
+  * BATCH UPADE
+
+  * View Data
+   
+    Button [DATA] provides an easier way to select information, return for you all information within your table.
+
+  * View Structure
+
+    Button [Structure] provides an easier way to returns the table structure from Firebird.
+
+  *_Example_*
+
+  # Column Name: <ID>
+  # Type Name: <LONG>
+  # Length: <4>
+    
+*_For more Information about commands for firebird:_* [http://wiki.firebirdsql.org/]http://wiki.firebirdsql.org/
+
 = Connecting MySQL =
 
 == Machine Setup ==
@@ -14,18 +83,6 @@
 
   
 = Connecting PostgreSQL = 
-
-== Machine Setup ==
-
-== Testing ==
-  * CREATE
-  * INSERT
-  * SELECT
-  * BATCH UPADE
-  * View Data
-  * View Structure
-
-= Connecting Firebird =
 
 == Machine Setup ==
 
