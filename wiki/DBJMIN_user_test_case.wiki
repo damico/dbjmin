@@ -1,5 +1,75 @@
 #summary How to test the main features of DBJMIN
 
+= Connecting Oracle =
+
+
+   # *Type:* oracle
+   # *Srv:* your_server
+   # *Port:* 1521
+   # *db:* your_database
+   # *User:* username
+   # *Passwd:* password
+
+Example
+
+   # Type: <oracle>
+   # Srv: <192.168.190.1>
+   # Port: <1521>
+   # db: <mydatabase>
+   # User: <username>
+   # Passwd: <password>
+
+*'[' > ']'* (Click in the button for connect)
+
+== Machine Setup ==
+
+Windows XP Professional
+
+java version "1.6.0_13"
+Java(TM) SE Runtime Environment (build 1.6.0_13-b03)
+Java HotSpot(TM) Client VM (build 11.3-b02, mixed mode, sharing)
+
+Oracle 10
+
+== Testing ==
+
+    * CREATE 
+
+  {{{
+   create table TBL_TEST 
+   (
+     ID INTEGER NOT NULL,
+     DESCRIPTION VARCHAR(25),
+     PRIMARY KEY (ID) 
+   )
+  }}}
+
+    * INSERT 
+
+    insert into TBL_TEST(ID, DESCRIPTION) VALUES(1, 'Oracle Test' ) 
+
+    * SELECT 
+
+    Select `*` from TBL_TEST 
+
+    * BATCH UPADE 
+
+    * View Data 
+
+    Button *[DATA]* provides an easier way to select information, return for you all information within your table. 
+
+    * View Structure 
+
+    Button *[Structure]* provides an easier way to returns the table structure from Oracle. 
+
+    * Example 
+
+   # Column Name: <Description>
+   # Type Name: <long>
+   # Length: <25>
+
+*_For more Information about commands for Oracle:_* [http://books.google.com/books?id=kl5l3_MisOAC&printsec=frontcover&dq=oracle+guide] 
+
 = Connecting Firebird =
 
  # *Type:* firebird
@@ -67,7 +137,7 @@ Java HotSpot(TM) Client VM (build 10.0-b22, mixed mode, sharing)
   # Type Name: <LONG>
   # Length: <4>
     
-*_For more Information about commands for firebird:_* [http://wiki.firebirdsql.org/]http://wiki.firebirdsql.org/
+*_For more Information about commands for firebird:_* [http://wiki.firebirdsql.org/]
 
 = Connecting MySQL =
 
@@ -107,18 +177,6 @@ Java HotSpot(TM) Client VM (build 10.0-b22, mixed mode, sharing)
   * View Structure
 
 = Connecting Derby Server = 
-
-== Machine Setup ==
-
-== Testing ==
-  * CREATE
-  * INSERT
-  * SELECT
-  * BATCH UPADE
-  * View Data
-  * View Structure
-
-= Connecting Oracle =
 
 == Machine Setup ==
 
