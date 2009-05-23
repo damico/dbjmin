@@ -121,7 +121,7 @@ public class SwingUtils {
 	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final JTextArea sqltext, JPanel panel) {
 				scrollableSqlArea.setVisible(true);
 		goSQL.setVisible(true);
-		sqltext.setBounds(5, 57 + Constants.LOGTEXTH, 740, Constants.SQLTEXTH);
+		sqltext.setBounds(5, 57 + Constants.LOGTEXTH, 790, Constants.SQLTEXTH);
 		sqltext.setLineWrap(true);
 		sqltext.setWrapStyleWord(false);
 		sqltext.setToolTipText("Use the keyboard (set UP or set Down) to Move through history commands");		
@@ -171,14 +171,14 @@ public class SwingUtils {
 		
 
 		
-		scrollableSqlArea.setBounds(5, 57 + Constants.LOGTEXTH, 742, Constants.SQLTEXTH);
+		scrollableSqlArea.setBounds(5, 57 + Constants.LOGTEXTH, 792, Constants.SQLTEXTH);
 		goSQL.setText("!");
 		goSQL.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				getRWhistory().writeFile(sqltext.getText());
 			}
 		});
-	    goSQL.setBounds(746, 57 + Constants.LOGTEXTH, 40,	Constants.SQLTEXTH - 1);
+	    goSQL.setBounds(796, 57 + Constants.LOGTEXTH, 40,	Constants.SQLTEXTH - 1);
 		panel.add(scrollableSqlArea);
 		panel.add(goSQL);
 	}
@@ -188,7 +188,7 @@ public class SwingUtils {
 			JTextField tf_user, JPasswordField tf_passwd,
 			Action actionValidadeAndConnect, JComboBox schemas,
 			JComboBox tables, JButton validateAndConnectButton,
-			Action actionGetTables, JButton data_button,
+			JButton connectBtnWeb, Action actionGetTables, JButton data_button,
 			JButton structure_button, JButton SQL_button, JTextArea logtext,
 			JScrollPane scrollableTextArea, JFrame mainDesktopFrame,
 			int os_specH, JButton table_button) {
@@ -275,9 +275,16 @@ public class SwingUtils {
 		panel.add(tables);
 		tables.setEnabled(false);
 
-		validateAndConnectButton.setText(">");
+		validateAndConnectButton.setText("D");
+		validateAndConnectButton.setToolTipText("Desktop Use");
 		validateAndConnectButton.setBounds(735, 2, 50, 20);
 		panel.add(validateAndConnectButton);
+		
+		connectBtnWeb.setText("W");
+		connectBtnWeb.setToolTipText("Web Use");
+		connectBtnWeb.setBounds(790, 2, 50, 20);
+		panel.add(connectBtnWeb);
+		
 
 		table_button.setAction(actionGetTables);
 		table_button.setText(">");
@@ -306,13 +313,13 @@ public class SwingUtils {
 		panel.add(SQL_button);
 		SQL_button.setEnabled(false);
 	
-		logtext.setBounds(5, 57, 782, Constants.LOGTEXTH);
+		logtext.setBounds(5, 57, 800, Constants.LOGTEXTH);
 		logtext.setBackground(Color.BLACK);
 		logtext.setForeground(Color.CYAN);
 		logtext.setLineWrap(true);
 		logtext.setWrapStyleWord(false);
 		
-		scrollableTextArea.setBounds(5, 57, 782, Constants.LOGTEXTH);
+		scrollableTextArea.setBounds(5, 57, 833, Constants.LOGTEXTH);
 		
 		panel.add(scrollableTextArea);
 
@@ -372,8 +379,8 @@ public class SwingUtils {
          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable.getModel();
          maintable.doLayout();
          maintable.setAutoCreateColumnsFromModel(true);
-         maintable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,782,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
-         scrollableTable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,782,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
+         maintable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,785,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
+         scrollableTable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,790,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
          maintable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
          for(int i=0; i<set.size(); i++){
              
@@ -423,8 +430,8 @@ public class SwingUtils {
 		javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable.getModel();
 		maintable.doLayout();
 		maintable.setAutoCreateColumnsFromModel(true);
-		maintable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 782, 480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
-		scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 782,	480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
+		maintable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 820, 480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
+		scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 840,	480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 		maintable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		return dtm;
 	}
