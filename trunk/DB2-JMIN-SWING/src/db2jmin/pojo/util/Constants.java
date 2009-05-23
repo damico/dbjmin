@@ -36,7 +36,7 @@ public interface Constants {
 	public static final int DEFAULT_OS_SPEC_H = 2;
 	
 	public static final String APPLOGO = "dbjmin.png";
-	public static int frameWidth = 798;
+	public static int frameWidth = 850;
 	public static int frameHeight = 50;
 	public static String COMMON_KEY = "dbjmin"; //add to xml
 	public static final String HISTORY_FILE = "dbash_history.txt"; //add to xml

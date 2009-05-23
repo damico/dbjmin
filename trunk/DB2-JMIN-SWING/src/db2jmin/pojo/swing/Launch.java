@@ -18,7 +18,12 @@
 /* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 			*/
 /* MA  02110-1301, USA.													*/
 /* ******************************************************************** */
-
+/*Contributors:															*/
+/*Jose' Ricardo de Oliveira Damico (jd.comment@gmail.com)				*/	
+/*Argemiro José de Lima - a.k.a Mir0 (mirolima@gmail.com)				*/	
+/*Mario C. Ponciano - a.k.a Razec (mrazec@gmail.com) 					*/
+/*																		
+*************************************************************************/
 package db2jmin.pojo.swing;
 
 import java.awt.Color;
@@ -69,26 +74,29 @@ import db2jmin.pojo.util.SystemOper;
 public class Launch {
 
 	public static void main(String[] args) {
-		
-		String preServerFile = SystemOper.singleton().getHomePath()+Constants.PRESERVER_FILE;
+
+		String preServerFile = SystemOper.singleton().getHomePath()
+				+ Constants.PRESERVER_FILE;
 
 		if (SystemOper.singleton().isWindows()) {
 			SystemOper.singleton().setWinUIManager();
 			os_specH = 5;
-		}else{
+		} else {
 			/* verify folder */
-			
+
 			File preServer = new File(preServerFile);
-			if( !preServer.isFile() ){
+			if (!preServer.isFile()) {
 				/* create folder */
-				String preServerFolder = preServerFile.replaceAll("/"+Constants.PRESERVER_FILE, "");
+				String preServerFolder = preServerFile.replaceAll("/"
+						+ Constants.PRESERVER_FILE, "");
 				File preServerFolderDir = new File(preServerFolder);
 				boolean successFolder = preServerFolderDir.mkdir();
-				log.AddLogLine(preServerFolder+" - "+successFolder);
+				log.AddLogLine(preServerFolder + " - " + successFolder);
 				/* copy file */
-				if( successFolder || preServerFolderDir.isDirectory() ){
-					try{
-						InputStream in = new FileInputStream("/usr/lib/dbjmin/"+Constants.PRESERVER_FILE);
+				if (successFolder || preServerFolderDir.isDirectory()) {
+					try {
+						InputStream in = new FileInputStream("/usr/lib/dbjmin/"
+								+ Constants.PRESERVER_FILE);
 						OutputStream out = new FileOutputStream(preServerFile);
 
 						// Transfer bytes from in to out
@@ -99,15 +107,15 @@ public class Launch {
 						}
 						in.close();
 						out.close();
-					}catch(IOException ioe){
-						log.AddLogLine("IOException: "+ioe.getMessage());
+					} catch (IOException ioe) {
+						log.AddLogLine("IOException: " + ioe.getMessage());
 					}
 				}
 			}
 		}
-		
-		log.AddLogLine("preServerFile: "+preServerFile);
-		
+
+		log.AddLogLine("preServerFile: " + preServerFile);
+
 		if (PreServers.singleton().isPreServer(preServerFile)) {
 			try {
 				srvObjArrLst = PreServers.singleton().getPreServers(
@@ -116,8 +124,6 @@ public class Launch {
 				e.printStackTrace();
 			}
 		}
-
-		
 
 		drivers = SwingUtils.singleton().prepareDrivers(drivers);
 
@@ -162,9 +168,9 @@ public class Launch {
 		SwingUtils.singleton().setGenericWindowSettings(panel, drivers,
 				tf_server, tf_port, tf_db, tf_user, tf_passwd,
 				actionValidadeAndConnect, schemas, tables,
-				validateAndConnectButton, actionGetTables, data_button,
-				structure_button, SQL_button, logtext, scrollableTextArea,
-				mainDesktopFrame, os_specH, table_button);
+				validateAndConnectButton, connectBtnWeb, actionGetTables,
+				data_button, structure_button, SQL_button, logtext,
+				scrollableTextArea, mainDesktopFrame, os_specH, table_button);
 
 		tf_passwd
 				.setToolTipText("Press F3 to save this dababase credentials on preServers.xml file. Or F9 to open a Web Module");
@@ -177,53 +183,9 @@ public class Launch {
 			private void tf_passwdKeyPressed(KeyEvent evt) {
 
 				if (evt.getKeyCode() == KeyEvent.VK_F9) {
-					ValidadeUserData4Connection validate = new ValidadeUserData4Connection(form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd, drivers, logtext);
-					if (!open
-							&& !connected
-							|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
-									tf_port, tf_db, tf_user, tf_passwd, drivers)) {
-						SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
-						SwingUtils.singleton().resetData(schemas, tables);
-						form_data.clear();
-						
-						if (drivers.getSelectedItem() != null) {
-							
-							
-							if (validate.isValidated()) {
-								schemas.setEnabled(true);
+					connectWeb();
 
-								logtext.setForeground(Color.CYAN);
-								logtext.setText("Connected\n");
-								open = true;
-								connected = true;
-								validateAndConnectButton.setText("W");
-								validateAndConnectButton.setBackground(Color.BLUE);
-								
-								
-								ActionsFactory.callJetty(form_data, Constants.D_SERVER_ACTION).exec();
-								boolean browserOpened = ActionsFactory.callJetty(form_data, Constants.D_SCHEMA_ACTION).exec();
-								
-								if(browserOpened){
-									logtext.setText("Web module started. Browser opened.");
-									logtext.setForeground(Color.GREEN);
-								}else{
-									logtext.setText("Web module started. Browser did not open! Check log!");
-									logtext.setForeground(Color.RED);
-								}
-								
-								mainDesktopFrame.setTitle("* "+Constants.APPNAME);
-								
-							}
-
-						} else {
-							drivers.setBackground(Color.RED);
-						}
-						mainDesktopFrame.setSize(798, 90 + Constants.LOGTEXTH);
-					}
-					
-					
 				} else if (evt.getKeyCode() == KeyEvent.VK_F3) {
-
 					form_data.add(tf_server.getText());
 					form_data.add(tf_port.getText());
 					form_data.add(tf_db.getText());
@@ -266,19 +228,19 @@ public class Launch {
 					}
 				}
 			}
-
 		});
 
 	}
-
+	
 	public static Action actionValidadeAndConnect = new AbstractAction(
 			"Action InputValidation / Schemas") {
-		
+
 		private static final long serialVersionUID = 5388887340394323000L;
 
-	
 		public void actionPerformed(ActionEvent evt) {
-			ValidadeUserData4Connection validate = new ValidadeUserData4Connection(form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd, drivers, logtext);
+			ValidadeUserData4Connection validate = new ValidadeUserData4Connection(
+					form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd,
+					drivers, logtext);
 
 			if (!open
 					&& !connected
@@ -287,11 +249,9 @@ public class Launch {
 				SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
 				SwingUtils.singleton().resetData(schemas, tables);
 				form_data.clear();
-				
 
 				if (drivers.getSelectedItem() != null) {
-					
-										
+
 					if (validate.isValidated()) {
 						schemas.setEnabled(true);
 
@@ -299,21 +259,24 @@ public class Launch {
 						logtext.setText("Connected\n");
 						open = true;
 						connected = true;
-						validateAndConnectButton.setText("<");
+						validateAndConnectButton.setText("D");
+						validateAndConnectButton.setForeground(Color.WHITE);
+						validateAndConnectButton.setBackground(Color.BLUE);
 						DBconnector dbc = new DBconnector(form_data);
 						schemas_array = dbc.getSchemas();
 
-						SwingUtils.singleton().setSchemasDropDown(form_data, schemas);
+						SwingUtils.singleton().setSchemasDropDown(form_data,
+								schemas);
 						SQL_button.setEnabled(true);
 						table_button.setEnabled(true);
-						
-					}else{
+
+					} else {
 						table_button.setEnabled(false);
 						SQL_button.setEnabled(false);
-						
+
 					}
-					mainDesktopFrame.setSize(798, 90 + Constants.LOGTEXTH);
-					
+					mainDesktopFrame.setSize(850, 90 + Constants.LOGTEXTH);
+
 				} else {
 					drivers.setBackground(Color.RED);
 				}
@@ -321,15 +284,76 @@ public class Launch {
 				mainDesktopFrame.setSize(Constants.frameWidth,
 						Constants.frameHeight + os_specH);
 				open = false;
-				validateAndConnectButton.setText(">");
+				validateAndConnectButton.setText("D");
 			} else if (!open && connected) {
-				mainDesktopFrame.setSize(798, 570 + os_specH);
+				mainDesktopFrame.setSize(850, 570 + os_specH);
 				open = true;
-				validateAndConnectButton.setText("<");
+				validateAndConnectButton.setText("D");
+				validateAndConnectButton.setBackground(Color.RED);
 			}
 
 		}
 	};
+
+	public static Action actionValidadeAndConnectWeb = new AbstractAction(
+			"Action InputValidation / Schemas") {
+		private static final long serialVersionUID = 1L;
+
+		public void actionPerformed(ActionEvent avt) {
+			connectWeb();
+		}
+
+	};
+
+	// This method make Web Connection allowed
+	public static void connectWeb() {
+		ValidadeUserData4Connection validate = new ValidadeUserData4Connection(
+				form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd,
+				drivers, logtext);
+		if (!open
+				&& !connected
+				|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
+						tf_port, tf_db, tf_user, tf_passwd, drivers)) {
+			SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
+			SwingUtils.singleton().resetData(schemas, tables);
+			form_data.clear();
+
+			if (drivers.getSelectedItem() != null) {
+
+				if (validate.isValidated()) {
+					schemas.setEnabled(true);
+					logtext.setForeground(Color.CYAN);
+					logtext.setText("Connected\n");
+					open = true;
+					connected = true;
+					// connectBtnWeb.setText("W");
+					connectBtnWeb.setForeground(Color.WHITE);
+					connectBtnWeb.setBackground(Color.BLUE);
+
+					ActionsFactory.callJetty(form_data,
+							Constants.D_SERVER_ACTION).exec();
+					boolean browserOpened = ActionsFactory.callJetty(form_data,
+							Constants.D_SCHEMA_ACTION).exec();
+
+					if (browserOpened) {
+						logtext.setText("Web module started. Browser opened.");
+						logtext.setForeground(Color.GREEN);
+					} else {
+						logtext
+								.setText("Web module started. Browser did not open! Check log!");
+						logtext.setForeground(Color.RED);
+					}
+
+					mainDesktopFrame.setTitle("* " + Constants.APPNAME);
+
+				}
+
+			} else {
+				drivers.setBackground(Color.RED);
+			}
+			mainDesktopFrame.setSize(850, 90 + Constants.LOGTEXTH);
+		}
+	}
 
 	public static Action actionGetTables = new AbstractAction("Action Tables") {
 
@@ -337,7 +361,8 @@ public class Launch {
 			tables.removeAllItems();
 
 			DBconnector dbc = new DBconnector(form_data);
-			ArrayList<String> tables_array = dbc.getTables(schemas.getSelectedItem().toString());
+			ArrayList<String> tables_array = dbc.getTables(schemas
+					.getSelectedItem().toString());
 			int counter = 0;
 			Iterator<String> it = tables_array.iterator();
 			while (it.hasNext()) {
@@ -361,6 +386,8 @@ public class Launch {
 			structure_button.setEnabled(true);
 		}
 	};
+
+	// --End Code
 
 	public static Action action3 = new AbstractAction("Action Table Data") {
 
@@ -397,7 +424,7 @@ public class Launch {
 				maintable.setAutoCreateColumnsFromModel(true);
 
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 782,
+						+ Constants.SQLTEXTH, 842,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 				int setSize = set.size();
 				if (setSize > 0) {
@@ -426,7 +453,7 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(798, 570);
+				mainDesktopFrame.setSize(850, 570);
 
 			} catch (NullPointerException e) {
 
@@ -437,23 +464,21 @@ public class Launch {
 		}
 	};
 
-
 	public static Action mountSqlArea = new AbstractAction("Action SQL Area") {
-		
-		
+
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent evt) {
 
 			SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 					sqltext, panel);
-			mainDesktopFrame.setSize(798, 570);
+			mainDesktopFrame.setSize(850, 570);
 
 		}
 	};
 
 	public static Action executeSql = new AbstractAction("Action SQL Go!") {
-		
+
 		public void actionPerformed(ActionEvent evt) {
 
 			scrollableTable.setVisible(false);
@@ -505,7 +530,6 @@ public class Launch {
 
 	public static Action action6 = new AbstractAction("Action Table Structure") {
 
-
 		public void actionPerformed(ActionEvent evt) {
 
 			try {
@@ -534,10 +558,10 @@ public class Launch {
 				maintable.doLayout();
 				maintable.setAutoCreateColumnsFromModel(true);
 				maintable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 782,
+						+ Constants.SQLTEXTH, 820,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 782,
+						+ Constants.SQLTEXTH, 840,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 
 				for (int i = 0; i < colname.size(); i++) {
@@ -554,7 +578,7 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(798, 570);
+				mainDesktopFrame.setSize(850, 570);
 
 			} catch (NullPointerException e) {
 
@@ -589,7 +613,10 @@ public class Launch {
 	public static JScrollPane scrollableTable = new JScrollPane(maintable);
 	public static Logger log = new Logger(Constants.LOGNAME);
 	public static JButton table_button = new JButton(">");
-	public static JButton validateAndConnectButton = new JButton(actionValidadeAndConnect);
+	public static JButton validateAndConnectButton = new JButton(
+			actionValidadeAndConnect);
+	public static JButton connectBtnWeb = new JButton(
+			actionValidadeAndConnectWeb);
 	public static boolean open = false;
 	public static boolean connected = false;
 	public static int os_specH = Constants.DEFAULT_OS_SPEC_H;
