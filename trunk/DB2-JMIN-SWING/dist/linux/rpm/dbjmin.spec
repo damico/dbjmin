@@ -1,5 +1,5 @@
 Name:           dbjmin
-Version:        0.2
+Version:        0.5
 Release:        1%{?dist}
 Summary:        Graphical Client for databases
 
@@ -8,12 +8,12 @@ License:        gpl
 BuildRoot:      %{_tmppath}/%{name}-%{version}
 BuildArch:      noarch
 Requires:       filesystem
-Requires:		java >= 1.5
+Requires:	java >= 1.5
 
 %description
 Graphical Client for databases.
  This is an easy-to-use client for DB2, Oracle, Derby, MySQL, PostgreSQL and Firebird.
- For more information see http://dcon.com.br/dbjmin.
+ For more information see http://dbjmin.googlecode.com/
 
 %prep
 
@@ -32,6 +32,26 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/applications/dbjmin.desktop
 
 %changelog
+0.5
+-Better arrangement of memory for web module
+-Headers improvement for web module. now it shows more information of
+tables/schemas
+-Improved deb/rpm definition packages
+-Refactored SystemOper to make correct calls for Browsers into Windows environment
+-Fixed bug that was failing to recognize Windows OS
+-Added specialized actions for WEB support
+-Changed JettyController to start jetty in a separated thread
+-Added package and class to encrypt and decrypt properties file
+-Added in sqltext a event for closes the open parenthesis.
+-Added feature with suggests hints to complete the sqlcommands.
+
+0.3
+-Finished implementation of Command's history
+-Added right path for Command's history
+-Removed "count" variable from main scope inside singleton
+-Added more tests units for preServers and RWhistory
+-Fixed bug with preServers (it was saving and getting from a wrong path)
+
 0.2
 - Fixed the return of error message when try to connect an invalid or unreacheable database
 - Added new messages and logic to start_dbjmin.sh

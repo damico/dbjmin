@@ -6,15 +6,14 @@ if [ -z "$JAVA_HOME" ]; then
     echo ""
     exit 1
 fi
-JAVALOCAL=$JAVA_HOME/bin/
+JAVALOCAL=$JAVA_HOME/bin
 DBJMINLOCAL=/usr/lib/dbjmin
 if [ -z "$DBJMINLOCAL" ]; then
     echo ""
     echo "No DBJMINLOCAL variable found in your environment!" 
     echo "DBJMINLOCAL is the directory of DBJMIN installation"
-    echo "Example: /opt/sws/DB2-JMIN-SWING"
+    echo "Example: /usr/lib/dbjmin"
     echo ""
 fi
 cd $DBJMINLOCAL
-$JAVALOCAL/java -cp $DBJMINLOCAL/:$DBJMINLOCAL/:$DBJMINLOCAL/db2jcc.jar:$DBJMINLOCAL/db2jcc_license_cu.jar:$DBJMINLOCAL/mysql-connector-java-5.0.3-bin.jar:$DBJMINLOCAL/ojdbc14.jar:$DBJMINLOCAL/derby.jar:$DBJMINLOCAL/derbyclient.jar:$DBJMINLOCAL/postgresql-8.1-407.jdbc3.jar:$DBJMINLOCAL/jaybird-full-2.1.0.jar:$DBJMINLOCAL/db2jmin.pojo.jar  db2jmin.pojo.swing.Launch
-
+$JAVALOCAL/java -cp $DBJMINLOCAL/:$DBJMINLOCAL/:$DBJMINLOCAL/db2jcc.jar:$DBJMINLOCAL/db2jcc_license_cu.jar:$DBJMINLOCAL/mysql-connector-java-5.0.3-bin.jar:$DBJMINLOCAL/ojdbc14.jar:$DBJMINLOCAL/derby.jar:$DBJMINLOCAL/derbyclient.jar:$DBJMINLOCAL/postgresql-8.1-407.jdbc3.jar:$DBJMINLOCAL/jaybird-full-2.1.0.jar:$DBJMINLOCAL/jetty-6.1.0.jar:$DBJMINLOCAL/jetty-embedded-6.1.5.jar:$DBJMINLOCAL/jetty-util-6.1.0.jar:$DBJMINLOCAL/servlet-api-2.5.jar:$DBJMINLOCAL/db2jmin.pojo.jar  db2jmin.pojo.swing.Launch
