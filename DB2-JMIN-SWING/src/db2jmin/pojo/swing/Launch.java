@@ -53,6 +53,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
 import db2jmin.pojo.data.DBconnector;
@@ -434,7 +435,7 @@ public class Launch {
 						String element = "";
 						for (int j = 0; j < columns_data.size(); j++) {
 							try {
-								element = columns_data.get(j).toString();
+								element = columns_data.get(j).toString();								
 							} catch (NullPointerException e) {
 								// log.AddLogLine("NullPointerException: "+e);
 							}
@@ -599,7 +600,7 @@ public class Launch {
 	public static JButton structure_button = new JButton(action6);
 	public static JButton data_button = new JButton(action3);
 	public static JTextArea logtext = new JTextArea();
-	public static JTextArea sqltext = new JTextArea();
+	public static RSyntaxTextArea sqltext = new RSyntaxTextArea();
 	public static JScrollPane scrollableTextArea = new JScrollPane(logtext);
 	public static JScrollPane scrollableSqlArea = new JScrollPane(sqltext);
 	public static JTextField tf_server = new JTextField("");

@@ -44,6 +44,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+
 import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.InputDataValidation;
@@ -51,6 +54,7 @@ import db2jmin.pojo.util.Logger;
 import db2jmin.pojo.util.RWhistory;
 import db2jmin.pojo.util.SQLSyntax;
 import db2jmin.pojo.util.SystemOper;
+
 
 /**
  * This class intents to be a helper to 
@@ -118,17 +122,23 @@ public class SwingUtils {
 	}
 	
 
-	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final JTextArea sqltext, JPanel panel) {
+	public void showSQLarea(JScrollPane scrollableSqlArea, JButton goSQL, final RSyntaxTextArea sqltext, JPanel panel) {
 				scrollableSqlArea.setVisible(true);
 		goSQL.setVisible(true);
 		sqltext.setBounds(5, 57 + Constants.LOGTEXTH, 790, Constants.SQLTEXTH);
 		sqltext.setLineWrap(true);
 		sqltext.setWrapStyleWord(false);
-		sqltext.setToolTipText("Use the keyboard (set UP or set Down) to Move through history commands");		
+		
+		//set syntax highlight in the SQL editor
+		sqltext.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
+		
+      	sqltext.setToolTipText("Use the keyboard (arrow UP or arrow Down) to Move through history commands");		
 		sqltext.setText("Write here your query.");
 	   
 		//send sql commands for analisy of SQLSyntax
 		sqltext.getDocument().addDocumentListener(new SQLSyntax(sqltext));
+		
+	
 		
 		sqltext.addKeyListener(new KeyAdapter(){
 	    	public void keyReleased(KeyEvent ke){
