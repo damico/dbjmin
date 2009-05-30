@@ -9,12 +9,12 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.3-bin.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc14.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-8.1-407.jdbc3.jar"/>
-	<classpathentry kind="lib" path="/home/workspace/workspace_rcp/DB2-JMIN-SWING/lib/rsyntaxtextarea.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="lib/jetty-6.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-embedded-6.1.5.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-util-6.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/rsyntaxtextarea.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
