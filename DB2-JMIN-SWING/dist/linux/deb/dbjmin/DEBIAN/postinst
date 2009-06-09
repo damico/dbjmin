@@ -1,3 +1,4 @@
 #!/bin/sh
 chmod +x /usr/bin/dbjmin
+chmod +x /usr/bin/dbjmind
 exit 0
