@@ -36,8 +36,10 @@ public interface Constants {
 	public static final int DEFAULT_OS_SPEC_H = 2;
 	
 	public static final String APPLOGO = "dbjmin.png";
-	public static int frameWidth = 850;
-	public static int frameHeight = 50;
+	public static int FRAME_DEFAULT_H_SIZE = 850;
+	public static int FRAME_DEFAULT_MIN_HEIGHT_SIZE = 50;
+	public static int FRAME_DEFAULT_MAX_HEIGHT_SIZE = 570;
+	public static int FRAME_DEFAULT_BUTTON_HEIGHT_SIZE = 20;
 	public static String COMMON_KEY = "dbjmin"; //add to xml
 	public static final String HISTORY_FILE = "dbash_history.txt"; //add to xml
 	public static final String TEMP_ALIVE_CREDENTIAL = "dbjmin.properties"; //add to xml
@@ -100,6 +102,7 @@ public interface Constants {
 	
 	public static final int SCHEMA_STRUCTURE = 0;
 	public static final int SCHEMA_DATA = 1;
+	public static final int TABLE_RESULT_H_SIZE = 832;
 
 	
 	
