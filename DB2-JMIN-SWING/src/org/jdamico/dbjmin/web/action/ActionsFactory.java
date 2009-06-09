@@ -14,6 +14,8 @@ public class ActionsFactory {
 				return new SchemaAction(form_data);
 			case Constants.W_SCHEMA_ACTION:
 				return new WebSchemaAction(form_data);
+			case Constants.W_CLI_ACTION:
+				return new WebCliAction(form_data);
 			case Constants.W_TABLE_ACTION:
 				return new WebTableAction(form_data);
 			case Constants.W_SAMPLEDATA_ACTION:
