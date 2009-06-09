@@ -195,4 +195,29 @@ public class InputDataValidation {
 		log.AddLogLine("getFirstCmd(String sql): "+maincmd);
 		return maincmd;
 	}
+
+	public String[] parseDbUrl(String url) {
+		/*
+		 * example of url: db2://username@localhost:50000/mydb
+		 * */
+		
+		String type = null;
+		String userServer = null;
+		String portDb = null;
+		int firstBreak =0, secondBreak = 0;
+		
+		for(int i = 0; i < url.length(); i++){
+			if(url.charAt(i) == ':' && firstBreak == 0){
+				firstBreak = i;
+				type = url.substring(0,firstBreak);
+			}else if(url.charAt(i) == ':' && firstBreak > 0){
+				secondBreak = i;
+				userServer = url.substring(firstBreak+2, secondBreak);
+				portDb = url.substring(secondBreak, url.length());
+			}
+		}
+		
+		
+		return null;
+	}
 }
