@@ -28,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
@@ -40,7 +41,7 @@ import db2jmin.pojo.util.Logger;
  * */
 
 public class DBconnector {
-	public DBconnector(ArrayList prefs) {
+	public DBconnector(List<String> prefs) {
 
 		remotedb = prefs.get(0).toString();
 		portdb = prefs.get(1).toString();
@@ -266,10 +267,10 @@ public class DBconnector {
 		return ret;
 	}
 
-	public ArrayList<String> getSchemas() {
+	public List<String> getSchemas() {
 
 		Statement stmt = null;
-		ArrayList<String> schemas = new ArrayList<String>();
+		List<String> schemas = new ArrayList<String>();
 		Connection con = null;
 
 		if (driver.equals("firebird")) {

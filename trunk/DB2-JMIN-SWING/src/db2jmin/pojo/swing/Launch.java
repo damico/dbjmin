@@ -39,6 +39,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -609,7 +610,7 @@ public class Launch {
 	public static JTextField tf_user = new JTextField("");
 	public static JPasswordField tf_passwd = new JPasswordField("");
 	public static ArrayList<String> form_data = new ArrayList<String>();
-	public static ArrayList<String> schemas_array = new ArrayList<String>();
+	public static List<String> schemas_array = new ArrayList<String>();
 	public static JTable mainTable = new JTable();
 	public static JScrollPane scrollableTable = new JScrollPane(mainTable);
 	public static Logger log = new Logger(Constants.LOGNAME);
