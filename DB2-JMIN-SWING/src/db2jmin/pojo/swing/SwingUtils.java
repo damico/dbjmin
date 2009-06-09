@@ -26,6 +26,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -498,11 +499,11 @@ public class SwingUtils {
 		return ret;
 	}
 
-	public void setSchemasDropDown(ArrayList<String> form_data, JComboBox schemas){
+	public void setSchemasDropDown(List<String> form_data, JComboBox schemas){
 		
 		DBconnector dbc = new DBconnector(form_data);
 
-		ArrayList<String> schemas_Array = dbc.getSchemas();
+		List<String> schemas_Array = dbc.getSchemas();
 		int counter = 0;
 		Iterator<String> it = schemas_Array.iterator();
 		while (it.hasNext()) {
