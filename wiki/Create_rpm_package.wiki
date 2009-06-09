@@ -1,5 +1,5 @@
-* go to /var/tmp
-* copy the folder dbjmin from rpm/ to /var/tmp
-* change name of /var/tmp/dbjmin to /var/tmp/dbjmin-0.5 according with the version described into dbjmin.spec
-* copy dbjmin.spec from rpm folder to /var/tmp
-* inside /var/tmp run 'rpmbuild -ba dbjmin.spec'
+ * go to /var/tmp
+ * copy the folder dbjmin from rpm/ to /var/tmp
+ * change name of /var/tmp/dbjmin to /var/tmp/dbjmin-0.5 according with the version described into dbjmin.spec
+ * copy dbjmin.spec from rpm folder to /var/tmp
+ * inside /var/tmp run 'rpmbuild -ba dbjmin.spec'
