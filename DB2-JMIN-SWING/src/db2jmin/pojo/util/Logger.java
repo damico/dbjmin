@@ -66,7 +66,16 @@ public class Logger {
 				ret = true;
 			} else {
 				// File already exists
-				file.delete();
+				
+				
+				if(file.length() > Constants.FIXED_LOGLIMIT){
+					/* 
+					 * check if file is too big
+					 */
+					file.delete();
+					
+				}
+				
 				ret = file.createNewFile();
 			}
 		} catch (IOException e) {
