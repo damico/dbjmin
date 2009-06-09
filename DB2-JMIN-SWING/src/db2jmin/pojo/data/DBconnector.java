@@ -449,13 +449,10 @@ public class DBconnector {
 				String column = "";
 
 				for (int i = 1; i <= n_columns; i++) {
-					log.AddLogLine("rs.getMetaData().getColumnName(i): "
-							+ rs.getMetaData().getColumnName(i));
-					columns_name.add(rs.getMetaData().getColumnName(i)
-							.toString());
+					//log.AddLogLine("rs.getMetaData().getColumnName(i): "+ rs.getMetaData().getColumnName(i));
+					columns_name.add(rs.getMetaData().getColumnName(i).toString());
 					column = rs.getMetaData().getColumnName(i).toString();
-					log.AddLogLine("rs.getString(" + column + "): "
-							+ rs.getString(column));
+					//log.AddLogLine("rs.getString(" + column + "): "+ rs.getString(column));
 					if (rs.getString(column) != null) {
 						columns_data.add(rs.getString(column));
 					} else {
