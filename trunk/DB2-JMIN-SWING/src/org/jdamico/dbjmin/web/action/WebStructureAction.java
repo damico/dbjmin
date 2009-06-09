@@ -1,6 +1,7 @@
 package org.jdamico.dbjmin.web.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
@@ -19,10 +20,11 @@ public class WebStructureAction implements JettyActions {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return dbc.getTablesDescription(form_data.get(0), form_data.get(1));
+		return (ArrayList) dbc.getTablesDescription(form_data.get(0), form_data.get(1));
 	}
 
 }

@@ -19,10 +19,11 @@ public class WebTableAction implements JettyActions {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return dbc.getTables(form_data.get(0));
+		return (ArrayList) dbc.getTables(form_data.get(0));
 	}
 
 }

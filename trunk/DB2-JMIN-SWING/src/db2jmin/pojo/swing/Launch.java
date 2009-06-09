@@ -363,7 +363,7 @@ public class Launch {
 			tables.removeAllItems();
 
 			DBconnector dbc = new DBconnector(form_data);
-			ArrayList<String> tables_array = dbc.getTables(schemas
+			List<String> tables_array = dbc.getTables(schemas
 					.getSelectedItem().toString());
 			int counter = 0;
 			Iterator<String> it = tables_array.iterator();
@@ -539,14 +539,14 @@ public class Launch {
 				scrollableTable.setVisible(false);
 
 				DBconnector DBc = new DBconnector(form_data);
-				ArrayList<ArrayList> table_description = DBc
+				List<List<String>> table_description = DBc
 						.getTablesDescription(schemas.getSelectedItem()
 								.toString(), tables.getSelectedItem()
 								.toString());
 
-				ArrayList colname = (ArrayList) table_description.get(0);
-				ArrayList typename = (ArrayList) table_description.get(1);
-				ArrayList length = (ArrayList) table_description.get(2);
+				List<String> colNames = table_description.get(0);
+				List<String> typeNames = table_description.get(1);
+				List<String> lengths = table_description.get(2);
 
 				String[] cols = (String[]) Array.newInstance(String.class, 3);
 				cols[0] = "Column Name";
@@ -566,11 +566,11 @@ public class Launch {
 						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 
-				for (int i = 0; i < colname.size(); i++) {
+				for (int i = 0; i < colNames.size(); i++) {
 					try {
-						dtm.addRow(new Object[] { colname.get(i).toString(),
-								typename.get(i).toString(),
-								length.get(i).toString() });
+						dtm.addRow(new Object[] { colNames.get(i).toString(),
+								typeNames.get(i).toString(),
+								lengths.get(i).toString() });
 					} catch (NullPointerException e) {
 						log.AddLogLine("NullPointerException: " + e);
 					}
