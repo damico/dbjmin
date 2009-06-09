@@ -218,7 +218,7 @@ public class SwingUtils {
 
 		JLabel l_port = new JLabel("Port: ");
 
-		l_port.setBounds(200, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		l_port.setBounds(220, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_port.setBounds(251, 2, 45, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_port.setToolTipText("Insert Port");
 		panel.add(l_port);
@@ -348,7 +348,9 @@ public class SwingUtils {
 	}
 	
 	public Image getDefaultIcon(){
-		return Toolkit.getDefaultToolkit().getImage(Constants.APPLOGO);
+		String iconPath = Constants.APPLOGO;
+		if(!SystemOper.singleton().isWindows()) iconPath = "/usr/lib/dbjmin/"+iconPath;
+		return Toolkit.getDefaultToolkit().getImage(iconPath);
 	}
 	
 	private AbstractAction getActionShowLog() {
