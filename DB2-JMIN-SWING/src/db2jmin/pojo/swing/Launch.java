@@ -19,11 +19,11 @@
 /* MA  02110-1301, USA.													*/
 /* ******************************************************************** */
 /*Contributors:															*/
-/*Jose' Ricardo de Oliveira Damico (jd.comment@gmail.com)				*/	
-/*Argemiro Jos� de Lima - a.k.a Mir0 (mirolima@gmail.com)				*/	
+/*Jose' Ricardo de Oliveira Damico (jd.comment@gmail.com)				*/
+/*Argemiro Jos� de Lima - a.k.a Mir0 (mirolima@gmail.com)				*/
 /*Mario C. Ponciano - a.k.a Razec (mrazec@gmail.com) 					*/
 /*																		
-*************************************************************************/
+ *************************************************************************/
 package db2jmin.pojo.swing;
 
 import java.awt.Color;
@@ -233,7 +233,7 @@ public class Launch {
 		});
 
 	}
-	
+
 	public static Action actionValidadeAndConnect = new AbstractAction(
 			"Action InputValidation / Schemas") {
 
@@ -277,7 +277,8 @@ public class Launch {
 						SQL_button.setEnabled(false);
 
 					}
-					mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, 90 + Constants.LOGTEXTH);
+					mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+							90 + Constants.LOGTEXTH);
 
 				} else {
 					drivers.setBackground(Color.RED);
@@ -288,7 +289,8 @@ public class Launch {
 				open = false;
 				validateAndConnectButton.setText("D");
 			} else if (!open && connected) {
-				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE + os_specH);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+						Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE + os_specH);
 				open = true;
 				validateAndConnectButton.setText("D");
 				validateAndConnectButton.setBackground(Color.RED);
@@ -353,7 +355,8 @@ public class Launch {
 			} else {
 				drivers.setBackground(Color.RED);
 			}
-			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, 90 + Constants.LOGTEXTH);
+			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+					90 + Constants.LOGTEXTH);
 		}
 	}
 
@@ -363,8 +366,8 @@ public class Launch {
 			tables.removeAllItems();
 
 			DBconnector dbc = new DBconnector(form_data);
-			List<String> tables_array = dbc.getTables(schemas
-					.getSelectedItem().toString());
+			List<String> tables_array = dbc.getTables(schemas.getSelectedItem()
+					.toString());
 			int counter = 0;
 			Iterator<String> it = tables_array.iterator();
 			while (it.hasNext()) {
@@ -436,7 +439,7 @@ public class Launch {
 						String element = "";
 						for (int j = 0; j < columns_data.size(); j++) {
 							try {
-								element = columns_data.get(j).toString();								
+								element = columns_data.get(j).toString();
 							} catch (NullPointerException e) {
 								// log.AddLogLine("NullPointerException: "+e);
 							}
@@ -455,7 +458,8 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+						Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 			} catch (NullPointerException e) {
 
@@ -474,7 +478,8 @@ public class Launch {
 
 			SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 					sqltext, panel);
-			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
+			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+					Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 		}
 	};
@@ -580,7 +585,8 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+						Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 			} catch (NullPointerException e) {
 
