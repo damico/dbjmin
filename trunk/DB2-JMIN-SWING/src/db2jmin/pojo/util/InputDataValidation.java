@@ -23,6 +23,7 @@ package db2jmin.pojo.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import db2jmin.pojo.data.DBconnector;
@@ -39,9 +40,9 @@ public class InputDataValidation {
 		log.AddLogLine("Invoking  InputDataValidation()");
 	}
 
-	public ArrayList formValidationDerbye(String form_name, ArrayList<String> form_data) {
+	public List formValidationDerby(String form_name, List<String> form_data) {
 
-		ArrayList validationResult = new ArrayList();
+		List validationResult = new ArrayList();
 		boolean ret = true;
 		validationResult.add(0, ret);
 

@@ -456,11 +456,11 @@ public class SwingUtils {
 
 	public boolean isValidFormData(ArrayList<String> form_data, JComboBox drivers, JTextArea logtext){
 		boolean ret = false;
-		ArrayList result_data = null;
+		List result_data = null;
 		InputDataValidation idv = new InputDataValidation();
 
 		if (drivers.getSelectedItem().toString().equals("derby-e")) {
-			result_data = idv.formValidationDerbye("pref_form",form_data);
+			result_data = idv.formValidationDerby("pref_form",form_data);
 		} else {
 			result_data = idv.formValidationGen("pref_form", form_data);
 		}
