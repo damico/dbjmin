@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
 import db2jmin.pojo.util.Constants;
-import db2jmin.pojo.util.SystemOper;
 
 public class ServletUtils {
 	private static ServletUtils INSTANCE;
