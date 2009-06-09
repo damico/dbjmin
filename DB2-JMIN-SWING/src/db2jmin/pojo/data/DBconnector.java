@@ -36,7 +36,8 @@ import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
 
 /**
- * This class takes care of all DB connections 
+ * This class takes care of all DB connections
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 
@@ -237,13 +238,13 @@ public class DBconnector {
 					+ "WHERE SA.OWNER =? AND  ST.TABLE_NAME=? order by column_name";
 		}
 
-		//log.AddLogLine("dburl: " + dburl);
+		// log.AddLogLine("dburl: " + dburl);
 	}
 
 	public boolean testConn() {
 		boolean ret = false;
 		try {
-			//log.AddLogLine("Test DB (" + driver + "): started");
+			// log.AddLogLine("Test DB (" + driver + "): started");
 			@SuppressWarnings("unused")
 			Connection con = null;
 
@@ -311,10 +312,10 @@ public class DBconnector {
 		return schemas;
 	}
 
-	public ArrayList getTables(String schema) {
+	public List<String> getTables(String schema) {
 
 		Statement stmt = null;
-		ArrayList tables = new ArrayList();
+		List<String> tables = new ArrayList<String>();
 		Connection con = null;
 		try {
 			Class.forName(classfn);
@@ -350,13 +351,13 @@ public class DBconnector {
 		return tables;
 	}
 
-	public ArrayList<ArrayList> getTablesDescription(String schema, String table) {
+	public List<List<String>> getTablesDescription(String schema, String table) {
 
 		Statement stmt = null;
-		ArrayList<ArrayList> table_description = new ArrayList<ArrayList>();
-		ArrayList<String> colname = new ArrayList<String>();
-		ArrayList typename = new ArrayList();
-		ArrayList length = new ArrayList();
+		List<List<String>> table_description = new ArrayList<List<String>>();
+		List<String> colname = new ArrayList<String>();
+		List<String> typename = new ArrayList<String>();
+		List<String> length = new ArrayList<String>();
 		Connection con = null;
 		try {
 			Class.forName(classfn);
@@ -403,7 +404,7 @@ public class DBconnector {
 		Statement stmt = null;
 		ArrayList columns_name = new ArrayList();
 		String error = "";
-		
+
 		ArrayList data = new ArrayList();
 		ArrayList set = new ArrayList();
 
@@ -451,10 +452,13 @@ public class DBconnector {
 				String column = "";
 
 				for (int i = 1; i <= n_columns; i++) {
-					//log.AddLogLine("rs.getMetaData().getColumnName(i): "+ rs.getMetaData().getColumnName(i));
-					columns_name.add(rs.getMetaData().getColumnName(i).toString());
+					// log.AddLogLine("rs.getMetaData().getColumnName(i): "+
+					// rs.getMetaData().getColumnName(i));
+					columns_name.add(rs.getMetaData().getColumnName(i)
+							.toString());
 					column = rs.getMetaData().getColumnName(i).toString();
-					//log.AddLogLine("rs.getString(" + column + "): "+ rs.getString(column));
+					// log.AddLogLine("rs.getString(" + column + "): "+
+					// rs.getString(column));
 					if (rs.getString(column) != null) {
 						columns_data.add(rs.getString(column));
 					} else {
@@ -463,8 +467,10 @@ public class DBconnector {
 
 				}
 				set.add(columns_data.clone());
-				log.AddLogLine("===================================================");
-				log.AddLogLine("nn_columns_data: " + columns_data.size()+" | "+"nn_set: " + set.size());
+				log
+						.AddLogLine("===================================================");
+				log.AddLogLine("nn_columns_data: " + columns_data.size()
+						+ " | " + "nn_set: " + set.size());
 				columns_data.clear();
 			}
 			rs.close();
@@ -517,9 +523,9 @@ public class DBconnector {
 			String SQL = sql;
 
 			int affected_rows = 0;
-			
+
 			InputDataValidation idv = new InputDataValidation();
-			
+
 			if (idv.isExecuteUpdateValidString(sql)) {
 
 				affected_rows = stmt.executeUpdate(sql);
@@ -539,7 +545,7 @@ public class DBconnector {
 				ResultSet rs = stmt.executeQuery(SQL);
 				int rows = 0;
 				while (rs.next()) {
-					if(rows < Constants.SELECT_LIMIT){
+					if (rows < Constants.SELECT_LIMIT) {
 						n_columns = rs.getMetaData().getColumnCount();
 
 						log.AddLogLine("n_columns: " + n_columns);
@@ -548,11 +554,13 @@ public class DBconnector {
 						String column = "";
 
 						for (int i = 1; i <= n_columns; i++) {
-							log.AddLogLine("rs.getMetaData().getColumnName(i): "
-									+ rs.getMetaData().getColumnName(i));
+							log
+									.AddLogLine("rs.getMetaData().getColumnName(i): "
+											+ rs.getMetaData().getColumnName(i));
 							columns_name.add(rs.getMetaData().getColumnName(i)
 									.toString());
-							column = rs.getMetaData().getColumnName(i).toString();
+							column = rs.getMetaData().getColumnName(i)
+									.toString();
 							if (rs.getString(column) != null) {
 								columns_data.add(rs.getString(column));
 							} else {
@@ -562,17 +570,19 @@ public class DBconnector {
 						set.add(columns_data.clone());
 						log
 								.AddLogLine("===================================================");
-						log.AddLogLine("nn_columns_data: " + columns_data.size());
+						log.AddLogLine("nn_columns_data: "
+								+ columns_data.size());
 						log.AddLogLine("nn_set: " + set.size());
 						columns_data.clear();
 						rows++;
-					}else{
-						String error = "Number of returned rows exceeded the limit ("+Constants.SELECT_LIMIT+")";
+					} else {
+						String error = "Number of returned rows exceeded the limit ("
+								+ Constants.SELECT_LIMIT + ")";
 						errors.add(error);
 						log.AddLogLine("EXCEPTION: " + error);
 						throw new Exception(error);
 					}
-					
+
 				}
 				rs.close();
 
@@ -605,7 +615,7 @@ public class DBconnector {
 	}
 
 	public ExecuteUpdateObject getBatchSQL(String sql) {
-		log.AddLogLine("invoking: getBatchSQL("+sql+")");
+		log.AddLogLine("invoking: getBatchSQL(" + sql + ")");
 		ExecuteUpdateObject eUO = new ExecuteUpdateObject();
 		eUO.setStatement(sql);
 		Statement stmt = null;
@@ -613,7 +623,7 @@ public class DBconnector {
 
 		try {
 			Class.forName(classfn);
-			//log.AddLogLine("DB: connected");
+			// log.AddLogLine("DB: connected");
 			if (driver.equals("derby")) {
 				con = DriverManager.getConnection(dburl);
 			} else {
@@ -627,14 +637,12 @@ public class DBconnector {
 			}
 
 			InputDataValidation idv = new InputDataValidation();
-			
 
 			if (idv.isExecuteUpdateValidString(sql)) {
-				
-				log.AddLogLine("stmt.executeUpdate("+sql+")");
+
+				log.AddLogLine("stmt.executeUpdate(" + sql + ")");
 				affected_rows = stmt.executeUpdate(sql);
 				eUO.setStatus(String.valueOf(affected_rows));
-			
 
 			} else {
 				String error = "This is not an Execute/Update action";
@@ -658,7 +666,7 @@ public class DBconnector {
 		}
 		return eUO;
 	}
-	
+
 	private Logger log = new Logger(Constants.LOGNAME);
 	private String remotedb = null;
 	private String portdb = null;
