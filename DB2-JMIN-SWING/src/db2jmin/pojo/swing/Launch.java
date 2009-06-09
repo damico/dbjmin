@@ -417,12 +417,12 @@ public class Launch {
 					cols[j] = columns_name.get(j).toString();
 				}
 
-				maintable.setModel(new javax.swing.table.DefaultTableModel(
+				mainTable.setModel(new javax.swing.table.DefaultTableModel(
 						new Object[][] {}, cols));
-				javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable
+				javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) mainTable
 						.getModel();
-				maintable.doLayout();
-				maintable.setAutoCreateColumnsFromModel(true);
+				mainTable.doLayout();
+				mainTable.setAutoCreateColumnsFromModel(true);
 
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
 						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
@@ -500,7 +500,7 @@ public class Launch {
 				if (idv.isExecuteUpdateValidArray(sqlStmts)) {
 					log.AddLogLine("sqlStmts.size(): " + sqlStmts.size());
 					String[] cols = { "#", "Status", "Statement" };
-					dtm = SwingUtils.singleton().setUITable(cols, maintable,
+					dtm = SwingUtils.singleton().setUITable(cols, mainTable,
 							scrollableTable);
 					for (int i = 0; i < sqlStmts.size(); i++) {
 						String[] cols_data = new String[3];
@@ -519,11 +519,11 @@ public class Launch {
 				}
 			} else {
 				ArrayList data = DBc.getSQL(sqltext.getText());
-				SwingUtils.singleton().callSql(sqltext, data, maintable,
+				SwingUtils.singleton().callSql(sqltext, data, mainTable,
 						scrollableTable, logtext, panel);
 			}
 
-			SwingUtils.singleton().refreshTable(maintable, scrollableTable,
+			SwingUtils.singleton().refreshTable(mainTable, scrollableTable,
 					panel);
 
 		}
@@ -552,13 +552,13 @@ public class Launch {
 				cols[1] = "Type Name";
 				cols[2] = "Length";
 
-				maintable.setModel(new javax.swing.table.DefaultTableModel(
+				mainTable.setModel(new javax.swing.table.DefaultTableModel(
 						new Object[][] {}, cols));
-				javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable
+				javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) mainTable
 						.getModel();
-				maintable.doLayout();
-				maintable.setAutoCreateColumnsFromModel(true);
-				maintable.setBounds(5, 57 + Constants.LOGTEXTH
+				mainTable.doLayout();
+				mainTable.setAutoCreateColumnsFromModel(true);
+				mainTable.setBounds(5, 57 + Constants.LOGTEXTH
 						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
@@ -610,8 +610,8 @@ public class Launch {
 	public static JPasswordField tf_passwd = new JPasswordField("");
 	public static ArrayList<String> form_data = new ArrayList<String>();
 	public static ArrayList<String> schemas_array = new ArrayList<String>();
-	public static JTable maintable = new JTable();
-	public static JScrollPane scrollableTable = new JScrollPane(maintable);
+	public static JTable mainTable = new JTable();
+	public static JScrollPane scrollableTable = new JScrollPane(mainTable);
 	public static Logger log = new Logger(Constants.LOGNAME);
 	public static JButton table_button = new JButton(">");
 	public static JButton validateAndConnectButton = new JButton(
