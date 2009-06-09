@@ -29,7 +29,7 @@ package db2jmin.pojo.util;
 
 public interface Constants {
 
-	public static final String APPNAME = "DBJMIN - 0.5 (2009-jun-24)";
+	public static final String APPNAME = "DBJMIN - 0.5 (RC2)";
 	public static final int LOGTEXTH = 80;
 	public static final int SQLTEXTH = 80;
 	public static final String PRESERVER_FILE = "preServers.xml";
@@ -60,6 +60,7 @@ public interface Constants {
 	public static final int W_SINGLE_SQL_ACTION = 7;
 	public static final int W_GET_DB_SESSION = 8;
 	public static final int W_CLOSE_SESSION = 9;
+	public static final int W_CLI_ACTION = 10;
 	
 	public static final String HTML_TOP = 	"<html>\n" +
 	"<head>\n" +
@@ -103,6 +104,7 @@ public interface Constants {
 	public static final int SCHEMA_STRUCTURE = 0;
 	public static final int SCHEMA_DATA = 1;
 	public static final int TABLE_RESULT_H_SIZE = 832;
+	
 
 	
 	
