@@ -1,5 +1,5 @@
 {{{
 chmod 0555 dbjmin-0.5/DEBIAN/postinst
 chmod 0555 dbjmin-0.5/DEBIAN/prerm
-dpkg -b dbjmin-0.5/chmod 0555
+dpkg -b dbjmin-0.5/
 }}}
