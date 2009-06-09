@@ -20,7 +20,7 @@
 /* ******************************************************************** */
 /*Contributors:															*/
 /*Jose' Ricardo de Oliveira Damico (jd.comment@gmail.com)				*/	
-/*Argemiro José de Lima - a.k.a Mir0 (mirolima@gmail.com)				*/	
+/*Argemiro Josï¿½ de Lima - a.k.a Mir0 (mirolima@gmail.com)				*/	
 /*Mario C. Ponciano - a.k.a Razec (mrazec@gmail.com) 					*/
 /*																		
 *************************************************************************/
@@ -276,18 +276,18 @@ public class Launch {
 						SQL_button.setEnabled(false);
 
 					}
-					mainDesktopFrame.setSize(850, 90 + Constants.LOGTEXTH);
+					mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, 90 + Constants.LOGTEXTH);
 
 				} else {
 					drivers.setBackground(Color.RED);
 				}
 			} else if (open && connected) {
-				mainDesktopFrame.setSize(Constants.frameWidth,
-						Constants.frameHeight + os_specH);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE,
+						Constants.FRAME_DEFAULT_MIN_HEIGHT_SIZE + os_specH);
 				open = false;
 				validateAndConnectButton.setText("D");
 			} else if (!open && connected) {
-				mainDesktopFrame.setSize(850, 570 + os_specH);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE + os_specH);
 				open = true;
 				validateAndConnectButton.setText("D");
 				validateAndConnectButton.setBackground(Color.RED);
@@ -352,7 +352,7 @@ public class Launch {
 			} else {
 				drivers.setBackground(Color.RED);
 			}
-			mainDesktopFrame.setSize(850, 90 + Constants.LOGTEXTH);
+			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, 90 + Constants.LOGTEXTH);
 		}
 	}
 
@@ -425,7 +425,7 @@ public class Launch {
 				maintable.setAutoCreateColumnsFromModel(true);
 
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 842,
+						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 				int setSize = set.size();
 				if (setSize > 0) {
@@ -454,7 +454,7 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(850, 570);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 			} catch (NullPointerException e) {
 
@@ -473,7 +473,7 @@ public class Launch {
 
 			SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 					sqltext, panel);
-			mainDesktopFrame.setSize(850, 570);
+			mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 		}
 	};
@@ -559,10 +559,10 @@ public class Launch {
 				maintable.doLayout();
 				maintable.setAutoCreateColumnsFromModel(true);
 				maintable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 820,
+						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 				scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH
-						+ Constants.SQLTEXTH, 840,
+						+ Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,
 						480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 
 				for (int i = 0; i < colname.size(); i++) {
@@ -579,7 +579,7 @@ public class Launch {
 				panel.add(scrollableTable);
 				SwingUtils.singleton().showSQLarea(scrollableSqlArea, goSQL,
 						sqltext, panel);
-				mainDesktopFrame.setSize(850, 570);
+				mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MAX_HEIGHT_SIZE);
 
 			} catch (NullPointerException e) {
 

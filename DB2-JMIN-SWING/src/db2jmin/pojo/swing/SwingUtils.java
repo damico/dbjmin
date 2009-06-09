@@ -16,7 +16,6 @@
 package db2jmin.pojo.swing;
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -73,7 +72,7 @@ public class SwingUtils {
 	}
 
 	public JComboBox prepareDrivers(JComboBox drivers) {
-		drivers.setBounds(40, 2, 60, 20);
+		drivers.setBounds(40, 2, 60, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		drivers.setToolTipText("Select DataBase");
 		ArrayList<String> defaultSrvs = new ArrayList<String>();
 		defaultSrvs.add("db2");
@@ -207,34 +206,34 @@ public class SwingUtils {
 		JLabel l_server = new JLabel("Srv: ");
 		JLabel l_type = new JLabel("Type: ");
 
-		l_type.setBounds(5, 2, 60, 20);
+		l_type.setBounds(5, 2, 60, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(l_type);
 
-		l_server.setBounds(110, 2, 100, 20);
-		tf_server.setBounds(135, 2, 80, 20);
+		l_server.setBounds(110, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		tf_server.setBounds(135, 2, 80, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_server.setToolTipText("localhost");
 		panel.add(l_server);
 		panel.add(tf_server);
 
 		JLabel l_port = new JLabel("Port: ");
 
-		l_port.setBounds(220, 2, 100, 20);
-		tf_port.setBounds(251, 2, 45, 20);
+		l_port.setBounds(200, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		tf_port.setBounds(251, 2, 45, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_port.setToolTipText("Insert Port");
 		panel.add(l_port);
 		panel.add(tf_port);
 
 		JLabel l_db = new JLabel("db: ");
 
-		l_db.setBounds(300, 2, 100, 20);
-		tf_db.setBounds(325, 2, 50, 20);
+		l_db.setBounds(300, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		tf_db.setBounds(325, 2, 50, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_db.setToolTipText("Add DataBase");
 		panel.add(l_db);
 		panel.add(tf_db);
 
 		JButton btnOpenDb = new JButton(actionGetTables);
 		btnOpenDb.setText(">");
-		btnOpenDb.setBounds(375, 2, 50, 20);
+		btnOpenDb.setBounds(375, 2, 50, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		btnOpenDb.addActionListener( new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JFileChooser fc = new JFileChooser();
@@ -250,8 +249,8 @@ public class SwingUtils {
 		
 		JLabel l_user = new JLabel("User: ");
 
-		l_user.setBounds(430, 2, 100, 20);
-		tf_user.setBounds(470, 2, 100, 20);
+		l_user.setBounds(430, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		tf_user.setBounds(470, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		tf_user.setToolTipText("Login");
 		panel.add(l_user);
 		panel.add(tf_user);
@@ -259,8 +258,8 @@ public class SwingUtils {
 		JLabel l_passwd = new JLabel("Passwd: ");
 
 		tf_passwd.setEchoChar('#');
-		l_passwd.setBounds(575, 2, 100, 20);
-		tf_passwd.setBounds(630, 2, 100, 20);
+		l_passwd.setBounds(575, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
+		tf_passwd.setBounds(630, 2, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 
 
 		tf_passwd.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),
@@ -270,56 +269,56 @@ public class SwingUtils {
 		panel.add(tf_passwd);
 
 		JLabel l_schemas = new JLabel("Schemas: ");
-		l_schemas.setBounds(5, 32, 100, 20);
+		l_schemas.setBounds(5, 32, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(l_schemas);
 
-		schemas.setBounds(65, 32, 140, 20);
+		schemas.setBounds(65, 32, 140, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(schemas);
 		schemas.setEnabled(false);
 
 		JLabel l_tables = new JLabel("Tables: ");
-		l_tables.setBounds(264, 32, 100, 20);
+		l_tables.setBounds(264, 32, 100, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(l_tables);
 
-		tables.setBounds(310, 32, 188, 20);
+		tables.setBounds(310, 32, 188, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(tables);
 		tables.setEnabled(false);
 
 		validateAndConnectButton.setText("D");
 		validateAndConnectButton.setToolTipText("Desktop Use");
-		validateAndConnectButton.setBounds(735, 2, 50, 20);
+		validateAndConnectButton.setBounds(735, 2, 50, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(validateAndConnectButton);
 		
 		connectBtnWeb.setText("W");
 		connectBtnWeb.setToolTipText("Web Use");
-		connectBtnWeb.setBounds(790, 2, 50, 20);
+		connectBtnWeb.setBounds(790, 2, 50, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(connectBtnWeb);
 		
 
 		table_button.setAction(actionGetTables);
 		table_button.setText(">");
-		table_button.setBounds(210, 32, 50, 20);
+		table_button.setBounds(210, 32, 50, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(table_button);
 		
 		JButton viewLog = new JButton();
 		viewLog.setText("Log");
-		viewLog.setBounds(503,32,58,20);
+		viewLog.setBounds(503,32,58,Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		ActionListener actionShowLog = getActionShowLog();
 		viewLog.addActionListener(actionShowLog);
 		panel.add(viewLog);
 
 		data_button.setText("Data");
-		data_button.setBounds(564, 32, 63, 20);
+		data_button.setBounds(564, 32, 63, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(data_button);
 		data_button.setEnabled(false);
 
 		structure_button.setText("Structure");
-		structure_button.setBounds(631, 32, 91, 20);
+		structure_button.setBounds(631, 32, 91, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(structure_button);
 		structure_button.setEnabled(false);
 
 		SQL_button.setText("SQL");
-		SQL_button.setBounds(725, 32, 58, 20);
+		SQL_button.setBounds(725, 32, 112, Constants.FRAME_DEFAULT_BUTTON_HEIGHT_SIZE);
 		panel.add(SQL_button);
 		SQL_button.setEnabled(false);
 	
@@ -341,7 +340,7 @@ public class SwingUtils {
 		mainDesktopFrame.setResizable(false);
 		// Set initial size
 
-		mainDesktopFrame.setSize(Constants.frameWidth, Constants.frameHeight
+		mainDesktopFrame.setSize(Constants.FRAME_DEFAULT_H_SIZE, Constants.FRAME_DEFAULT_MIN_HEIGHT_SIZE
 				+ os_specH);
 		
 		
@@ -389,8 +388,8 @@ public class SwingUtils {
          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable.getModel();
          maintable.doLayout();
          maintable.setAutoCreateColumnsFromModel(true);
-         maintable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,785,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
-         scrollableTable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,790,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
+         maintable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,Constants.TABLE_RESULT_H_SIZE,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
+         scrollableTable.setBounds(5,57+Constants.LOGTEXTH + Constants.SQLTEXTH,Constants.TABLE_RESULT_H_SIZE,480-(Constants.LOGTEXTH + Constants.SQLTEXTH));
          maintable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
          for(int i=0; i<set.size(); i++){
              
@@ -440,8 +439,8 @@ public class SwingUtils {
 		javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel) maintable.getModel();
 		maintable.doLayout();
 		maintable.setAutoCreateColumnsFromModel(true);
-		maintable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 820, 480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
-		scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, 840,	480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
+		maintable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE, 480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
+		scrollableTable.setBounds(5, 57 + Constants.LOGTEXTH + Constants.SQLTEXTH, Constants.TABLE_RESULT_H_SIZE,	480 - (Constants.LOGTEXTH + Constants.SQLTEXTH));
 		maintable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		return dtm;
 	}
