@@ -28,7 +28,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
@@ -242,9 +241,11 @@ public class DBconnector {
 
 	public boolean testConn() {
 		boolean ret = false;
-		//log.AddLogLine("Test DB (" + driver + "): started");
-		Connection con = null;
 		try {
+			//log.AddLogLine("Test DB (" + driver + "): started");
+			@SuppressWarnings("unused")
+			Connection con = null;
+
 			Class.forName(classfn);
 			if (driver.contains("derby")) {
 				con = DriverManager.getConnection(dburl);

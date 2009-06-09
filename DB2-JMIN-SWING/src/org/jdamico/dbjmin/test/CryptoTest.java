@@ -1,15 +1,12 @@
 package org.jdamico.dbjmin.test;
 
 import java.util.ArrayList;
-import java.util.Properties;
 
 import junit.framework.TestCase;
 
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
 import db2jmin.pojo.util.Constants;
-import db2jmin.pojo.util.ManageProperties;
-import db2jmin.pojo.util.SystemOper;
 
 public class CryptoTest extends TestCase {
 	public void testEncryptDecrypt(){

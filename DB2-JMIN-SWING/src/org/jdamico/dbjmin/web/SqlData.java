@@ -1,9 +1,7 @@
 package org.jdamico.dbjmin.web;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,13 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
-import db2jmin.pojo.swing.SwingUtils;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
-import db2jmin.pojo.util.InputDataValidation;
 import db2jmin.pojo.util.Logger;
 import db2jmin.pojo.util.OutputDataValidation;
-import db2jmin.pojo.util.SQLParser;
 
 public class SqlData extends HttpServlet {
 
