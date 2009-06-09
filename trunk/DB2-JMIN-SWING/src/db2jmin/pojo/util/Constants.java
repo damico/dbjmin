@@ -45,6 +45,8 @@ public interface Constants {
 	public static final String[] UNIXES_DEFAULT_BROWSERS = {"firefox", "iceweasel"};
 	public static final String LOGNAME = "DBJMIN"; //add to xml
 	public static final boolean VERBOSE_CONSOLE = false; //add to xml
+	public static final int FIXED_LOGLIMIT = 5000000; //add to xml
+	
 	
 	public static final int D_SERVER_ACTION = 0;
 	public static final int D_SCHEMA_ACTION = 1;
