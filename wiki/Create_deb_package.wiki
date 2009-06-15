@@ -1,5 +1,4 @@
 
-
 {{{
 mkdir dbjmin-0.5
 }}}
@@ -7,13 +6,12 @@ mkdir dbjmin-0.5
  * copy the content of dist/deb/dbjmin to this folder the result structure should be:
 
 {{{
-ls -la
-total 8268
-drwxr-xr-x  4 jdamico jdamico    4096 2009-06-09 15:26 .
-drwxrwxrwx 15 jdamico jdamico    4096 2009-06-11 11:20 ..
--rw-r--r--  1 jdamico jdamico 8437040 2009-06-09 15:26 .deb
-drwxr-xr-x  2 jdamico jdamico    4096 2009-06-09 16:43 DEBIAN
-drwxr-xr-x  5 jdamico jdamico    4096 2009-06-09 16:42 usr
+$ls -la
+total 16
+drwxr-xr-x  4 jdamico jdamico 4096 2009-06-15 17:46 .
+drwxrwxrwx 15 jdamico jdamico 4096 2009-06-11 11:20 ..
+drwxr-xr-x  2 jdamico jdamico 4096 2009-06-09 16:43 DEBIAN
+drwxr-xr-x  5 jdamico jdamico 4096 2009-06-09 16:42 usr
 }}}
 
 {{{
