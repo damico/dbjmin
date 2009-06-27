@@ -1,12 +1,11 @@
 package org.jdamico.dbjmin.web.action;
 
-import java.util.ArrayList;
-
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 
 public class ActionsFactory {
 
-	public static JettyActions callJetty(ArrayList<String> form_data, int action) {
+	public static JettyActions callJetty(Preferences form_data, int action) {
 		switch(action){
 			case Constants.D_SERVER_ACTION:
 				return new ServerAction(form_data);

@@ -2,16 +2,17 @@ package org.jdamico.dbjmin.web.action;
 
 import java.util.ArrayList;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ManageProperties;
 import db2jmin.pojo.util.SystemOper;
 
 public class SchemaAction implements JettyActions {
 
-	private ArrayList<String> form_data = null;
+	private Preferences form_data = null;
 	
-	public SchemaAction(ArrayList<String> form_data){
-		this.form_data = form_data;
+	public SchemaAction(Preferences form_data2){
+		this.form_data = form_data2;
 	}
 	
 	public boolean exec() {
@@ -25,6 +26,7 @@ public class SchemaAction implements JettyActions {
 		return ret;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList getResult() {
 		return null;
 	}

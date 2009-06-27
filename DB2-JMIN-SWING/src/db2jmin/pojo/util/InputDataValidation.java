@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import db2jmin.pojo.data.DBconnector;
+import db2jmin.pojo.data.Preferences;
 
 /**
  * This class loads is used to Validade input data from user, as db, host, port,
@@ -40,66 +41,65 @@ public class InputDataValidation {
 		log.AddLogLine("Invoking  InputDataValidation()");
 	}
 
-	public List formValidationDerby(String form_name, List<String> form_data) {
+	public List formValidationDerby(String form_name, Preferences form_data) {
 
 		List validationResult = new ArrayList();
 		boolean ret = true;
 		validationResult.add(0, ret);
 
-		if (form_data.get(2).toString().equals("")) {
+		if (form_data.getNamedb().equals("")) {
 			ret = false;
 			validationResult.add("Wrong database name");
-			log.AddLogLine("EXCEPTION: " + form_data.get(2).toString());
+			log.AddLogLine("EXCEPTION: " + form_data.getNamedb());
 		}
 
 		if (ret) {
 
-			DBconnector dbc = new DBconnector(form_data);
-			ret = dbc.testConn();
+			DBconnector dbc;
+			dbc = new DBconnector(form_data);
+			dbc.testConn();
 		}
 
 		return validationResult;
 	}
 
-	public ArrayList<String> testTextFields(ArrayList<String> form_data){
+	public ArrayList<String> testTextFields(Preferences form_data) {
 		ArrayList<String> validationResult = new ArrayList<String>();
-		if (form_data.get(0).toString().equals("")) {
+		if (form_data.getRemoteDB().equals("")) {
 			validationResult.add("Wrong server address");
-			log.AddLogLine("EXCEPTION: " + form_data.get(0).toString());
+			log.AddLogLine("EXCEPTION: " + form_data.getRemoteDB());
 		}
-		if (form_data.get(1).toString().equals("")) {
+		if (form_data.getPortdb().equals("")) {
 			validationResult.add("Wrong server port");
-			log.AddLogLine("EXCEPTION: " + form_data.get(1).toString());
+			log.AddLogLine("EXCEPTION: " + form_data.getPortdb());
 		}
 
-		if (form_data.get(2).toString().equals("")) {
+		if (form_data.getNamedb().equals("")) {
 			validationResult.add("Wrong database name");
-			log.AddLogLine("EXCEPTION: " + form_data.get(2).toString());
+			log.AddLogLine("EXCEPTION: " + form_data.getNamedb());
 		}
-		
-		if (form_data.get(3).toString().equals("")) {
+
+		if (form_data.getUserdb().equals("")) {
 			validationResult.add("Wrong user name");
-			log.AddLogLine("EXCEPTION: " + form_data.get(3).toString());
+			log.AddLogLine("EXCEPTION: " + form_data.getUserdb());
 		}
 		return validationResult;
 	}
-	
-	public ArrayList formValidationGen(String form_name, ArrayList form_data) {
+
+	public ArrayList formValidationGen(String form_name, Preferences form_data) {
 
 		ArrayList validationResult = new ArrayList();
 		boolean ret = true;
-		
-		
-		
+
 		if (form_name.equals("pref_form")) {
-			
+
 			validationResult.addAll(testTextFields(form_data));
-			
-			if(validationResult.size() > 0){
+
+			if (validationResult.size() > 0) {
 				ret = false;
 				validationResult.add(0, ret);
 			}
-			
+
 			/*
 			 * Commented because derby
 			 * 
@@ -110,7 +110,7 @@ public class InputDataValidation {
 			 * validationResult.add("Wrong username/password");
 			 * log.AddLogLine("EXCEPTION: "+form_data.get(4).toString()); }
 			 */
-			ReachServer reachsrv = new ReachServer(form_data.get(0).toString());
+			ReachServer reachsrv = new ReachServer(form_data.getRemoteDB());
 
 			if (ret) {
 				if (reachsrv.isAlive() == false) {
@@ -118,20 +118,10 @@ public class InputDataValidation {
 					validationResult.add("Hostname/IP address unreachable");
 					log.AddLogLine("Hostname/IP address unreachable");
 				} else {
-					DBconnector dbc = new DBconnector(form_data);
-					if (!dbc.testConn()) {
-						ret = false;
-						validationResult.add("Database connection failed");
-					} else {
-						ret = true;
-					}
+					DBconnector dbc;
+					dbc = new DBconnector(form_data);
+					dbc.testConn();
 				}
-			}
-
-			if (ret && reachsrv.isAlive()) {
-
-				DBconnector dbc = new DBconnector(form_data);
-				ret = dbc.testConn();
 			}
 		}
 
@@ -158,12 +148,15 @@ public class InputDataValidation {
 	public boolean isExecuteUpdateValidString(String sql) {
 
 		boolean ret = false;
-		
+
 		sql = cleanSql(sql);
 		sql = getFirstCmd(sql);
-		
+
 		HashMap<Integer, String> hm = getValidExecuteUpdateStatements();
-		if (!hm.containsValue(sql)) ret = false; else ret = true;
+		if (!hm.containsValue(sql))
+			ret = false;
+		else
+			ret = true;
 		return ret;
 	}
 
@@ -179,64 +172,63 @@ public class InputDataValidation {
 		hm.put(6, "truncate");
 		return hm;
 	}
-	
-	private String cleanSql(String sql){
+
+	private String cleanSql(String sql) {
 		sql = sql.replaceAll("\n", " ");
 		while (sql.startsWith(" ")) {
 			sql = sql.substring(1);
 		}
-		log.AddLogLine("cleanSql(String sql): "+sql);
+		log.AddLogLine("cleanSql(String sql): " + sql);
 		return sql;
 	}
-	
-	private String getFirstCmd(String sql){
+
+	private String getFirstCmd(String sql) {
 		StringTokenizer st = new StringTokenizer(sql, " ");
 		String maincmd = st.nextToken();
-		maincmd =  maincmd.toLowerCase().trim();
-		log.AddLogLine("getFirstCmd(String sql): "+maincmd);
+		maincmd = maincmd.toLowerCase().trim();
+		log.AddLogLine("getFirstCmd(String sql): " + maincmd);
 		return maincmd;
 	}
 
 	public String[] parseDbUrl(String url) {
 		/*
 		 * example of url: db2://username@localhost:50000/mydb
-		 * */
-		
+		 */
+
 		String[] ret = new String[5];
-		
-		
+
 		String userServer = null;
 		String portDb = null;
-		
-		
-		int firstBreak =0, secondBreak = 0;
-		
-		for(int i = 0; i < url.length(); i++){
-			if(url.charAt(i) == ':' && firstBreak == 0){
+
+		int firstBreak = 0, secondBreak = 0;
+
+		for (int i = 0; i < url.length(); i++) {
+			if (url.charAt(i) == ':' && firstBreak == 0) {
 				firstBreak = i;
-				ret[0] = url.substring(0,firstBreak);
-			}else if(url.charAt(i) == ':' && firstBreak > 0){
+				ret[0] = url.substring(0, firstBreak);
+			} else if (url.charAt(i) == ':' && firstBreak > 0) {
 				secondBreak = i;
-				userServer = url.substring(firstBreak+3, secondBreak);
-				
-				for(int j=0; j < userServer.length(); j++){
-					if(userServer.charAt(j) == '@'){
-						ret[1] = userServer.substring(0,j);
-						ret[2] = userServer.substring(j+1,userServer.length());
+				userServer = url.substring(firstBreak + 3, secondBreak);
+
+				for (int j = 0; j < userServer.length(); j++) {
+					if (userServer.charAt(j) == '@') {
+						ret[1] = userServer.substring(0, j);
+						ret[2] = userServer.substring(j + 1, userServer
+								.length());
 					}
 				}
-				
-				portDb = url.substring(secondBreak+1, url.length());
-				
-				for(int j=0; j < portDb.length(); j++){
-					if(portDb.charAt(j) == '/'){
-						ret[3] = portDb.substring(0,j);
-						ret[4] = portDb.substring(j+1,portDb.length());
+
+				portDb = url.substring(secondBreak + 1, url.length());
+
+				for (int j = 0; j < portDb.length(); j++) {
+					if (portDb.charAt(j) == '/') {
+						ret[3] = portDb.substring(0, j);
+						ret[4] = portDb.substring(j + 1, portDb.length());
 					}
 				}
-				
+
 			}
-		}	
+		}
 		return ret;
 	}
 }

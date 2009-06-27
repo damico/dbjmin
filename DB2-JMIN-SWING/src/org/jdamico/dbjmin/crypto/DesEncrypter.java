@@ -3,7 +3,6 @@ package org.jdamico.dbjmin.crypto;
 import java.io.UnsupportedEncodingException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.KeySpec;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.crypto.Cipher;
@@ -13,6 +12,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ManageProperties;
 import db2jmin.pojo.util.SystemOper;
@@ -75,7 +75,6 @@ public class DesEncrypter {
         } catch (javax.crypto.BadPaddingException e) {
         } catch (IllegalBlockSizeException e) {
         } catch (UnsupportedEncodingException e) {
-        } catch (java.io.IOException e) {
         }
         return null;
     }
@@ -98,20 +97,20 @@ public class DesEncrypter {
         return null;
     }
     
-    public ArrayList<String> transformFormData(){
-    	ArrayList<String> form_data = new ArrayList<String>();
+    public Preferences transformFormData(){
+    	Preferences form_data = new Preferences();
 		String fs = SystemOper.singleton().getTempPath();
 		fs = fs + Constants.TEMP_ALIVE_CREDENTIAL;
 		Properties prop = ManageProperties.getInstance().read(fs);
 		
 		try {
 	        DesEncrypter encrypter = new DesEncrypter(Constants.COMMON_KEY);
-	        form_data.add(encrypter.decrypt(prop.getProperty("remotedb")));
-	        form_data.add(encrypter.decrypt(prop.getProperty("portdb")));
-	        form_data.add(encrypter.decrypt(prop.getProperty("namedb")));
-	        form_data.add(encrypter.decrypt(prop.getProperty("userdb")));
-	        form_data.add(encrypter.decrypt(prop.getProperty("pwddb")));
-	        form_data.add(encrypter.decrypt(prop.getProperty("driver")));
+	        form_data.setRemoteDB(encrypter.decrypt(prop.getProperty("remotedb")));
+	        form_data.setPortdb(encrypter.decrypt(prop.getProperty("portdb")));
+	        form_data.setNamedb(encrypter.decrypt(prop.getProperty("namedb")));
+	        form_data.setUserdb(encrypter.decrypt(prop.getProperty("userdb")));
+	        form_data.setPwddb(encrypter.decrypt(prop.getProperty("pwddb")));
+	        form_data.setDriver(encrypter.decrypt(prop.getProperty("driver")));
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }

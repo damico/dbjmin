@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 
 public class SampleData extends HttpServlet {
@@ -19,9 +20,9 @@ public class SampleData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String schema = request.getParameter("s");
 		String table = request.getParameter("t");
-		ArrayList<String> form_data = new ArrayList<String>();
-		form_data.add(schema);
-		form_data.add(table);
+		Preferences form_data = new Preferences();
+		form_data.setSchema(schema);
+		form_data.setTable(table);
 		ArrayList data = ActionsFactory.callJetty(form_data, Constants.W_SAMPLEDATA_ACTION).getResult();
 		PrintWriter out = response.getWriter();
 		

@@ -42,15 +42,35 @@ import db2jmin.pojo.util.Logger;
  * */
 
 public class DBconnector {
-	public DBconnector(List<String> prefs) {
+	private Logger log = new Logger(Constants.LOGNAME);
+	private String remotedb = null;
+	private String portdb = null;
+	private String namedb = null;
+	private String userdb = null;
+	private String pwddb = null;
+	private String driver = null;
+	private String classfn = null;
+	private String dburl = null;
+	private String SQL_schemas = null;
+	private String scolumn = null;
+	private String SQL_tables = null;
+	private String tcolumn = null;
+	private String SQL_structure = null;
 
-		remotedb = prefs.get(0).toString();
-		portdb = prefs.get(1).toString();
-		namedb = prefs.get(2).toString();
-		userdb = prefs.get(3).toString();
+	private String SCOLNAME = null;
+	private String STYPE = null;
+	private String SLENGTH = null;
+	private String slimit = null;
+
+	public DBconnector(Preferences prefs) {
+
+		remotedb = prefs.getRemoteDB();
+		portdb = prefs.getPortdb();
+		namedb = prefs.getNamedb();
+		userdb = prefs.getUserdb();
 		log.AddLogLine("User: " + userdb);
-		pwddb = prefs.get(4).toString();
-		driver = prefs.get(5).toString();
+		pwddb = prefs.getPwddb();
+		driver = prefs.getDriver();
 		log.AddLogLine("driver: " + driver);
 
 		if (driver.equals("mysql")) {
@@ -238,77 +258,68 @@ public class DBconnector {
 					+ "WHERE SA.OWNER =? AND  ST.TABLE_NAME=? order by column_name";
 		}
 
+		try {
+			Class.forName(classfn);
+		} catch (ClassNotFoundException e) {
+			log.AddLogLine("EXCEPTION: " + e);
+		}
 		// log.AddLogLine("dburl: " + dburl);
 	}
 
-	public boolean testConn() {
-		boolean ret = false;
+	public Connection getConnection() {
 		try {
-			// log.AddLogLine("Test DB (" + driver + "): started");
-			@SuppressWarnings("unused")
-			Connection con = null;
+			if (driver.contains("derby"))
+				return DriverManager.getConnection(dburl);
 
-			Class.forName(classfn);
-			if (driver.contains("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
-
-			log.AddLogLine("Test DB (" + driver + "): connected");
-			ret = true;
-		} catch (ClassNotFoundException e) {
-			log.AddLogLine("EXCEPTION: " + e);
-			ret = false;
+			return DriverManager.getConnection(dburl, userdb, pwddb);
 		} catch (SQLException e) {
-			log.AddLogLine("EXCEPTION: " + e);
-			ret = false;
+			e.printStackTrace();
+			return null;
 		}
-
-		return ret;
 	}
 
-	public List<String> getSchemas() {
+	public void testConn() {
+		// log.AddLogLine("Test DB (" + driver + "): started");
+		@SuppressWarnings("unused")
+		Connection con = this.getConnection();
+
+		log.AddLogLine("Test DB (" + driver + "): connected");
+	}
+
+	public SchemasDO getSchemas() {
 
 		Statement stmt = null;
-		List<String> schemas = new ArrayList<String>();
+		SchemasDO schemas = new SchemasDO();
 		Connection con = null;
 
 		if (driver.equals("firebird")) {
 			schemas.add(namedb);
-		} else {
+			return schemas;
+		}
 
+		try {
+			con = this.getConnection();
+			log.AddLogLine("DB: connected");
+			stmt = con.createStatement();
+			String SQL = SQL_schemas;
+
+			log.AddLogLine("SQL: " + SQL);
+			ResultSet rs = stmt.executeQuery(SQL);
+			while (rs.next()) {
+				schemas.add(rs.getString("" + scolumn + ""));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			log.AddLogLine("EXCEPTION: " + e);
+		} finally {
 			try {
-				Class.forName(classfn);
-
-				if (driver.contains("derby")) {
-					con = DriverManager.getConnection(dburl);
-				} else {
-					con = DriverManager.getConnection(dburl, userdb, pwddb);
-				}
-				log.AddLogLine("DB: connected");
-				stmt = con.createStatement();
-				String SQL = SQL_schemas;
-
-				log.AddLogLine("SQL: " + SQL);
-				ResultSet rs = stmt.executeQuery(SQL);
-				while (rs.next()) {
-					schemas.add(rs.getString("" + scolumn + ""));
-				}
-				rs.close();
+				stmt.close();
+				con.close();
 			} catch (SQLException e) {
 				log.AddLogLine("EXCEPTION: " + e);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					stmt.close();
-					con.close();
-				} catch (SQLException e) {
-					log.AddLogLine("EXCEPTION: " + e);
-				}
 			}
 		}
+
 		return schemas;
 	}
 
@@ -318,13 +329,7 @@ public class DBconnector {
 		List<String> tables = new ArrayList<String>();
 		Connection con = null;
 		try {
-			Class.forName(classfn);
-			log.AddLogLine("DB: connected");
-			if (driver.equals("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
+			con = this.getConnection();
 			stmt = con.createStatement();
 			String SQL = SQL_tables;
 			log.AddLogLine("SQL: " + SQL);
@@ -338,8 +343,6 @@ public class DBconnector {
 			rs.close();
 		} catch (SQLException e) {
 			log.AddLogLine("EXCEPTION: " + e);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
@@ -360,13 +363,7 @@ public class DBconnector {
 		List<String> length = new ArrayList<String>();
 		Connection con = null;
 		try {
-			Class.forName(classfn);
-			log.AddLogLine("DB: connected");
-			if (driver.equals("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
+			con = this.getConnection();
 			stmt = con.createStatement();
 			String SQL = SQL_structure;
 			PreparedStatement stmtp = con.prepareStatement(SQL);
@@ -383,8 +380,6 @@ public class DBconnector {
 			rs.close();
 		} catch (SQLException e) {
 			log.AddLogLine("EXCEPTION: " + e);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
@@ -431,13 +426,7 @@ public class DBconnector {
 			SQL = "SELECT * FROM " + schema + "." + table + " ";
 		}
 		try {
-			Class.forName(classfn);
-			log.AddLogLine("DB: connected");
-			if (driver.equals("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
+			con = this.getConnection();
 			stmt = con.createStatement();
 
 			log.AddLogLine("SQL: " + SQL);
@@ -480,8 +469,6 @@ public class DBconnector {
 		} catch (SQLException e) {
 			error = error + e.getMessage();
 			log.AddLogLine("EXCEPTION: " + e);
-		} catch (ClassNotFoundException e) {
-			error = error + e.getMessage();
 			e.printStackTrace();
 		} finally {
 			try {
@@ -512,13 +499,7 @@ public class DBconnector {
 		int n_columns = 0;
 
 		try {
-			Class.forName(classfn);
-			log.AddLogLine("DB: connected");
-			if (driver.equals("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
+			con = this.getConnection();
 			stmt = con.createStatement();
 			String SQL = sql;
 
@@ -595,8 +576,6 @@ public class DBconnector {
 			errors.add(e.toString());
 
 			log.AddLogLine("EXCEPTION: " + e);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -622,13 +601,7 @@ public class DBconnector {
 		Connection con = null;
 
 		try {
-			Class.forName(classfn);
-			// log.AddLogLine("DB: connected");
-			if (driver.equals("derby")) {
-				con = DriverManager.getConnection(dburl);
-			} else {
-				con = DriverManager.getConnection(dburl, userdb, pwddb);
-			}
+			con = this.getConnection();
 			stmt = con.createStatement();
 
 			int affected_rows = 0;
@@ -654,8 +627,6 @@ public class DBconnector {
 			eUO.setStatement(sql);
 			eUO.setStatus(String.valueOf(e.toString()));
 			log.AddLogLine("SQLException: " + e);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
@@ -666,25 +637,5 @@ public class DBconnector {
 		}
 		return eUO;
 	}
-
-	private Logger log = new Logger(Constants.LOGNAME);
-	private String remotedb = null;
-	private String portdb = null;
-	private String namedb = null;
-	private String userdb = null;
-	private String pwddb = null;
-	private String driver = null;
-	private String classfn = null;
-	private String dburl = null;
-	private String SQL_schemas = null;
-	private String scolumn = null;
-	private String SQL_tables = null;
-	private String tcolumn = null;
-	private String SQL_structure = null;
-
-	private String SCOLNAME = null;
-	private String STYPE = null;
-	private String SLENGTH = null;
-	private String slimit = null;
 
 }

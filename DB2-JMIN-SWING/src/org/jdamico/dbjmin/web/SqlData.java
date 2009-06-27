@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
 import db2jmin.pojo.util.Logger;
@@ -22,11 +23,11 @@ public class SqlData extends HttpServlet {
 	private static final long serialVersionUID = -8232210101653665253L;
 	private Logger log = new Logger(Constants.LOGNAME);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<String> form_data = new ArrayList<String>();
+		Preferences form_data = new Preferences();
 		ArrayList errors = new ArrayList();
 		StringBuffer sb = new StringBuffer();
 		String query = request.getParameter("s");
-		form_data.add(query);
+		form_data.setQuery(query);
 		PrintWriter out = response.getWriter();
 		out.println(Constants.HTML_TOP);
 		out.println(ServletUtils.getInstance().getHTMLhead());

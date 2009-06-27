@@ -2,11 +2,12 @@ package org.jdamico.dbjmin.web.action;
 
 import java.util.ArrayList;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.ManageProperties;
 
 public class WebCloseSessionAction implements JettyActions {
 
-	public WebCloseSessionAction(ArrayList<String> form_data) {
+	public WebCloseSessionAction(Preferences form_data) {
 		// TODO Auto-generated constructor stub
 	}
 

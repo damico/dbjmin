@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
 import db2jmin.pojo.data.DBconnector;
+import db2jmin.pojo.data.Preferences;
 
 public class WebSchemaAction implements JettyActions {
 	
-	public WebSchemaAction(ArrayList<String> form_data) {
+	public WebSchemaAction(Preferences form_data) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,7 +22,7 @@ public class WebSchemaAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return (ArrayList) dbc.getSchemas();
+		return (ArrayList) dbc.getSchemas().getSchema();
 	}
 
 }

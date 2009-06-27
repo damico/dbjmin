@@ -58,6 +58,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.jdamico.dbjmin.web.action.ActionsFactory;
 
 import db2jmin.pojo.data.DBconnector;
+import db2jmin.pojo.data.Preferences;
+import db2jmin.pojo.data.SchemasDO;
 import db2jmin.pojo.util.Constants;
 import db2jmin.pojo.util.ExecuteUpdateObject;
 import db2jmin.pojo.util.InputDataValidation;
@@ -188,12 +190,17 @@ public class Launch {
 					connectWeb();
 
 				} else if (evt.getKeyCode() == KeyEvent.VK_F3) {
-					form_data.add(tf_server.getText());
-					form_data.add(tf_port.getText());
-					form_data.add(tf_db.getText());
-					form_data.add(tf_user.getText());
-					form_data.add(tf_passwd.getText());
-					form_data.add(drivers.getSelectedItem().toString());
+					form_data.setRemoteDB(tf_server.getText());
+					form_data.setPortdb(tf_port.getText());
+					form_data.setNamedb(tf_db.getText());
+					form_data.setUserdb(tf_user.getText());
+					form_data.setPwddb(tf_passwd.getText());
+					// form_data.add();
+					// form_data.add();
+					// form_data.add(tf_db.getText());
+					// form_data.add(tf_user.getText());
+					// form_data.add(tf_passwd.getText());
+					// form_data.add(drivers.getSelectedItem().toString());
 
 					if (SwingUtils.singleton().isValidFormDataForPreServer(
 							form_data)
@@ -615,8 +622,8 @@ public class Launch {
 	public static JTextField tf_db = new JTextField("");
 	public static JTextField tf_user = new JTextField("");
 	public static JPasswordField tf_passwd = new JPasswordField("");
-	public static ArrayList<String> form_data = new ArrayList<String>();
-	public static List<String> schemas_array = new ArrayList<String>();
+	public static Preferences form_data = new Preferences();
+	public static SchemasDO schemas_array = new SchemasDO();
 	public static JTable mainTable = new JTable();
 	public static JScrollPane scrollableTable = new JScrollPane(mainTable);
 	public static Logger log = new Logger(Constants.LOGNAME);
