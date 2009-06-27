@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
+import db2jmin.pojo.data.Preferences;
+
 public class WebGetDbSessionAction implements JettyActions {
 
-	public WebGetDbSessionAction(ArrayList<String> form_data) {
+	public WebGetDbSessionAction(Preferences form_data) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -15,8 +17,9 @@ public class WebGetDbSessionAction implements JettyActions {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList getResult() {
-		return new DesEncrypter().transformFormData();
+		return (ArrayList) new DesEncrypter().transformFormData().toList();
 	}
 
 }

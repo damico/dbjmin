@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
 import db2jmin.pojo.data.DBconnector;
+import db2jmin.pojo.data.Preferences;
 
 public class WebSampleDataAction implements JettyActions {
 	
-	private ArrayList<String> form_data = null; 
+	private Preferences form_data = null; 
 
-	public WebSampleDataAction(ArrayList<String> form_data) {
-		this.form_data = form_data;
+	public WebSampleDataAction(Preferences form_data2) {
+		this.form_data = form_data2;
 	}
 
 	public boolean exec() {
@@ -22,7 +23,7 @@ public class WebSampleDataAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return dbc.getTablesData(form_data.get(0), form_data.get(1));
+		return dbc.getTablesData(form_data.getRemoteDB(), form_data.getPortdb());
 	}
 
 }

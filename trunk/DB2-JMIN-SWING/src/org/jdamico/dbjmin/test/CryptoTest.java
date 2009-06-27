@@ -1,11 +1,12 @@
 package org.jdamico.dbjmin.test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.jdamico.dbjmin.crypto.DesEncrypter;
 
+import db2jmin.pojo.data.Preferences;
 import db2jmin.pojo.util.Constants;
 
 public class CryptoTest extends TestCase {
@@ -24,9 +25,10 @@ public class CryptoTest extends TestCase {
 	
 	public void testTransformForm_Data(){
 		DesEncrypter encDec = new DesEncrypter();
-		ArrayList<String > form_data = encDec.transformFormData();
-	    for(int i = 0; i < form_data.size(); i++){
-	    	System.out.println(form_data.get(i));
+		Preferences form_data = encDec.transformFormData();
+		List<String> list = form_data.toList();
+	    for(int i = 0; i < list.size(); i++){
+	    	System.out.println(list.get(i));
 	    }
 	}
 }

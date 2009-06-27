@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.jdamico.dbjmin.web.JettyController;
 
+import db2jmin.pojo.data.Preferences;
+
 public class ServerAction implements JettyActions {
 	
-	private ArrayList<String> form_data = null;
+	private Preferences form_data = null;
 
-	public ServerAction(ArrayList<String> form_data) {
-		this.form_data = form_data;
+	public ServerAction(Preferences form_data2) {
+		this.form_data = form_data2;
 	}
 
 	public boolean exec() {
