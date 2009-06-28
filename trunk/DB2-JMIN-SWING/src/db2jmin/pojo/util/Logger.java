@@ -28,9 +28,10 @@ import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
- * This class is a simple logger code
- * used in entire application
+ * This class is a simple logger code used in entire application
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 
@@ -38,17 +39,17 @@ public class Logger {
 
 	private String filen = null;
 	private String tempDir = "/tmp/";
-	
+
 	public Logger(String fFile) {
 
 		tempDir = SystemOper.singleton().getTempPath();
-		/* Format formatter;
-		Date date = new Date();
-		formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
-		String stime = formatter.format(date);
-		filen = fFile + "_" + stime + ".log"; */
+		/*
+		 * Format formatter; Date date = new Date(); formatter = new
+		 * SimpleDateFormat("yyyyMMdd_HHmmss"); String stime =
+		 * formatter.format(date); filen = fFile + "_" + stime + ".log";
+		 */
 
-		filen = tempDir+fFile + ".log";
+		filen = tempDir + fFile + ".log";
 		createLog(filen);
 
 	}
@@ -66,16 +67,15 @@ public class Logger {
 				ret = true;
 			} else {
 				// File already exists
-				
-				
-				if(file.length() > Constants.FIXED_LOGLIMIT){
-					/* 
+
+				if (file.length() > Constants.FIXED_LOGLIMIT) {
+					/*
 					 * check if file is too big
 					 */
 					file.delete();
-					
+
 				}
-				
+
 				ret = file.createNewFile();
 			}
 		} catch (IOException e) {
@@ -97,7 +97,7 @@ public class Logger {
 			FileWriter fw = new FileWriter(filen, true);
 			BufferedWriter bwr = new BufferedWriter(fw);
 			String logLine = stime + ": " + line + "\n";
-			if(Constants.VERBOSE_CONSOLE){
+			if (Constants.VERBOSE_CONSOLE) {
 				System.out.println(logLine);
 			}
 			bwr.write(logLine);
@@ -109,7 +109,5 @@ public class Logger {
 		}
 		return ret;
 	}
-
-
 
 }

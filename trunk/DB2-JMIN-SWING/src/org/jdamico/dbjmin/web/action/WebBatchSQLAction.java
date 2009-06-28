@@ -15,8 +15,8 @@ import db2jmin.pojo.util.SQLParser;
 public class WebBatchSQLAction implements JettyActions {
 
 	private Logger log = new Logger(Constants.LOGNAME);
-	private Preferences form_data = null; 
-	
+	private Preferences form_data = null;
+
 	public WebBatchSQLAction(Preferences form_data2) {
 		this.form_data = form_data2;
 	}
@@ -37,7 +37,7 @@ public class WebBatchSQLAction implements JettyActions {
 		InputDataValidation idv = new InputDataValidation();
 		if (idv.isExecuteUpdateValidArray(sqlStmts)) {
 			for (int i = 0; i < sqlStmts.size(); i++) {
-				log.AddLogLine("calling getBatchSQL: "+i );
+				log.AddLogLine("calling getBatchSQL: " + i);
 				euoArray.add(dbc.getBatchSQL(sqlStmts.get(i)));
 			}
 		} else {
@@ -48,7 +48,7 @@ public class WebBatchSQLAction implements JettyActions {
 			euoArray.add(euo);
 			log.AddLogLine(error);
 		}
-		
+
 		return euoArray;
 	}
 

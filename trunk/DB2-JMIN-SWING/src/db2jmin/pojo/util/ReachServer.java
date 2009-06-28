@@ -26,8 +26,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * This class is very useful to test
- * if db server is a reachable address 
+ * This class is very useful to test if db server is a reachable address
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 

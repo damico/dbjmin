@@ -4,7 +4,7 @@ import db2jmin.pojo.util.SystemOper;
 import junit.framework.TestCase;
 
 public class TestSystemOper extends TestCase {
-	public void testExecExtCommand(){
+	public void testExecExtCommand() {
 		System.out.println(SystemOper.singleton().execExtCommand("whoami"));
 	}
 }

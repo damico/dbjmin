@@ -9,41 +9,45 @@ public class JettyController implements Runnable {
 
 	private Server server = null;
 	private Thread t = null;
-	
+
 	public JettyController(int port) throws Exception {
 		server = new Server();
-        Connector connector=new SocketConnector();
-        connector.setPort(port);
-        server.setConnectors(new Connector[]{connector});
-        
-        ServletHandler handler=new ServletHandler();
-        server.setHandler(handler);
-        
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.Schemas",		 "/schemas");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.Tables",		 "/tables");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.Sql",			 "/sql");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.SampleData",	 "/sampledata");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.SqlData",		 "/sqldata");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.Structure",	 "/structure");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.Destroy",		 "/destroy");
-        handler.addServletWithMapping("org.jdamico.dbjmin.web.RenderServlet","/RenderServlet");
-        
-        
+		Connector connector = new SocketConnector();
+		connector.setPort(port);
+		server.setConnectors(new Connector[] { connector });
+
+		ServletHandler handler = new ServletHandler();
+		server.setHandler(handler);
+
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.Schemas",
+				"/schemas");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.Tables",
+				"/tables");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.Sql", "/sql");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.SampleData",
+				"/sampledata");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.SqlData",
+				"/sqldata");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.Structure",
+				"/structure");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.Destroy",
+				"/destroy");
+		handler.addServletWithMapping("org.jdamico.dbjmin.web.RenderServlet",
+				"/RenderServlet");
+
 	}
 
+	public void init() {
+		t = new Thread(this);
+		t.start();
+	}
 
-	public void init(){
-        t = new Thread(this);
-        t.start();
-    }
+	public int stopServer() {
+		t = new Thread(this);
+		t.interrupt();
+		return 1;
+	}
 
-    public int stopServer(){
-        t= new Thread(this);
-        t.interrupt();
-        return 1;
-    }
-	
-	
 	public void run() {
 		try {
 			server.start();
@@ -51,8 +55,7 @@ public class JettyController implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-		
+
 	}
 
 }
