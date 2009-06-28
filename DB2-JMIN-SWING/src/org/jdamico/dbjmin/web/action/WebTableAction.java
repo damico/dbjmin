@@ -9,8 +9,8 @@ import db2jmin.pojo.data.Preferences;
 
 public class WebTableAction implements JettyActions {
 
-	private Preferences form_data = null; 
-	
+	private Preferences form_data = null;
+
 	public WebTableAction(Preferences form_data2) {
 		this.form_data = form_data2;
 	}

@@ -12,7 +12,7 @@ public class SwingLogAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 		LogConsole.singleton().start();
-		
+
 	}
 
 }

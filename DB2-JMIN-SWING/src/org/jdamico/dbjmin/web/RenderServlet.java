@@ -16,64 +16,58 @@ public class RenderServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -5393876155840395297L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
-
-		//response.setCharacterEncoding("ISO-8859-1");
-		//response.setDateHeader("Expires",System.currentTimeMillis(  ) + 24*60*60*1000);
+		// response.setCharacterEncoding("ISO-8859-1");
+		// response.setDateHeader("Expires",System.currentTimeMillis( ) +
+		// 24*60*60*1000);
 		String reqFile = request.getParameter("f");
 		String filename = null;
-		
-		if(reqFile.equals("log")){
-			filename = SystemOper.singleton().getTempPath()+Constants.LOGNAME+".log"; 
-		}else if(reqFile.equals("sql")){
-			filename = SystemOper.singleton().getHomePath()+Constants.HISTORY_FILE;
-		}else{
-			filename = SystemOper.singleton().getLibPath()+reqFile;
+
+		if (reqFile.equals("log")) {
+			filename = SystemOper.singleton().getTempPath() + Constants.LOGNAME
+					+ ".log";
+		} else if (reqFile.equals("sql")) {
+			filename = SystemOper.singleton().getHomePath()
+					+ Constants.HISTORY_FILE;
+		} else {
+			filename = SystemOper.singleton().getLibPath() + reqFile;
 		}
-		
+
 		Boolean err = false;
-		String errMsg = "Incorrect file path or incorrect file name. ("+filename+") ";
+		String errMsg = "Incorrect file path or incorrect file name. ("
+				+ filename + ") ";
 
-		if(reqFile!=null){
-			try{
-				
+		if (reqFile != null) {
+			try {
 
-					
-					   try {
-							BufferedReader in = new BufferedReader(new FileReader(filename));
-							String str;
+				try {
+					BufferedReader in = new BufferedReader(new FileReader(
+							filename));
+					String str;
 
-							while ((str = in.readLine()) != null) {
-								response.getWriter().println(str);
-							}
-							in.close();
-						} catch (IOException ioe) {
-							err = true;
-							errMsg = errMsg + ioe.getMessage();
-						}
+					while ((str = in.readLine()) != null) {
+						response.getWriter().println(str);
+					}
+					in.close();
+				} catch (IOException ioe) {
+					err = true;
+					errMsg = errMsg + ioe.getMessage();
+				}
 
-					
-
-				
-				
-			} catch(NullPointerException npe){
+			} catch (NullPointerException npe) {
 				npe.printStackTrace();
 				err = true;
 				errMsg = errMsg + npe.getMessage();
 			}
-		}else{
+		} else {
 			err = true;
 		}
 
-		if(err) response.getWriter().println(errMsg);
-
-
-
-
+		if (err)
+			response.getWriter().println(errMsg);
 
 	}
 
-
 }
-

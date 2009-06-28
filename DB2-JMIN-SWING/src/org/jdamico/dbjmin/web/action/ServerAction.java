@@ -7,7 +7,7 @@ import org.jdamico.dbjmin.web.JettyController;
 import db2jmin.pojo.data.Preferences;
 
 public class ServerAction implements JettyActions {
-	
+
 	private Preferences form_data = null;
 
 	public ServerAction(Preferences form_data2) {

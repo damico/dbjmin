@@ -1,9 +1,9 @@
 package db2jmin.pojo.util;
 
 /**
- * This class only defines an object
- * to store information retrieved by
+ * This class only defines an object to store information retrieved by
  * PreServers class
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 

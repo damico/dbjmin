@@ -14,13 +14,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * This class allows application to
- * get pre-defined db credentials
+ * This class allows application to get pre-defined db credentials
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 
 public class PreServers {
-	
+
 	private static final PreServers getInstance = new PreServers();
 
 	public static PreServers singleton() {
@@ -76,9 +76,9 @@ public class PreServers {
 						Element e_element = (Element) e_list.item(j);
 
 						/*
-						 * Get attributes
-						 * <SERVER type="" host="" port="" dbname="" user="db2inst1"/>
-						 * */
+						 * Get attributes <SERVER type="" host="" port=""
+						 * dbname="" user="db2inst1"/>
+						 */
 
 						if (e_element.getAttribute("dbname") != null
 								&& !e_element.getAttribute("dbname").equals("")) {
@@ -101,30 +101,27 @@ public class PreServers {
 		}
 		return srvObjArrLst;
 	}
-	
-	
 
 	public void setPreServers(String type, String tf_server, String tf_port,
 			String tf_db, String tf_user) {
 
-
-
 		try {
-			 RandomAccessFile raf = new RandomAccessFile(SystemOper.singleton().getHomePath()+Constants.PRESERVER_FILE,"rw");
-			 raf.seek(raf.length()-14);
-			 raf.writeBytes("\n");
-			 raf.writeBytes("<SERVER type=\""+ type + "\" host=\""+ tf_server + "\" port=\"" + tf_port + "\" dbname=\"" + tf_db + "\" user=\"" + tf_user + "\"/>");
-			 raf.writeBytes("\n");
-			 raf.writeBytes("</PRESERVERS>");
-			 raf.close(); 
-			
-			 
+			RandomAccessFile raf = new RandomAccessFile(SystemOper.singleton()
+					.getHomePath()
+					+ Constants.PRESERVER_FILE, "rw");
+			raf.seek(raf.length() - 14);
+			raf.writeBytes("\n");
+			raf.writeBytes("<SERVER type=\"" + type + "\" host=\"" + tf_server
+					+ "\" port=\"" + tf_port + "\" dbname=\"" + tf_db
+					+ "\" user=\"" + tf_user + "\"/>");
+			raf.writeBytes("\n");
+			raf.writeBytes("</PRESERVERS>");
+			raf.close();
 
 		} catch (IOException e) {
 
 			log.AddLogLine(e.getMessage());
 		}
-
 
 	}
 }

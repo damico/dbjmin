@@ -27,27 +27,27 @@ import java.io.InputStream;
 import javax.swing.UIManager;
 
 /**
- * This class is used to discover which 
- * is the OS of client (only works to Linux | Windows)
- * Also this class allow to set specific LookAndFeel settings,
+ * This class is used to discover which is the OS of client (only works to Linux
+ * | Windows) Also this class allow to set specific LookAndFeel settings,
  * related to a specific OS
+ * 
  * @author Jose Damico (damico@dcon.com.br)
  * */
 
 public class SystemOper {
-	
+
 	private static final SystemOper getInstance = new SystemOper();
-	
-	public static SystemOper singleton(){
+
+	public static SystemOper singleton() {
 		return getInstance;
 	}
 
 	public boolean isWindows() {
 		boolean ret = false;
 		String osName = System.getProperty("os.name");
-		if (osName.toLowerCase().contains("linux")){
+		if (osName.toLowerCase().contains("linux")) {
 			ret = false;
-		}else if (osName.toLowerCase().contains("win")){
+		} else if (osName.toLowerCase().contains("win")) {
 			ret = true;
 		}
 		return ret;
@@ -56,94 +56,93 @@ public class SystemOper {
 	public void setWinUIManager() {
 		Logger log = new Logger(Constants.LOGNAME);
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e) {
 			log.AddLogLine("EXCEPTION: " + e);
 		}
 	}
 
-	public String execExtCommand(String command){
+	public String execExtCommand(String command) {
 		StringBuffer sb = new StringBuffer();
 		Logger log = new Logger(Constants.LOGNAME);
 		try {
-	        Process child = Runtime.getRuntime().exec(command);
-	        InputStream in = child.getInputStream();
-	        int c;
-	        while ((c = in.read()) != -1) {
-	            sb.append((char)c);
-	        }
-	        in.close();
-	    } catch (IOException e) {
-	    	log.AddLogLine("IOException: " + e);
-	    }
-	    String ret = sb.toString();
-	    ret = ret.replaceAll("\n", "");
-	    return ret;
+			Process child = Runtime.getRuntime().exec(command);
+			InputStream in = child.getInputStream();
+			int c;
+			while ((c = in.read()) != -1) {
+				sb.append((char) c);
+			}
+			in.close();
+		} catch (IOException e) {
+			log.AddLogLine("IOException: " + e);
+		}
+		String ret = sb.toString();
+		ret = ret.replaceAll("\n", "");
+		return ret;
 	}
 
 	public String getHomePath() {
 		String path = null;
-		if(isWindows()){
+		if (isWindows()) {
 			path = "";
-		}else{
-			path ="/home/"+SystemOper.singleton().execExtCommand("whoami")+"/.dbjmin/";
+		} else {
+			path = "/home/" + SystemOper.singleton().execExtCommand("whoami")
+					+ "/.dbjmin/";
 		}
-		
+
 		return path;
 	}
-	
+
 	public String getTempPath() {
 		String path = null;
-		if(isWindows()){
+		if (isWindows()) {
 			path = "c:/WINDOWS/Temp/";
-		}else{
-			path ="/tmp/";
+		} else {
+			path = "/tmp/";
 		}
-		
+
 		return path;
 	}
-	
+
 	public String getLibPath() {
 		String path = null;
-		if(isWindows()){
+		if (isWindows()) {
 			path = "lib/";
-		}else{
-			path ="/usr/lib/dbjmin/";
+		} else {
+			path = "/usr/lib/dbjmin/";
 		}
-		
+
 		return path;
 	}
-	
-	public boolean startBrowser(String cmd[], String url){
+
+	public boolean startBrowser(String cmd[], String url) {
 		Logger log = new Logger(Constants.LOGNAME);
-		
+
 		boolean success = false;
-		
-		
-		if(isWindows()){
+
+		if (isWindows()) {
 			Runtime rt = Runtime.getRuntime();
 			try {
-				rt.exec( "rundll32 url.dll,FileProtocolHandler " + url);
+				rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
 				success = true;
 			} catch (IOException e) {
 				log.AddLogLine("Exception: " + e.getMessage());
 			}
-		}else{
+		} else {
 			int apps = -1;
-			while(!success && (apps < cmd.length-1)){
+			while (!success && (apps < cmd.length - 1)) {
 				try {
 					apps++;
-					Runtime.getRuntime().exec(cmd[apps]+" "+url);
+					Runtime.getRuntime().exec(cmd[apps] + " " + url);
 					success = true;
 					break;
 				} catch (IOException err) {
-					log.AddLogLine("Exception: " + err.getMessage());		
+					log.AddLogLine("Exception: " + err.getMessage());
 				}
 			}
 		}
 		return success;
 	}
 
-	
-	
 }

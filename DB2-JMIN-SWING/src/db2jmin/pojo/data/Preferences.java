@@ -14,7 +14,7 @@ public class Preferences {
 	private String pwddb = null; // 4
 	private String driver = null; // 5
 	private String schema = null;
-	private String table = null;	
+	private String table = null;
 	private String query = null;
 
 	private boolean modified = false;
@@ -30,7 +30,7 @@ public class Preferences {
 		this.userdb = null;
 		this.pwddb = null;
 		this.driver = null;
-		
+
 		this.modified = false;
 	}
 
@@ -126,7 +126,7 @@ public class Preferences {
 	public String getQuery() {
 		return query;
 	}
-	
+
 	public List<String> toList() {
 		List<String> list = new ArrayList<String>();
 		Preferences p = new DesEncrypter().transformFormData();

@@ -8,7 +8,7 @@ import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.data.Preferences;
 
 public class WebSchemaAction implements JettyActions {
-	
+
 	public WebSchemaAction(Preferences form_data) {
 		// TODO Auto-generated constructor stub
 	}

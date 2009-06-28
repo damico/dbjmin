@@ -8,8 +8,8 @@ import db2jmin.pojo.data.DBconnector;
 import db2jmin.pojo.data.Preferences;
 
 public class WebSingleSQLAction implements JettyActions {
-	
-	private Preferences form_data = null; 
+
+	private Preferences form_data = null;
 
 	public WebSingleSQLAction(Preferences form_data2) {
 		this.form_data = form_data2;

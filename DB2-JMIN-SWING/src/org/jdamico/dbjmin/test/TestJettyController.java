@@ -5,8 +5,8 @@ import org.jdamico.dbjmin.web.JettyController;
 import junit.framework.TestCase;
 
 public class TestJettyController extends TestCase {
-	
-	public void testStartJetty(){
+
+	public void testStartJetty() {
 		boolean isStarted = false;
 		JettyController jettyControl;
 		try {
@@ -16,7 +16,7 @@ public class TestJettyController extends TestCase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 
+
 		assertTrue(isStarted);
 	}
 
