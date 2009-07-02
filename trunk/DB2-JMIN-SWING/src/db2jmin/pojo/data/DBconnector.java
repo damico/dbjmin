@@ -323,10 +323,10 @@ public class DBconnector {
 		return schemas;
 	}
 
-	public List<String> getTables(String schema) {
+	public TablesDO getTables(String schema) {
 
 		Statement stmt = null;
-		List<String> tables = new ArrayList<String>();
+		TablesDO tables = new TablesDO();
 		Connection con = null;
 		try {
 			con = this.getConnection();
