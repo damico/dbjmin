@@ -24,7 +24,7 @@ public class WebTableAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return (ArrayList) dbc.getTables(form_data.getRemoteDB());
+		return (ArrayList) dbc.getTables(form_data.getRemoteDB()).getTables();
 	}
 
 }

@@ -374,7 +374,7 @@ public class Launch {
 
 			DBconnector dbc = new DBconnector(form_data);
 			List<String> tables_array = dbc.getTables(schemas.getSelectedItem()
-					.toString());
+					.toString()).getTables();
 			int counter = 0;
 			Iterator<String> it = tables_array.iterator();
 			while (it.hasNext()) {
