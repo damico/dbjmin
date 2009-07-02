@@ -542,7 +542,7 @@ public class SwingUtils {
 		DBconnector dbc = new DBconnector(form_data);
 
 		int counter = 0;
-		Iterator<String> it = dbc.getSchemas().getSchema().iterator();
+		Iterator<String> it = dbc.getSchemas().getSchemas().iterator();
 		while (it.hasNext()) {
 			schemas.insertItemAt(it.next(), counter);
 			counter++;

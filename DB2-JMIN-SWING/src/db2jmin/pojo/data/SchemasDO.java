@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SchemasDO {
-	private List<String> schema = null;
+	private List<String> schemas = null;
 
 	public SchemasDO() {
 		super();
-		setSchema(new ArrayList<String>());
+		setSchemas(new ArrayList<String>());
 	}
 
 	public SchemasDO(List<String> schema) {
 		super();
-		this.setSchema(schema);
+		this.setSchemas(schema);
 	}
 
 	public void add(String entry) {
-		schema.add(entry);
+		schemas.add(entry);
 	}
 
-	public void setSchema(List<String> schema) {
-		this.schema = schema;
+	public void setSchemas(List<String> schema) {
+		this.schemas = schema;
 	}
 
-	public List<String> getSchema() {
-		return schema;
+	public List<String> getSchemas() {
+		return schemas;
 	}
 }
