@@ -22,7 +22,7 @@ public class WebSchemaAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return (ArrayList) dbc.getSchemas().getSchema();
+		return (ArrayList) dbc.getSchemas().getSchemas();
 	}
 
 }
