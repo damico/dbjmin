@@ -25,8 +25,8 @@ public class WebStructureAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return (ArrayList) dbc.getTablesDescription(form_data.getRemoteDB(),
-				form_data.getPortdb());
+		return (ArrayList) dbc.getTablesDescription(form_data.getHost(),
+				form_data.getPort());
 	}
 
 }

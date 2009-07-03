@@ -3,16 +3,16 @@ package db2jmin.pojo.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdamico.dbjmin.crypto.DesEncrypter;
-
 public class Preferences {
 
-	private String remoteDB = null; // 0
-	private String portdb = null; // 1
-	private String namedb = null; // 2
-	private String userdb = null; // 3
-	private String pwddb = null; // 4
+	private String host = null; // 0
+	private String port = null; // 1
+	private String database = null; // 2
+	private String user = null; // 3
+	private String password = null; // 4
 	private String driver = null; // 5
+	private String className = null;
+
 	private String schema = null;
 	private String table = null;
 	private String query = null;
@@ -24,58 +24,58 @@ public class Preferences {
 	}
 
 	public void clear() {
-		this.remoteDB = null;
-		this.portdb = null;
-		this.namedb = null;
-		this.userdb = null;
-		this.pwddb = null;
+		this.host = null;
+		this.port = null;
+		this.database = null;
+		this.user = null;
+		this.password = null;
 		this.driver = null;
 
 		this.modified = false;
 	}
 
-	public String getRemoteDB() {
-		return remoteDB;
+	public String getHost() {
+		return host;
 	}
 
-	public void setRemoteDB(String remoteDB) {
-		this.remoteDB = remoteDB;
+	public void setHost(String host) {
+		this.host = host;
 		this.modified();
 	}
 
-	public String getPortdb() {
-		return portdb;
+	public String getPort() {
+		return port;
 	}
 
-	public void setPortdb(String portdb) {
-		this.portdb = portdb;
+	public void setPort(String port) {
+		this.port = port;
 		this.modified();
 	}
 
-	public String getNamedb() {
-		return namedb;
+	public String getDatabase() {
+		return database;
 	}
 
-	public void setNamedb(String namedb) {
-		this.namedb = namedb;
+	public void setDatabase(String database) {
+		this.database = database;
 		this.modified();
 	}
 
-	public String getUserdb() {
-		return userdb;
+	public String getUser() {
+		return user;
 	}
 
-	public void setUserdb(String userdb) {
-		this.userdb = userdb;
+	public void setUser(String user) {
+		this.user = user;
 		this.modified();
 	}
 
-	public String getPwddb() {
-		return pwddb;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPwddb(String pwddb) {
-		this.pwddb = pwddb;
+	public void setPassword(String password) {
+		this.password = password;
 		this.modified();
 	}
 
@@ -86,18 +86,6 @@ public class Preferences {
 	public void setDriver(String driver) {
 		this.driver = driver;
 		this.modified();
-	}
-
-	public void setModified(boolean modified) {
-		this.modified = modified;
-	}
-
-	public boolean isModified() {
-		return modified;
-	}
-
-	public void modified() {
-		this.modified = true;
 	}
 
 	public void setSchema(String schema) {
@@ -127,19 +115,42 @@ public class Preferences {
 		return query;
 	}
 
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public void setModified(boolean modified) {
+		this.modified = modified;
+	}
+
+	public boolean isModified() {
+		return modified;
+	}
+
+	public void modified() {
+		this.modified = true;
+	}
+
 	public List<String> toList() {
 		List<String> list = new ArrayList<String>();
-		Preferences p = new DesEncrypter().transformFormData();
-		list.add(p.getRemoteDB());
-		list.add(p.getPortdb());
-		list.add(p.getNamedb());
-		list.add(p.getUserdb());
-		list.add(p.getPwddb());
-		list.add(p.getDriver());
-		list.add(p.getSchema());
-		list.add(p.getTable());
-		list.add(p.getQuery());
-		return list;
+		list.add(this.getHost());
+		list.add(this.getPort());
+		list.add(this.getDatabase());
+		list.add(this.getUser());
+		list.add(this.getPassword());
+		list.add(this.getDriver());
+		if (this.getSchema() != null)
+			list.add(this.getSchema());
+		if (this.getTable() != null)
+			list.add(this.getTable());
+		if (this.getQuery() != null)
+			list.add(this.getQuery());
 
+		return list;
 	}
+
 }

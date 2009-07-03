@@ -45,10 +45,10 @@ public class DbjminCLI {
 
 				Preferences formData = new Preferences();
 
-				formData.setRemoteDB(input[2]);
-				formData.setPortdb(input[3]);
-				formData.setNamedb(input[4]);
-				formData.setUserdb(input[1]);
+				formData.setHost(input[2]);
+				formData.setPort(input[3]);
+				formData.setDatabase(input[4]);
+				formData.setUser(input[1]);
 
 				char password[] = null;
 				try {
@@ -58,7 +58,7 @@ public class DbjminCLI {
 					exitWithMessage("Invalid password char[]");
 				}
 
-				formData.setPwddb(String.valueOf(password));
+				formData.setPassword(String.valueOf(password));
 
 				formData.setDriver(input[0]);
 

@@ -96,11 +96,11 @@ public class SwingUtils {
 		boolean ret = true;
 
 		if (form_data.isModified()) {
-			if (form_data.getRemoteDB().equals(tf_server.getText())
-					&& form_data.getPortdb().equals(tf_port.getText())
-					&& form_data.getNamedb().toString().equals(tf_db.getText())
-					&& form_data.getUserdb().equals(tf_user.getText())
-					&& form_data.getPwddb().equals(tf_passwd.getText())
+			if (form_data.getHost().equals(tf_server.getText())
+					&& form_data.getPort().equals(tf_port.getText())
+					&& form_data.getDatabase().toString().equals(tf_db.getText())
+					&& form_data.getUser().equals(tf_user.getText())
+					&& form_data.getPassword().equals(tf_passwd.getText())
 					&& form_data.getDriver().equals(
 							drivers.getSelectedItem().toString())) {
 				ret = false;

@@ -31,7 +31,7 @@ public class WebBatchSQLAction implements JettyActions {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
 		ArrayList<ExecuteUpdateObject> euoArray = new ArrayList<ExecuteUpdateObject>();
-		String query = form_data.getRemoteDB();
+		String query = form_data.getHost();
 		String preSql = query.replaceAll("\n", "");
 		ArrayList<String> sqlStmts = SQLParser.singleton().breakSql(preSql);
 		InputDataValidation idv = new InputDataValidation();

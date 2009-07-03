@@ -21,10 +21,10 @@ public class InputDataValidationTest extends TestCase {
 
 		Preferences formData = new Preferences();
 
-		formData.setRemoteDB(input[2]);
-		formData.setPortdb(input[3]);
-		formData.setNamedb(input[4]);
-		formData.setUserdb(input[1]);
+		formData.setHost(input[2]);
+		formData.setPort(input[3]);
+		formData.setDatabase(input[4]);
+		formData.setUser(input[1]);
 
 		char password[] = null;
 		try {
@@ -34,7 +34,7 @@ public class InputDataValidationTest extends TestCase {
 			ioe.printStackTrace();
 		}
 
-		formData.setPwddb(password.toString());
+		formData.setPassword(password.toString());
 		formData.setDriver(input[0]);
 
 		ArrayList val = idv.formValidationGen("pref_form", formData);
