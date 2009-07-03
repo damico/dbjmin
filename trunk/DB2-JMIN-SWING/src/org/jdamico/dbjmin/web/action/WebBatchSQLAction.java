@@ -15,10 +15,10 @@ import db2jmin.pojo.util.SQLParser;
 public class WebBatchSQLAction implements JettyActions {
 
 	private Logger log = new Logger(Constants.LOGNAME);
-	private Preferences form_data = null;
+	private Preferences formData = null;
 
 	public WebBatchSQLAction(Preferences form_data2) {
-		this.form_data = form_data2;
+		this.formData = form_data2;
 	}
 
 	public boolean exec() {
@@ -31,7 +31,7 @@ public class WebBatchSQLAction implements JettyActions {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
 		ArrayList<ExecuteUpdateObject> euoArray = new ArrayList<ExecuteUpdateObject>();
-		String query = form_data.getHost();
+		String query = formData.getHost();
 		String preSql = query.replaceAll("\n", "");
 		ArrayList<String> sqlStmts = SQLParser.singleton().breakSql(preSql);
 		InputDataValidation idv = new InputDataValidation();

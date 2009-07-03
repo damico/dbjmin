@@ -10,10 +10,10 @@ import db2jmin.pojo.data.Preferences;
 
 public class WebStructureAction implements JettyActions {
 
-	private Preferences form_data = null;
+	private Preferences formData = null;
 
 	public WebStructureAction(Preferences form_data2) {
-		this.form_data = form_data2;
+		this.formData = form_data2;
 	}
 
 	public boolean exec() {
@@ -25,8 +25,8 @@ public class WebStructureAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return (ArrayList) dbc.getTablesDescription(form_data.getHost(),
-				form_data.getPort());
+		return (ArrayList) dbc.getTablesDescription(formData.getHost(),
+				formData.getPort());
 	}
 
 }

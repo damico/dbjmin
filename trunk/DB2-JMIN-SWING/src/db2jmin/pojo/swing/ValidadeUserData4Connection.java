@@ -9,7 +9,7 @@ import db2jmin.pojo.data.Preferences;
 
 public class ValidadeUserData4Connection {
 
-	private Preferences form_data;
+	private Preferences formData;
 	private JTextField tf_server;
 	private JTextField tf_port;
 	private JTextField tf_db;
@@ -23,7 +23,7 @@ public class ValidadeUserData4Connection {
 			JTextField tf_user, JPasswordField tf_passwd, JComboBox drivers,
 			JTextArea logtext) {
 
-		this.form_data = form_data2;
+		this.formData = form_data2;
 		this.tf_server = tf_server;
 		this.tf_port = tf_port;
 		this.tf_db = tf_db;
@@ -44,20 +44,20 @@ public class ValidadeUserData4Connection {
 			tf_passwd.setText("null");
 		}
 
-		form_data.setHost(tf_server.getText());
-		form_data.setPort(tf_port.getText());
-		form_data.setDatabase(tf_db.getText());
-		form_data.setUser(tf_user.getText());
-		form_data.setPassword(tf_passwd.getText());
-		form_data.setDriver(drivers.getSelectedItem().toString());
+		formData.setHost(tf_server.getText());
+		formData.setPort(tf_port.getText());
+		formData.setDatabase(tf_db.getText());
+		formData.setUser(tf_user.getText());
+		formData.setPassword(tf_passwd.getText());
+		formData.setDriver(drivers.getSelectedItem().toString());
 
-		// form_data.add(tf_server.getText());
-		// form_data.add(tf_port.getText());
-		// form_data.add(tf_db.getText());
-		// form_data.add(tf_user.getText());
-		// form_data.add(tf_passwd.getText());
-		// form_data.add(drivers.getSelectedItem().toString());
-		ret = SwingUtils.singleton().isValidFormData(form_data, drivers,
+		// formData.add(tf_server.getText());
+		// formData.add(tf_port.getText());
+		// formData.add(tf_db.getText());
+		// formData.add(tf_user.getText());
+		// formData.add(tf_passwd.getText());
+		// formData.add(drivers.getSelectedItem().toString());
+		ret = SwingUtils.singleton().isValidFormData(formData, drivers,
 				logtext);
 
 		return ret;

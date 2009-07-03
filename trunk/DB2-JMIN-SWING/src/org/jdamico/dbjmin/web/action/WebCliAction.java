@@ -9,10 +9,10 @@ import db2jmin.pojo.util.SystemOper;
 
 public class WebCliAction implements JettyActions {
 
-	private Preferences form_data = null;
+	private Preferences formData = null;
 
 	public WebCliAction(Preferences form_data2) {
-		this.form_data = form_data2;
+		this.formData = form_data2;
 	}
 
 	public boolean exec() {
@@ -20,7 +20,7 @@ public class WebCliAction implements JettyActions {
 		String fs = SystemOper.singleton().getTempPath();
 		fs = fs + Constants.TEMP_ALIVE_CREDENTIAL;
 		boolean isPropWritten = ManageProperties.getInstance().write(fs,
-				form_data);
+				formData);
 
 		return isPropWritten;
 	}

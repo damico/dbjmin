@@ -103,12 +103,12 @@ public class InputDataValidation {
 			/*
 			 * Commented because derby
 			 * 
-			 * if(form_data.get(3).toString().equals("")){ ret = false;
+			 * if(formData.get(3).toString().equals("")){ ret = false;
 			 * validationResult.add("Wrong username/password");
-			 * log.AddLogLine("EXCEPTION: "+form_data.get(3).toString()); }
-			 * if(form_data.get(4).toString().equals("")){ ret = false;
+			 * log.AddLogLine("EXCEPTION: "+formData.get(3).toString()); }
+			 * if(formData.get(4).toString().equals("")){ ret = false;
 			 * validationResult.add("Wrong username/password");
-			 * log.AddLogLine("EXCEPTION: "+form_data.get(4).toString()); }
+			 * log.AddLogLine("EXCEPTION: "+formData.get(4).toString()); }
 			 */
 			ReachServer reachsrv = new ReachServer(form_data.getHost());
 

@@ -9,10 +9,10 @@ import db2jmin.pojo.data.Preferences;
 
 public class WebSingleSQLAction implements JettyActions {
 
-	private Preferences form_data = null;
+	private Preferences formData = null;
 
 	public WebSingleSQLAction(Preferences form_data2) {
-		this.form_data = form_data2;
+		this.formData = form_data2;
 	}
 
 	public boolean exec() {
@@ -24,7 +24,7 @@ public class WebSingleSQLAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return dbc.getSQL(form_data.getHost());
+		return dbc.getSQL(formData.getHost());
 	}
 
 }
