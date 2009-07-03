@@ -191,20 +191,20 @@ public class Launch {
 					connectWeb();
 
 				} else if (evt.getKeyCode() == KeyEvent.VK_F3) {
-					form_data.setHost(tf_server.getText());
-					form_data.setPort(tf_port.getText());
-					form_data.setDatabase(tf_db.getText());
-					form_data.setUser(tf_user.getText());
-					form_data.setPassword(tf_passwd.getText());
-					// form_data.add();
-					// form_data.add();
-					// form_data.add(tf_db.getText());
-					// form_data.add(tf_user.getText());
-					// form_data.add(tf_passwd.getText());
-					// form_data.add(drivers.getSelectedItem().toString());
+					formData.setHost(tf_server.getText());
+					formData.setPort(tf_port.getText());
+					formData.setDatabase(tf_db.getText());
+					formData.setUser(tf_user.getText());
+					formData.setPassword(tf_passwd.getText());
+					// formData.add();
+					// formData.add();
+					// formData.add(tf_db.getText());
+					// formData.add(tf_user.getText());
+					// formData.add(tf_passwd.getText());
+					// formData.add(drivers.getSelectedItem().toString());
 
 					if (SwingUtils.singleton().isValidFormDataForPreServer(
-							form_data)
+							formData)
 							&& srvObjArrLst != null && srvObjArrLst.size() > 0) {
 						int i = 0;
 						ServersObject srvObj = null;
@@ -249,16 +249,16 @@ public class Launch {
 
 		public void actionPerformed(ActionEvent evt) {
 			ValidadeUserData4Connection validate = new ValidadeUserData4Connection(
-					form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd,
+					formData, tf_server, tf_port, tf_db, tf_user, tf_passwd,
 					drivers, logtext);
 
 			if (!open
 					&& !connected
-					|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
+					|| SwingUtils.singleton().isNewSetup(formData, tf_server,
 							tf_port, tf_db, tf_user, tf_passwd, drivers)) {
 				SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
 				SwingUtils.singleton().resetData(schemas, tables);
-				form_data.clear();
+				formData.clear();
 
 				if (drivers.getSelectedItem() != null) {
 
@@ -272,10 +272,10 @@ public class Launch {
 						validateAndConnectButton.setText("D");
 						validateAndConnectButton.setForeground(Color.WHITE);
 						validateAndConnectButton.setBackground(Color.BLUE);
-						DBconnector dbc = new DBconnector(form_data);
+						DBconnector dbc = new DBconnector(formData);
 						schemas_array = dbc.getSchemas();
 
-						SwingUtils.singleton().setSchemasDropDown(form_data,
+						SwingUtils.singleton().setSchemasDropDown(formData,
 								schemas);
 						SQL_button.setEnabled(true);
 						table_button.setEnabled(true);
@@ -320,15 +320,15 @@ public class Launch {
 	// This method make Web Connection allowed
 	public static void connectWeb() {
 		ValidadeUserData4Connection validate = new ValidadeUserData4Connection(
-				form_data, tf_server, tf_port, tf_db, tf_user, tf_passwd,
+				formData, tf_server, tf_port, tf_db, tf_user, tf_passwd,
 				drivers, logtext);
 		if (!open
 				&& !connected
-				|| SwingUtils.singleton().isNewSetup(form_data, tf_server,
+				|| SwingUtils.singleton().isNewSetup(formData, tf_server,
 						tf_port, tf_db, tf_user, tf_passwd, drivers)) {
 			SwingUtils.singleton().hideSQLarea(scrollableSqlArea, goSQL);
 			SwingUtils.singleton().resetData(schemas, tables);
-			form_data.clear();
+			formData.clear();
 
 			if (drivers.getSelectedItem() != null) {
 
@@ -342,9 +342,9 @@ public class Launch {
 					connectBtnWeb.setForeground(Color.WHITE);
 					connectBtnWeb.setBackground(Color.BLUE);
 
-					ActionsFactory.callJetty(form_data,
+					ActionsFactory.callJetty(formData,
 							Constants.D_SERVER_ACTION).exec();
-					boolean browserOpened = ActionsFactory.callJetty(form_data,
+					boolean browserOpened = ActionsFactory.callJetty(formData,
 							Constants.D_SCHEMA_ACTION).exec();
 
 					if (browserOpened) {
@@ -375,7 +375,7 @@ public class Launch {
 		public void actionPerformed(ActionEvent evt) {
 			tables.removeAllItems();
 
-			DBconnector dbc = new DBconnector(form_data);
+			DBconnector dbc = new DBconnector(formData);
 			List<String> tables_array = dbc.getTables(schemas.getSelectedItem()
 					.toString()).getTables();
 			int counter = 0;
@@ -415,7 +415,7 @@ public class Launch {
 
 				scrollableTable.setVisible(false);
 				List data = new ArrayList();
-				DBconnector DBc = new DBconnector(form_data);
+				DBconnector DBc = new DBconnector(formData);
 				data = DBc.getTablesData(schemas.getSelectedItem().toString(),
 						tables.getSelectedItem().toString());
 				List columns_name = new ArrayList();
@@ -503,7 +503,7 @@ public class Launch {
 			scrollableTable.setVisible(false);
 			javax.swing.table.DefaultTableModel dtm = null;
 
-			DBconnector DBc = new DBconnector(form_data);
+			DBconnector DBc = new DBconnector(formData);
 
 			if (sqltext.getText().contains(";")) {
 				/* Discover how many statements was inserted */
@@ -555,7 +555,7 @@ public class Launch {
 
 				scrollableTable.setVisible(false);
 
-				DBconnector DBc = new DBconnector(form_data);
+				DBconnector DBc = new DBconnector(formData);
 				List<List<String>> table_description = DBc
 						.getTablesDescription(schemas.getSelectedItem()
 								.toString(), tables.getSelectedItem()
@@ -627,7 +627,7 @@ public class Launch {
 	public static JTextField tf_db = new JTextField("");
 	public static JTextField tf_user = new JTextField("");
 	public static JPasswordField tf_passwd = new JPasswordField("");
-	public static Preferences form_data = new Preferences();
+	public static Preferences formData = new Preferences();
 	public static SchemasDO schemas_array = new SchemasDO();
 	public static JTable mainTable = new JTable();
 	public static JScrollPane scrollableTable = new JScrollPane(mainTable);

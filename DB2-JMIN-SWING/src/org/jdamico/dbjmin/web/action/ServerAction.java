@@ -8,10 +8,10 @@ import db2jmin.pojo.data.Preferences;
 
 public class ServerAction implements JettyActions {
 
-	private Preferences form_data = null;
+	private Preferences formData = null;
 
 	public ServerAction(Preferences form_data2) {
-		this.form_data = form_data2;
+		this.formData = form_data2;
 	}
 
 	public boolean exec() {
