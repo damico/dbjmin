@@ -24,7 +24,7 @@ public class WebSampleDataAction implements JettyActions {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
 		return dbc
-				.getTablesData(form_data.getRemoteDB(), form_data.getPortdb());
+				.getTablesData(form_data.getHost(), form_data.getPort());
 	}
 
 }

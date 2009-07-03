@@ -36,11 +36,11 @@ public class ManageProperties {
 		boolean ret = false;
 		Properties prop = new Properties();
 		try {
-			prop.setProperty("remotedb", cipherStr(form_data.getRemoteDB()));
-			prop.setProperty("portdb", cipherStr(form_data.getPortdb()));
-			prop.setProperty("namedb", cipherStr(form_data.getNamedb()));
-			prop.setProperty("userdb", cipherStr(form_data.getUserdb()));
-			prop.setProperty("pwddb", cipherStr(form_data.getPwddb()));
+			prop.setProperty("remotedb", cipherStr(form_data.getHost()));
+			prop.setProperty("portdb", cipherStr(form_data.getPort()));
+			prop.setProperty("namedb", cipherStr(form_data.getDatabase()));
+			prop.setProperty("userdb", cipherStr(form_data.getUser()));
+			prop.setProperty("pwddb", cipherStr(form_data.getPassword()));
 			prop.setProperty("driver", cipherStr(form_data.getDriver()));
 			prop.store(new FileOutputStream(fs), null);
 			ret = true;

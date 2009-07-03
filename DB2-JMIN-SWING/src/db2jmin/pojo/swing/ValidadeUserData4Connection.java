@@ -44,11 +44,11 @@ public class ValidadeUserData4Connection {
 			tf_passwd.setText("null");
 		}
 
-		form_data.setRemoteDB(tf_server.getText());
-		form_data.setPortdb(tf_port.getText());
-		form_data.setNamedb(tf_db.getText());
-		form_data.setUserdb(tf_user.getText());
-		form_data.setPwddb(tf_passwd.getText());
+		form_data.setHost(tf_server.getText());
+		form_data.setPort(tf_port.getText());
+		form_data.setDatabase(tf_db.getText());
+		form_data.setUser(tf_user.getText());
+		form_data.setPassword(tf_passwd.getText());
 		form_data.setDriver(drivers.getSelectedItem().toString());
 
 		// form_data.add(tf_server.getText());

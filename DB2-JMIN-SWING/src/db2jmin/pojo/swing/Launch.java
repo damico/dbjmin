@@ -184,17 +184,18 @@ public class Launch {
 				tf_passwdKeyPressed(evt);
 			}
 
+			@SuppressWarnings("deprecation")
 			private void tf_passwdKeyPressed(KeyEvent evt) {
 
 				if (evt.getKeyCode() == KeyEvent.VK_F9) {
 					connectWeb();
 
 				} else if (evt.getKeyCode() == KeyEvent.VK_F3) {
-					form_data.setRemoteDB(tf_server.getText());
-					form_data.setPortdb(tf_port.getText());
-					form_data.setNamedb(tf_db.getText());
-					form_data.setUserdb(tf_user.getText());
-					form_data.setPwddb(tf_passwd.getText());
+					form_data.setHost(tf_server.getText());
+					form_data.setPort(tf_port.getText());
+					form_data.setDatabase(tf_db.getText());
+					form_data.setUser(tf_user.getText());
+					form_data.setPassword(tf_passwd.getText());
 					// form_data.add();
 					// form_data.add();
 					// form_data.add(tf_db.getText());
@@ -369,6 +370,8 @@ public class Launch {
 
 	public static Action actionGetTables = new AbstractAction("Action Tables") {
 
+		private static final long serialVersionUID = -68306392319221687L;
+
 		public void actionPerformed(ActionEvent evt) {
 			tables.removeAllItems();
 
@@ -403,19 +406,21 @@ public class Launch {
 
 	public static Action action3 = new AbstractAction("Action Table Data") {
 
+		private static final long serialVersionUID = 334654803997718249L;
+
 		// This method is called when the action is invoked
 		public void actionPerformed(ActionEvent evt) {
 
 			try {
 
 				scrollableTable.setVisible(false);
-				ArrayList data = new ArrayList();
+				List data = new ArrayList();
 				DBconnector DBc = new DBconnector(form_data);
 				data = DBc.getTablesData(schemas.getSelectedItem().toString(),
 						tables.getSelectedItem().toString());
-				ArrayList columns_name = new ArrayList();
-				ArrayList columns_data = new ArrayList();
-				ArrayList set = new ArrayList();
+				List columns_name = new ArrayList();
+				List columns_data = new ArrayList();
+				List set = new ArrayList();
 				columns_name = (ArrayList) data.get(0);
 				set = (ArrayList) data.get(1);
 

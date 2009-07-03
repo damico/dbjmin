@@ -64,12 +64,12 @@ public class DBconnector {
 
 	public DBconnector(Preferences prefs) {
 
-		remotedb = prefs.getRemoteDB();
-		portdb = prefs.getPortdb();
-		namedb = prefs.getNamedb();
-		userdb = prefs.getUserdb();
+		remotedb = prefs.getHost();
+		portdb = prefs.getPort();
+		namedb = prefs.getDatabase();
+		userdb = prefs.getUser();
 		log.AddLogLine("User: " + userdb);
-		pwddb = prefs.getPwddb();
+		pwddb = prefs.getPassword();
 		driver = prefs.getDriver();
 		log.AddLogLine("driver: " + driver);
 
@@ -637,5 +637,4 @@ public class DBconnector {
 		}
 		return eUO;
 	}
-
 }

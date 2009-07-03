@@ -105,12 +105,12 @@ public class DesEncrypter {
 
 		try {
 			DesEncrypter encrypter = new DesEncrypter(Constants.COMMON_KEY);
-			form_data.setRemoteDB(encrypter.decrypt(prop
+			form_data.setHost(encrypter.decrypt(prop
 					.getProperty("remotedb")));
-			form_data.setPortdb(encrypter.decrypt(prop.getProperty("portdb")));
-			form_data.setNamedb(encrypter.decrypt(prop.getProperty("namedb")));
-			form_data.setUserdb(encrypter.decrypt(prop.getProperty("userdb")));
-			form_data.setPwddb(encrypter.decrypt(prop.getProperty("pwddb")));
+			form_data.setPort(encrypter.decrypt(prop.getProperty("portdb")));
+			form_data.setDatabase(encrypter.decrypt(prop.getProperty("namedb")));
+			form_data.setUser(encrypter.decrypt(prop.getProperty("userdb")));
+			form_data.setPassword(encrypter.decrypt(prop.getProperty("pwddb")));
 			form_data.setDriver(encrypter.decrypt(prop.getProperty("driver")));
 		} catch (Exception e) {
 			e.printStackTrace();

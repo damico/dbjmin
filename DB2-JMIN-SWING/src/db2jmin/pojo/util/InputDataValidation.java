@@ -47,10 +47,10 @@ public class InputDataValidation {
 		boolean ret = true;
 		validationResult.add(0, ret);
 
-		if (form_data.getNamedb().equals("")) {
+		if (form_data.getDatabase().equals("")) {
 			ret = false;
 			validationResult.add("Wrong database name");
-			log.AddLogLine("EXCEPTION: " + form_data.getNamedb());
+			log.AddLogLine("EXCEPTION: " + form_data.getDatabase());
 		}
 
 		if (ret) {
@@ -65,23 +65,23 @@ public class InputDataValidation {
 
 	public ArrayList<String> testTextFields(Preferences form_data) {
 		ArrayList<String> validationResult = new ArrayList<String>();
-		if (form_data.getRemoteDB().equals("")) {
+		if (form_data.getHost().equals("")) {
 			validationResult.add("Wrong server address");
-			log.AddLogLine("EXCEPTION: " + form_data.getRemoteDB());
+			log.AddLogLine("EXCEPTION: " + form_data.getHost());
 		}
-		if (form_data.getPortdb().equals("")) {
+		if (form_data.getPort().equals("")) {
 			validationResult.add("Wrong server port");
-			log.AddLogLine("EXCEPTION: " + form_data.getPortdb());
+			log.AddLogLine("EXCEPTION: " + form_data.getPort());
 		}
 
-		if (form_data.getNamedb().equals("")) {
+		if (form_data.getDatabase().equals("")) {
 			validationResult.add("Wrong database name");
-			log.AddLogLine("EXCEPTION: " + form_data.getNamedb());
+			log.AddLogLine("EXCEPTION: " + form_data.getDatabase());
 		}
 
-		if (form_data.getUserdb().equals("")) {
+		if (form_data.getUser().equals("")) {
 			validationResult.add("Wrong user name");
-			log.AddLogLine("EXCEPTION: " + form_data.getUserdb());
+			log.AddLogLine("EXCEPTION: " + form_data.getUser());
 		}
 		return validationResult;
 	}
@@ -110,7 +110,7 @@ public class InputDataValidation {
 			 * validationResult.add("Wrong username/password");
 			 * log.AddLogLine("EXCEPTION: "+form_data.get(4).toString()); }
 			 */
-			ReachServer reachsrv = new ReachServer(form_data.getRemoteDB());
+			ReachServer reachsrv = new ReachServer(form_data.getHost());
 
 			if (ret) {
 				if (reachsrv.isAlive() == false) {

@@ -24,7 +24,7 @@ public class WebSingleSQLAction implements JettyActions {
 	public ArrayList getResult() {
 		DesEncrypter encDec = new DesEncrypter();
 		DBconnector dbc = new DBconnector(encDec.transformFormData());
-		return dbc.getSQL(form_data.getRemoteDB());
+		return dbc.getSQL(form_data.getHost());
 	}
 
 }
