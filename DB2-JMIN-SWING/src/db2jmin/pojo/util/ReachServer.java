@@ -29,6 +29,7 @@ import java.net.UnknownHostException;
  * This class is very useful to test if db server is a reachable address
  * 
  * @author Jose Damico (damico@dcon.com.br)
+ * @contributor Mario C. Ponciano a.k.a Razec (mrazec@gmail.com)
  * */
 
 public class ReachServer {
@@ -42,10 +43,19 @@ public class ReachServer {
 		boolean ret = false;
 
 		try {
-
 			InetAddress address = InetAddress.getByName(host);
-			ret = address.isReachable(3000);
+			
+			/*
+			 * Bug (4727550) - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4727550
+			 * Windows doesn`t support ICMP Request Ping
+			 * J2SE 5 implementation (.isReachable(3000)) hence tries to open a TCP socket on port 7
+			*/
+			if(! System.getProperty("os.name").contains("Windows"))
+				ret = address.isReachable(3000);
+
+			ret = true;
 			log.AddLogLine("host conn: " + ret);
+
 		} catch (UnknownHostException e) {
 			ret = false;
 			log.AddLogLine("host conn: " + e);
@@ -53,6 +63,7 @@ public class ReachServer {
 			ret = false;
 			log.AddLogLine("host conn: " + e);
 		}
+		System.out.println(ret);
 		return ret;
 	}
 
