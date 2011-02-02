@@ -29,7 +29,7 @@ package db2jmin.pojo.util;
 
 public interface Constants {
 
-	public static final String APPNAME = "DBJMIN - 0.5 (RC2)";
+	public static final String APPNAME = "DBJMIN - 0.5 (RC3)";
 	public static final int LOGTEXTH = 80;
 	public static final int SQLTEXTH = 80;
 	public static final String PRESERVER_FILE = "preServers.xml";
