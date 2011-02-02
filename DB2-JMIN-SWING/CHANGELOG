@@ -4,6 +4,9 @@
 -Removed "count" variable from main scope inside singleton
 -Added more tests units for preServers and RWhistory
 -Fixed bug with preServers (it was saving and getting from a wrong path)
+-Fixed bug with ReachServer.java (Database is up but not connect) because tries to open a TCP socket on port 7 but
+Windows doesn`t support ICMP Request Ping Officially.
+ *Bug (4727550) - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4727550 
 
 0.2
 - Several changes done to make app compliance with deb and rpm packages.
