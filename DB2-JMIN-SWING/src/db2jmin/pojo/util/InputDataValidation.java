@@ -113,7 +113,7 @@ public class InputDataValidation {
 			ReachServer reachsrv = new ReachServer(form_data.getHost());
 
 			if (ret) {
-				if (reachsrv.isAlive() == false) {
+				if (reachsrv.isAlive(form_data.getPort()) == false) {
 					ret = false;
 					validationResult.add("Hostname/IP address unreachable");
 					log.AddLogLine("Hostname/IP address unreachable");

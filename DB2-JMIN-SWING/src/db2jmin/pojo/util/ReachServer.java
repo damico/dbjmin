@@ -23,6 +23,7 @@ package db2jmin.pojo.util;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.UnknownHostException;
 
 /**
@@ -39,22 +40,13 @@ public class ReachServer {
 		log.AddLogLine("host: " + host);
 	}
 
-	public boolean isAlive() {
+	public boolean isAlive(String port) {
 		boolean ret = false;
 
 		try {
 			InetAddress address = InetAddress.getByName(host);
-			
-			/*
-			 * Bug (4727550) - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4727550
-			 * Windows doesn`t support ICMP Request Ping
-			 * J2SE 5 implementation (.isReachable(3000)) hence tries to open a TCP socket on port 7
-			*/
-			if(! System.getProperty("os.name").contains("Windows"))
-				ret = address.isReachable(3000);
-
-			ret = true;
-			log.AddLogLine("host conn: " + ret);
+			ret = isPortAvailable(Integer.valueOf(port));
+			log.AddLogLine("host/port conn: " + ret);
 
 		} catch (UnknownHostException e) {
 			ret = false;
@@ -65,6 +57,18 @@ public class ReachServer {
 		}
 		System.out.println(ret);
 		return ret;
+	}
+	
+	public static boolean isPortAvailable(int port)
+	{
+		try {
+			ServerSocket srv = new ServerSocket(port);
+			srv.close();
+			srv = null;
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
 	}
 
 	private String host = null;
